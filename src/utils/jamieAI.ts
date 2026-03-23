@@ -2393,6 +2393,43 @@ export function generateStartMyTaskDraft(
     return `Subject: ${subjectLine}\n\n${opener}\n\n${body}\n\n${closing}`;
   }
   
+  // Handle general follow-up, email, or outreach tasks even without a specific task type
+  if (contact && (taskTitle.toLowerCase().includes('follow up') || 
+                   taskTitle.toLowerCase().includes('email') || 
+                   taskTitle.toLowerCase().includes('reach out') ||
+                   taskTitle.toLowerCase().includes('contact') ||
+                   taskTitle.toLowerCase().includes('message'))) {
+    const firstName = contact.name.split(' ')[0];
+    const lowerTitle = taskTitle.toLowerCase();
+    const lowerDesc = taskDescription?.toLowerCase() || '';
+    
+    let body = '';
+    let subjectLine = 'Following Up';
+    
+    // Parse patterns in task title and description
+    if (lowerDesc.includes('collaboration') || lowerDesc.includes('partner') || 
+        lowerTitle.includes('collaboration') || lowerTitle.includes('partner')) {
+      subjectLine = 'Exploring Collaboration Opportunities';
+      body = `I've been following your work${contact.company ? ` at ${contact.company}` : ''} and would love to explore potential collaboration opportunities. I think there could be some interesting synergies between what you're working on and my patient experience strategy work.\n\nWould you be open to a brief call to discuss?`;
+    } else if (lowerDesc.includes('introduce') || lowerDesc.includes('intro') ||
+               lowerTitle.includes('introduce') || lowerTitle.includes('intro')) {
+      subjectLine = 'Quick Introduction';
+      body = `I wanted to reach out and introduce myself. I work in patient experience strategy for digital health companies, and I'd love to learn more about what you're working on${contact.company ? ` at ${contact.company}` : ''}.\n\nWould you be open to a quick call sometime?`;
+    } else if (lowerDesc.includes('thank') || lowerTitle.includes('thank')) {
+      subjectLine = 'Thank You';
+      body = `I wanted to reach out and say thank you. I really appreciated our last conversation and would love to stay connected.\n\nLet me know if there's anything I can do to support your work!`;
+    } else {
+      // Generic follow-up email
+      subjectLine = 'Following Up';
+      body = `I wanted to follow up and see how things are going${contact.company ? ` at ${contact.company}` : ''}. ${taskDescription || "I'd love to catch up and hear what you've been working on lately."}\n\nDo you have time for a quick call in the next week or two?`;
+    }
+    
+    const opener = `Hi ${firstName},`;
+    const closing = `Best,\nMeredith`;
+    
+    return `Subject: ${subjectLine}\n\n${opener}\n\n${body}\n\n${closing}`;
+  }
+  
   // For other task types, use the existing breakdown logic
   return generateTaskBreakdown(taskTitle, taskDescription, contact);
 }
