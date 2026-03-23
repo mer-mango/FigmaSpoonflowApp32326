@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LinkedIn OAuth Callback</title>
+</head>
+<body>
+  <div style="font-family: sans-serif; text-align: center; padding: 50px;">
+    <h2>Connecting to LinkedIn...</h2>
+    <p>Please wait while we complete the authentication.</p>
+  </div>
+  
+  <script>
+    // Extract the authorization code from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    const error = urlParams.get('error');
+    
+    if (error) {
+      alert('LinkedIn authorization failed: ' + error);
+      window.close();
+    } else if (code) {
+      // Send the code back to the parent window
+      if (window.opener) {
+        window.opener.postMessage({
+          type: 'linkedin-oauth-success',
+          code: code,
+          redirectUri: window.location.origin + window.location.pathname
+        }, window.location.origin);
+      }
+      
+      // Don't close immediately - let the parent handle it
+      document.body.innerHTML = '<div style="font-family: sans-serif; text-align: center; padding: 50px;"><h2 style="color: green;">✓ Connected!</h2><p>You can close this window.</p></div>';
+    } else {
+      alert('No authorization code received');
+      window.close();
+    }
+  </script>
+</body>
+</html>

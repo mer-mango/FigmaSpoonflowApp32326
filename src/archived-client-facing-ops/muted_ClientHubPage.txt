@@ -1,0 +1,33 @@
+ARCHIVED FILE: /components/muted_ClientHubPage.tsx
+FILE SIZE: ~800 lines
+ARCHIVED ON: January 5, 2026
+
+This file contained the Client Hub page with journey engine integration,
+forms library, flow assembly, draft engagements, active projects tracking,
+and payments page.
+
+The full file is too large to copy here, but it has been removed from the
+main codebase as it's part of the client-facing operational features that
+are no longer part of this content management app.
+
+Key features in this file:
+- Forms Library tab
+- Assemble Flow tab
+- Draft Engagements tab
+- Active Projects tab (Prospects & Clients with journey timelines)
+- Payments tab
+- Action Required Inbox
+- Journey state derivation for contacts
+- WhoseMove badge styling
+
+DEPENDENCIES REMOVED:
+- JOURNEYS, JourneyType, WhoseMove from '../utils/journey_config'
+- deriveJourneyState from '../utils/journey_engine'
+- MutedPaymentsPage
+- MutedFormsLibraryPage
+- MutedAssembleFlowPage
+- MutedDraftEngagementPage
+- ActionRequiredInbox
+- calculateActionRequiredItems
+
+This page has been removed from App.tsx routing and is no longer accessible.

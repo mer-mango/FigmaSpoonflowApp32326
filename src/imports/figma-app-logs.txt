@@ -1,0 +1,47 @@
+vendor-core-0f06c244c7c593a2.min.js.br:54 [Violation] 'requestAnimationFrame' handler took 72ms
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🚀 App component rendering...
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 📍 Current URL: https://c297cef1-5a73-47e4-9244-558c04ce9c05-v2-figmaiframepreview.figma.site/?page=tasks
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 📍 Current pathname: /
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 📍 Current search: ?page=tasks
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🔍 State: {currentPage: 'content', showFullApp: true, viewParam: null}
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🔍 Calendar callback check: {isCalendarCallback: false, calendarCode: undefined, calendarError: null}
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🔍 LinkedIn callback check: {isLinkedInCallback: false, linkedInCode: undefined, linkedInError: null}
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🚀 App.tsx proceeding to full app render...
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🔍 URL params: {page: 'tasks'}
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🔍 FILTERING - Starting with 3 items
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28    Active filters: status="null", platform="null"
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🔄 RENDER - Total items: 3, Filtered: 3
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28    All filtered titles: (3) ['ARC Launches SmartER Ambient AI Platform at Sheba Medical Center Emergency Department', 'Chronilogix Integrates with Balance for Life to Ex…Driven Behavioral Health and Chronic Care Support', 'athenahealth and b.well Introduce Patient-Controll… Digital Health Data Sharing at the Point of Care']
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28    All filtered IDs: (3) ['cdb63ded-8fea-451c-9173-e4db5dacb0b2', '6c6144a5-e1f0-4843-9606-7a6f343b2500', 'c29497cb-8963-4d88-96c9-0d4193830aaf']
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🎨 Rendering row 0: cdb63ded-8fea-451c-9173-e4db5dacb0b2 - ARC Launches SmartER Ambient AI Platform at Sheba Medical Center Emergency Department
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🎨 Rendering row 1: 6c6144a5-e1f0-4843-9606-7a6f343b2500 - Chronilogix Integrates with Balance for Life to Expand AI-Driven Behavioral Health and Chronic Care Support
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🎨 Rendering row 2: c29497cb-8963-4d88-96c9-0d4193830aaf - athenahealth and b.well Introduce Patient-Controlled Digital Health Data Sharing at the Point of Care
+vendor-core-0f06c244c7c593a2.min.js.br:11 [Violation] 'requestAnimationFrame' handler took 370ms
+vendor-core-0f06c244c7c593a2.min.js.br:68 [VideoPiP] Navigation detected: https://www.figma.com/make/M4AsXZPzxNtNQh7nDqvbfs/Task-Management-Dashboard-Mockup?p=f&t=HW8nJBn6c0fto88T-0&preview-route=%3Fpage%3Dcontent
+vendor-core-0f06c244c7c593a2.min.js.br:11 [Violation] 'requestAnimationFrame' handler took 59ms
+content.js:3715 [VideoPiP] No video found, retry 1/4
+content.js:3715 [VideoPiP] No video found, retry 2/4
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🚀 App component rendering...
+content.js:3715 [VideoPiP] No video found, retry 3/4
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 📍 Current URL: https://c297cef1-5a73-47e4-9244-558c04ce9c05-v2-figmaiframepreview.figma.site/?page=content
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 📍 Current pathname: /
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 📍 Current search: ?page=content
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🔍 State: {currentPage: 'tasks', showFullApp: true, viewParam: null}
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🔍 Calendar callback check: {isCalendarCallback: false, calendarCode: undefined, calendarError: null}
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🔍 LinkedIn callback check: {isLinkedInCallback: false, linkedInCode: undefined, linkedInError: null}
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🚀 App.tsx proceeding to full app render...
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🔍 URL params: {page: 'content'}
+vendor-core-0f06c244c7c593a2.min.js.br:68 [VideoPiP] Navigation detected: https://www.figma.com/make/M4AsXZPzxNtNQh7nDqvbfs/Task-Management-Dashboard-Mockup?p=f&t=HW8nJBn6c0fto88T-0&preview-route=%3Fpage%3Dtasks
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🚀 App component rendering...
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 📍 Current URL: https://c297cef1-5a73-47e4-9244-558c04ce9c05-v2-figmaiframepreview.figma.site/?page=tasks
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 📍 Current pathname: /
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 📍 Current search: ?page=tasks
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🔍 State: {currentPage: 'tasks', showFullApp: true, viewParam: null}
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🔍 Calendar callback check: {isCalendarCallback: false, calendarCode: undefined, calendarError: null}
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🔍 LinkedIn callback check: {isLinkedInCallback: false, linkedInCode: undefined, linkedInError: null}
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🚀 App.tsx proceeding to full app render...
+code_components_preview_iframe-c7239de3eebdcfa0.min.js.br:28 🔍 URL params: {page: 'tasks'}
+content.js:3715 [VideoPiP] No video found, retry 1/4
+content.js:3715 [VideoPiP] No video found, retry 2/4
+content.js:3715 [VideoPiP] No video found, retry 3/4
+content.js:3715 [VideoPiP] No video found, retry 4/4

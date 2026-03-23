@@ -1,0 +1,645 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Soft Summer Palette - Clothing Colors */
+  --soft-pink: #e2a8b6;
+  --peachy-blush: #eec9c6;
+  --blush: #c5a3ab;
+  --mauve: #8b9db8;
+  --sage: #a5bfa5;
+  --wisteria: #a5a5c5;
+  --blush-pink: #d8a5b8;
+  --mauve-purple: #9b8ba5;
+  --dusty-roe: #6b8ba8;
+  --seafoam: #8bb8a5;
+  --lavender: #9b9bb8;
+  --dusty-rose: #c59b9b;
+  --dusty-rose-alt: #a58b9b;
+  --slate-blue: #6b7b98;
+  --mint: #98c5b8;
+  --soft-plum: #a598b8;
+  
+  /* Makeup & Jewelry Shades */
+  --cool-taupe: #8b8b83;
+  --muted-lavender: #8b98b8;
+  --soft-rose: #d8a5b8;
+  --muted-pink: #c5a598;
+  --mauve-pink: #b89ba5;
+  --cool-berry: #b89bb8;
+  --pale-blue: #98a5b8;
+  --amethyst: #8b83a5;
+  --rose-quartz: #a583a5;
+  --soft-raspberry: #c59bb8;
+  
+  /* Reference Palette Colors */
+  --rock-blue: #9fb8cf;
+  --nepal: #93a8b8;
+  --maverick: #c9b8cb;
+  --santas-gray: #9fa3ad;
+  --botticelli: #c8dfe0;
+  
+  /* Brand colors - Purple family for primary actions */
+  --brand-primary: #a598b8;
+  --brand-primary-hover: #9b8ba5;
+  --brand-secondary: #c5a3ab;
+  --brand-accent: #c59bb8;
+  --brand-attention: #6b7b98;
+  
+  /* Functional colors */
+  --color-red: #e2a8b6;
+  --color-orange: #eec9c6;
+  
+  /* Surface colors - subtle translucent layers */
+  --surface-white: rgba(255, 255, 255, 0.7);
+  --surface-white-opaque: rgba(255, 255, 255, 0.9);
+  --surface-glass: rgba(255, 255, 255, 0.5);
+  
+  /* Soft shadows */
+  --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.08);
+  --shadow-gentle: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.04);
+  
+  /* Status colors - using the soft palette */
+  --status-todo: #e2a8b6;
+  --status-progress: #eec9c6;
+  --status-awaiting: #9fb8cf;
+  --status-done: #a5bfa5;
+  
+  /* Typography */
+  --font-serif: 'Lora', serif;
+  --font-sans: 'Poppins', sans-serif;
+  
+  /* Base system colors */
+  --font-size: 16px;
+  --background: #fafafa;
+  --foreground: oklch(0.145 0 0);
+  --card: #ffffff;
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: #030213;
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.95 0.0058 264.53);
+  --secondary-foreground: #030213;
+  --muted: #ececf0;
+  --muted-foreground: #717182;
+  --accent: #e9ebef;
+  --accent-foreground: #030213;
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 0, 0, 0.08);
+  --input: transparent;
+  --input-background: #f3f3f5;
+  --switch-background: #cbced4;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  
+  /* Generous border radius - soft, organic shapes */
+  --radius: 1.5rem; /* 24px - default rounded */
+  --radius-sm: 1rem; /* 16px */
+  --radius-md: 1.25rem; /* 20px */
+  --radius-lg: 1.5rem; /* 24px */
+  --radius-xl: 1.875rem; /* 30px */
+  --radius-2xl: 2rem; /* 32px */
+  --radius-3xl: 2.5rem; /* 40px */
+  
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: #030213;
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+  
+  /* Typography sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+  --text-4xl: 2.25rem;
+  --text-5xl: 3rem;
+  
+  /* Generous spacing scale */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.985 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-input-background: var(--input-background);
+  --color-switch-background: var(--switch-background);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 8px);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+/* Base styles */
+* {
+  @apply border-border outline-ring/50;
+}
+
+body {
+  @apply bg-background text-foreground;
+  font-family: var(--font-sans);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/**
+ * Base typography - Lora for headings (warmth), Open Sans for body (clarity)
+ */
+:where(:not(:has([class*=' text-']), :not(:has([class^='text-'])))) {
+  h1 {
+    font-family: var(--font-serif);
+    font-size: var(--text-5xl);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-family: var(--font-serif);
+    font-size: var(--text-4xl);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+  }
+
+  h3 {
+    font-family: var(--font-serif);
+    font-size: var(--text-2xl);
+    font-weight: 600;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+  }
+
+  h4 {
+    font-family: var(--font-sans);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  h5 {
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  p {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.6;
+  }
+
+  label {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  button {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  input, textarea {
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-normal);
+    line-height: 1.5;
+  }
+}
+
+html {
+  font-size: var(--font-size);
+}
+
+/* Utility classes for the calm aesthetic */
+.surface-glass {
+  background: var(--surface-glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.surface-white {
+  background: var(--surface-white);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.shadow-soft {
+  box-shadow: var(--shadow-soft);
+}
+
+.shadow-gentle {
+  box-shadow: var(--shadow-gentle);
+}
+
+.shadow-subtle {
+  box-shadow: var(--shadow-subtle);
+}
+
+/* Gentle transitions - never jarring */
+.transition-gentle {
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.transition-soft {
+  transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Slide-in animation for side notifications */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slideInRight {
+  animation: slideInRight 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Smooth slide-in animation for panel */
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Fade-in animation for page load */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Pulsing ring animation for "now" indicator on timeline */
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 0 0px rgba(59, 130, 246, 0);
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Print styles - hide navigation and ensure clean PDF export */
+@media print {
+  /* Hide all navigation and app chrome */
+  .app-sidebar,
+  .no-print,
+  .pdf-exclude,
+  [data-pdf-exclude="true"],
+  button:not(.print-include) {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -99999px !important;
+  }
+  
+  /* Force app container to show only content */
+  .app-container {
+    display: block !important;
+    width: 100% !important;
+  }
+  
+  /* Remove transform and set proper margins */
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+  }
+  
+  /* Force flex containers to full width */
+  .flex-1 {
+    width: 100% !important;
+    flex: none !important;
+  }
+  
+  /* Ensure white background for print */
+  body, html {
+    background: white !important;
+  }
+  
+  /* Remove box shadows for cleaner print */
+  * {
+    box-shadow: none !important;
+  }
+  
+  /* Increase base font size for better readability */
+  html {
+    font-size: 11pt !important;
+  }
+  
+  /* Scale up body text elements proportionally */
+  p, li, td, th, div, span, label {
+    font-size: 11pt !important;
+    line-height: 1.5 !important;
+  }
+  
+  /* Heading sizes for PDF */
+  h1 {
+    font-size: 18pt !important;
+    margin-bottom: 12pt !important;
+    page-break-after: avoid !important;
+  }
+  
+  h2 {
+    font-size: 14pt !important;
+    margin-bottom: 10pt !important;
+    page-break-after: avoid !important;
+  }
+  
+  h3 {
+    font-size: 12pt !important;
+    margin-bottom: 8pt !important;
+    page-break-after: avoid !important;
+  }
+  
+  h4 {
+    font-size: 11pt !important;
+    margin-bottom: 6pt !important;
+    page-break-after: avoid !important;
+  }
+  
+  /* Proper page break handling */
+  .space-y-8 > *,
+  .space-y-6 > *,
+  .border-2 {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+  
+  /* Add spacing between sections but allow breaks */
+  .space-y-8 > * + * {
+    margin-top: 20pt !important;
+  }
+  
+  .space-y-6 > * + * {
+    margin-top: 18pt !important;
+  }
+  
+  .space-y-4 > * + * {
+    margin-top: 14pt !important;
+  }
+  
+  .space-y-3 > * + * {
+    margin-top: 10pt !important;
+  }
+  
+  .space-y-2 > * + * {
+    margin-top: 8pt !important;
+  }
+  
+  /* Keep reasonable padding in main container */
+  .py-12 {
+    padding-top: 32pt !important;
+    padding-bottom: 16pt !important;
+  }
+  
+  /* Reduce excessive py-8 padding slightly but keep structure */
+  .py-8 {
+    padding-top: 18pt !important;
+    padding-bottom: 18pt !important;
+  }
+  
+  /* Keep appropriate padding while maintaining structure */
+  .p-8 {
+    padding: 18pt !important;
+  }
+  
+  .px-8 {
+    padding-left: 18pt !important;
+    padding-right: 18pt !important;
+  }
+  
+  .p-6 {
+    padding: 14pt !important;
+  }
+  
+  .px-6 {
+    padding-left: 14pt !important;
+    padding-right: 14pt !important;
+  }
+  
+  .py-6 {
+    padding-top: 14pt !important;
+    padding-bottom: 14pt !important;
+  }
+  
+  .p-4 {
+    padding: 11pt !important;
+  }
+  
+  .px-4 {
+    padding-left: 11pt !important;
+    padding-right: 11pt !important;
+  }
+  
+  .py-4 {
+    padding-top: 11pt !important;
+    padding-bottom: 11pt !important;
+  }
+  
+  /* Keep reasonable bottom margins - reduce from screen but not too much */
+  .mb-12 {
+    margin-bottom: 24pt !important;
+  }
+  
+  .mb-8 {
+    margin-bottom: 18pt !important;
+  }
+  
+  .mb-6 {
+    margin-bottom: 14pt !important;
+  }
+  
+  .mb-4 {
+    margin-bottom: 11pt !important;
+  }
+  
+  .mb-3 {
+    margin-bottom: 9pt !important;
+  }
+  
+  .mb-2 {
+    margin-bottom: 7pt !important;
+  }
+  
+  .mt-16 {
+    margin-top: 28pt !important;
+  }
+  
+  .mt-12 {
+    margin-top: 24pt !important;
+  }
+  
+  /* Show print-only logo */
+  .print-only-logo {
+    display: block !important;
+  }
+  
+  /* Ensure brand colors print correctly */
+  .bg-\[#f5fafb\],
+  .bg-\[#e3f2f7\],
+  .bg-\[#f8f3f7\] {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  .bg-\[#6b2358\],
+  .bg-\[#2f829b\],
+  .bg-\[#034863\] {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  /* Proper page margins - 0.75 inches on all sides */
+  @page {
+    margin: 0.75in;
+    size: letter;
+  }
+  
+  /* Prevent orphaned headers and improve page breaks */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+  
+  /* Keep content blocks together when possible */
+  .rounded-xl,
+  .border-2 {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}

@@ -1,0 +1,117 @@
+🔍 SAVE CLICKED - Starting save process...
+code_components_preview_iframe-94f0c6d3bc79708f.min.js.br:90 📊 Current documents count: 3
+code_components_preview_iframe-94f0c6d3bc79708f.min.js.br:90 📁 Current folders count: 1
+code_components_preview_iframe-94f0c6d3bc79708f.min.js.br:90 📄 Documents data: [
+  {
+    "id": "doc-1773464391364",
+    "title": "Updated Branding",
+    "pinned": false,
+    "status": "draft",
+    "content": "Value prop\nI help healthcare and innovation leaders pinpoint where care delivery is creating friction and avoidable burden for patients and teams alike — and turn those insights into more effective systems, smoother operations, and easier-to-navigate patient journeys that strengthen engagement and continuity of care.\n\nHero subheader\nYou want to deliver more human-centered care without adding more strain to your teams.\nLet’s turn friction points into practical improvements that support both patients and performance.",
+    "preview": "",
+    "archived": false,
+    "folderId": "1",
+    "wordCount": 74,
+    "lastEdited": "2026-03-14T04:59:51.364Z"
+  },
+  {
+    "id": "doc-1773464565859",
+    "title": "Updated Messaging",
+    "preview": "",
+    "content": "Value prop\nI help healthcare and innovation leaders pinpoint where care delivery is creating friction and avoidable burden for patients and teams alike — and turn those insights into more effective systems, smoother operations, and easier-to-navigate patient journeys that strengthen engagement and continuity of care.\n\nHero subheader\nYou want to deliver more human-centered care without adding more strain to your teams.\nLet’s turn friction points into practical improvements that support both patients and performance.",
+    "folderId": "1",
+    "lastEdited": "2026-03-14T05:02:45.859Z",
+    "wordCount": 74,
+    "status": "draft",
+    "pinned": false,
+    "archived": false
+  },
+  {
+    "id": "doc-1773464643359",
+    "title": "updated messaging",
+    "preview": "",
+    "content": "Value prop\nI help healthcare and innovation leaders pinpoint where care delivery is creating friction and avoidable burden for patients and teams alike — and turn those insights into more effective systems, smoother operations, and easier-to-navigate patient journeys that strengthen engagement and continuity of care.\n\nHero subheader\nYou want to deliver more human-centered care without adding more strain to your teams.\nLet’s turn friction points into practical improvements that support both patients and performance.",
+    "folderId": "1",
+    "lastEdited": "2026-03-14T05:04:03.359Z",
+    "wordCount": 74,
+    "status": "draft",
+    "pinned": false,
+    "archived": false
+  }
+]
+code_components_preview_iframe-94f0c6d3bc79708f.min.js.br:90 📂 Folders data: [
+  {
+    "id": "folder-1773464327802",
+    "icon": "folder",
+    "name": "Brand Messaging",
+    "color": "#e8dfe0",
+    "archived": false,
+    "documentCount": 0
+  }
+]
+code_components_preview_iframe-94f0c6d3bc79708f.min.js.br:90 🌐 Sending POST request to: https://cthtyfkutjfjawnkuucf.supabase.co/functions/v1/make-server-a89809a8/documents
+code_components_preview_iframe-94f0c6d3bc79708f.min.js.br:90 🔑 ProjectId: cthtyfkutjfjawnkuucf
+code_components_preview_iframe-94f0c6d3bc79708f.min.js.br:90 🔑 Using auth key (first 20 chars): eyJhbGciOiJIUzI1NiIs...
+code_components_preview_iframe-94f0c6d3bc79708f.min.js.br:90 📦 Payload being sent: {
+  "documents": [
+    {
+      "id": "doc-1773464391364",
+      "title": "Updated Branding",
+      "pinned": false,
+      "status": "draft",
+      "content": "Value prop\nI help healthcare and innovation leaders pinpoint where care delivery is creating friction and avoidable burden for patients and teams alike — and turn those insights into more effective systems, smoother operations, and easier-to-navigate patient journeys that strengthen engagement and continuity of care.\n\nHero subheader\nYou want to deliver more human-centered care without adding more strain to your teams.\nLet’s turn friction points into practical improvements that support both patients and performance.",
+      "preview": "",
+      "archived": false,
+      "folderId": "1",
+      "wordCount": 74,
+      "lastEdited": "2026-03-14T04:59:51.364Z"
+    },
+    {
+      "id": "doc-1773464565859",
+      "title": "Updated Messaging",
+      "preview": "",
+      "content": "Value prop\nI help healthcare and innovation leaders pinpoint where care delivery is creating friction and avoidable burden for patients and teams alike — and turn those insights into more effective systems, smoother operations, and easier-to-navigate patient journeys that strengthen engagement and continuity of care.\n\nHero subheader\nYou want to deliver more human-centered care without adding more strain to your teams.\nLet’s turn friction points into practical improvements that support both patients and performance.",
+      "folderId": "1",
+      "lastEdited": "2026-03-14T05:02:45.859Z",
+      "wordCount": 74,
+      "status": "draft",
+      "pinned": false,
+      "archived": false
+    },
+    {
+      "id": "doc-1773464643359",
+      "title": "updated messaging",
+      "preview": "",
+      "content": "Value prop\nI help healthcare and innovation leaders pinpoint where care delivery is creating friction and avoidable burden for patients and teams alike — and turn those insights into more effective systems, smoother operations, and easier-to-navigate patient journeys that strengthen engagement and continuity of care.\n\nHero subheader\nYou want to deliver more human-centered care without adding more strain to your teams.\nLet’s turn friction points into practical improvements that support both patients and performance.",
+      "folderId": "1",
+      "lastEdited": "2026-03-14T05:04:03.359Z",
+      "wordCount": 74,
+      "status": "draft",
+      "pinned": false,
+      "archived": false
+    }
+  ],
+  "folders": [
+    {
+      "id": "folder-1773464327802",
+      "icon": "folder",
+      "name": "Brand Messaging",
+      "color": "#e8dfe0",
+      "archived": false,
+      "documentCount": 0
+    }
+  ]
+}
+vendor-core-0f06c244c7c593a2.min.js.br:54 [Violation] 'requestAnimationFrame' handler took 100ms
+code_components_preview_iframe-94f0c6d3bc79708f.min.js.br:90 📥 Response status: 200
+code_components_preview_iframe-94f0c6d3bc79708f.min.js.br:90 📥 Response ok: true
+code_components_preview_iframe-94f0c6d3bc79708f.min.js.br:90 📥 Response body (raw): {"success":true,"message":"Documents saved successfully","count":{"documents":3,"folders":1}}
+code_components_preview_iframe-94f0c6d3bc79708f.min.js.br:90 ✅ Response data (parsed): {success: true, message: 'Documents saved successfully', count: {…}}
+code_components_preview_iframe-94f0c6d3bc79708f.min.js.br:90 ✅ Documents saved successfully!
+code_components_preview_iframe-94f0c6d3bc79708f.min.js.br:90 🏁 Save process complete
+client:1035 WebSocket connection to 'wss://app-j2q3laaby5n5vboxvrkmsnmoboi2bqmguuffgxpdtafpcj6sxeta.makeproxy-c.figma.site/' failed: 
+ping @ client:1035
+waitForSuccessfulPing @ client:1060Understand this error
+client:1035 WebSocket connection to 'wss://app-j2q3laaby5n5vboxvrkmsnmoboi2bqmguuffgxpdtafpcj6sxeta.makeproxy-c.figma.site/' failed: 
+ping @ client:1035
+waitForSuccessfulPing @ client:1060Understand this error

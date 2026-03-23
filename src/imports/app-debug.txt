@@ -1,0 +1,825 @@
+[Hydrated]
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 🚀 App component rendering...
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 📍 Current URL: https://skill-stove-47070579.figma.site/?page=today
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 📍 Current pathname: /
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 📍 Current search: ?page=today
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75016 🔍 State: {currentPage: 'today', showFullApp: true, viewParam: null}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75326 🎨 ENRICHMENT: About to enrich calendar events
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75326   Calendar events: 0
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75326   Contacts: 0
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75326   Contacts loaded: false
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75334 ⚠️ ENRICHMENT: Skipping - contactsLoaded: false events: 0
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75590 📊 App.tsx counts calculation: {today: '2026-02-28', todayTasks: 0, activeTodayTasks: 0, todayContent: 0, todayNurtures: 0, …}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75630 🔍 [TIMELINE DEBUG] Filtering calendar events for today:
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75630   📅 Today's date (local): "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75630   📊 Total enriched events: 0
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75640 📅 RESULT: 0 out of 0 events match today (2026-02-28)
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75675 🔍 Calendar callback check: {isCalendarCallback: false, calendarCode: undefined, calendarError: null}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75680 🔍 LinkedIn callback check: {isLinkedInCallback: false, linkedInCode: undefined, linkedInError: null}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:76221 🚀 App.tsx proceeding to full app render...
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:76221 🔍 URL params: {page: 'today'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:52481 [E5C 11.7 Bridge] 🟢 Mounting NotificationSchedulerBridge - will start scheduler
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:73891 🎯 ContactSuggestionModal isOpen changed: false
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75048 ✅ Loaded content from localStorage: 3
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:72628 📅 Loaded 141 cached calendar events
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:72659 🔍 [useGoogleCalendarMeetings] useEffect triggered: {isConnected: true, eventsCount: 141, lastSyncTime: Sat Feb 28 2026 08:41:58 GMT-0500 (Eastern Standard Time)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:72664 🔄 [useGoogleCalendarMeetings] Starting auto-sync - connected: true
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:71890 🎬 [startAutoSync] Called with: {isConnected: true, hasCallback: true}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:71897 🚀 [startAutoSync] Starting initial sync...
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:71949 🔄 Syncing Google Calendar...
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:71901 ✅ Google Calendar auto-sync started (every 30 minutes)
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75152 🔍 Checking server calendar integration status...
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75168 ✅ Loaded tasks from localStorage: 22
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75221 ✅ Loaded contacts from localStorage: 171
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75386 ⌨️ Focus Widget keyboard listener attached
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75392 [VideoPiP] Navigation detected: https://skill-stove-47070579.figma.site/?page=today
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75528 💾 App.tsx: Services persisted to localStorage 0 services
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 🚀 App component rendering...
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 📍 Current URL: https://skill-stove-47070579.figma.site/?page=today
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 📍 Current pathname: /
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 📍 Current search: ?page=today
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75016 🔍 State: {currentPage: 'today', showFullApp: true, viewParam: null}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75326 🎨 ENRICHMENT: About to enrich calendar events
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75326   Calendar events: 141
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75326   Contacts: 171
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75326   Contacts loaded: true
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75330 
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75330 ═══════════════════════════════════════════════════════
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75330 📋 ALL CALENDAR IDs (for SubwayTimeline buffer config):
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75330 ═══════════════════════════════════════════════════════
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "c_db8c7da6c97cceca59f02acc7b2f85d3bd4606dcf8e32e39a78149e74ca81ea1@group.calendar.google.com",  // Common Grounds Community - Events
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "c_c335af726b18d27166b2f36c1c5d9fbb1fd92649a49eacfc0816adf890038992@group.calendar.google.com",  // 🩺 Virtual Appts
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "meredith@empowerhealthstrategies.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "janna@chronicpainproject.org",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "ancil@ancillea.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "liz@socialwithpurpose.co",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "jason@bitelabs.io",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "scheduledevents@riverside.fm",  // PFN Riverside 1
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "suzi@teachyourthing.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "waelsaasouh@gmail.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "zhen@grapevyne.health",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "ithappenedtomepod@gmail.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "careers@flightforty.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "roberth2mstrategies@gmail.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "c_63de4d845029e69906675f62e92609302f7fbd4aea58aaa3da8834fb1e7e033c@group.calendar.google.com",  // Gildergold Family 🏠
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "admin@bitelabs.io",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "c_a180db3bb003b2be8eaebb1e9f7d6c347b424b9dd139e634de4962fa1329e5c5@group.calendar.google.com",  // 🩺 Medical Appts
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "c_382c8c85a87aa01141ef1e99873b54663eb5c49e2690ae5f1cc200774085ca3e@group.calendar.google.com",  // CBC 👠
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "meredith.mangold@gmail.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "ryan.gsleeve@gmail.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "vmp886lrea7ba57tlqd9qc829auqg23s@import.calendar.google.com",  // _2026_Spring
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75332 ═══════════════════════════════════════════════════════
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75332 
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45347 🔍 ENRICHMENT DEBUG: Starting enrichment process
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45347   📅 Calendar Events: 141
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45347   👥 Contacts: 171
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45349   📋 Sample Event: {title: "Ancil's Coffee Corner", attendees: Array(0), contact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45357   📋 Sample Contact: {name: 'Sarah Mitchell', email: 'sarah@techstartup.com'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Vision board workshop', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Affiliate Partner Program interest meeting', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '5pm Dr. Speed ', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Caitlin', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Caitlin', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Caitlin', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '9:20am Dr. Speed', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Caitlin', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Caitlin', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Caitlin', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '🩸 GET LABS FOR DR. AHMED DONE THIS WEEK', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Caitlin', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10:30am Dr. Shabina Ahmed (virtual) - LABS ONE WK IN ADVANCE', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Caitlin', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Alex (Protoqual) + Meredith (EHS) Reconnect', contact: 'Alex Altman', email: 'alex@protoqual.com', color: '#c6686d', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…kgYH5huPfFDSMDgAAgA1xNNk5J7g4+lDtPhj8qq5c8nI//9k='}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'CPP Board meeting', contact: 'Janna Kimel', email: 'janna@chronicpainproject.org', color: '#e49bb4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Tracy + Mer: Chat+Cowork', contact: 'Tracy Steffek', email: 'tracy@remedyandroot.com', color: '#5a6d5f', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Loraine + Meredith', contact: 'Loraine Coleman', email: 'lcoleman@informs.org', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'PCORI Virtual Community Roundtable on Harnessing Digital Health Technologies - Part 2', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Sophie + Meredith', contact: 'Sophie Shah', email: 'sophie.s.shah@gmail.com', color: '#7fa383', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Ancil', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10-11:30 PEOF Setting the Table for the Future of Digital Health', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Setting the Table for the Future of Digital Health', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith Mangold and Ancil Lea', contact: 'Ancil Lea', email: 'ancil@ancillea.com', color: '#c6686d', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Monday Mavens Meeting', contact: 'Amy Graves', email: 'Amy@hiddenconsumers.com', color: '#f4c4c4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith / Jason ', contact: 'Jason Spinney', email: 'jason@bitelabs.io', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…biQtDXY0AfEETnkNcN9bfWDQXi2t5LPWvaCXejd1TS+nzP//Z'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Mo-ments of Experience with Meredith Mangold', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Vishal + Meredith', contact: 'Vishal Goyal', email: 'vishal0073@gmail.com', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…kbzQvV8fj/fJE+VucRVN6NmGDcuRjbD0POsOE4Somf5cz/9k='}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: '11:30am Maylin + Meredith', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Suzi Hunn', contact: 'Suzi Hunn', email: 'suzi@teachyourthing.com', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Mavens Coworking 👯‍♀️ ✨', attendees: Array(3), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'test event you can ignore', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'mm839', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Re: Follow up Meredith/Wael HRC/LinkedIn patient experience', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Ancil Lea', contact: 'Ancil Lea', email: 'ancil@ancillea.com', color: '#c6686d', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'CPP Board meeting', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Katie + Mer 💕', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Sophie + Meredith', contact: 'Sophie Shah', email: 'sophie.s.shah@gmail.com', color: '#7fa383', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Chat - Meredith - ancil', contact: 'Ancil Lea', email: 'ancil@ancillea.com', color: '#c6686d', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith / Jason ', contact: 'Jason Spinney', email: 'jason@bitelabs.io', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…biQtDXY0AfEETnkNcN9bfWDQXi2t5LPWvaCXejd1TS+nzP//Z'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Zhen - 30 Minute (Meredith Mangold)', contact: 'Zhen Chan', email: 'zhen@grapevyne.health', color: '#7ea5b4', imageUrl: ''}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith Mangold and It Happened To Me Podcast', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'CM/EHS Partnership video', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Career Chat (Meredith Mangold)', contact: 'Michael Stinnett', email: 'careers@flightforty.com', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Ancil/Betty Lou/Meredith', contact: 'Ancil Lea', email: 'ancil@ancillea.com', color: '#c6686d', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Marc + Meredith', contact: 'Marc Jett', email: 'mjett@thrivesls.com', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'send sophie videos', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '!!! cancel honeybook account', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meet with Rob (Meredith Mangold)', contact: 'Robert Howell', email: 'roberth2mstrategies@gmail.com', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'prep for tmrw', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'KER + EM + MER', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'AAPM', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'prep for BL', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'BiteLabs USA (Winter 2026) Workshop : Workshop Lead Invitation', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Monday Mavens Meeting', contact: 'Amy Graves', email: 'Amy@hiddenconsumers.com', color: '#f4c4c4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith / Jason ', contact: 'Jason Spinney', email: 'jason@bitelabs.io', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…biQtDXY0AfEETnkNcN9bfWDQXi2t5LPWvaCXejd1TS+nzP//Z'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Kwazema  Abakporo', contact: 'Kwazema Abakporo', email: 'kwaztobak@gmail.com', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'potentially CM fellowship', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith / Jason ', contact: 'Jason Spinney', email: 'jason@bitelabs.io', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…biQtDXY0AfEETnkNcN9bfWDQXi2t5LPWvaCXejd1TS+nzP//Z'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'CPP Board meeting', contact: 'Janna Kimel', email: 'janna@chronicpainproject.org', color: '#e49bb4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'potentially CM fellowship', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'potentially CM fellowship', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith / Jason ', contact: 'Jason Spinney', email: 'jason@bitelabs.io', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…biQtDXY0AfEETnkNcN9bfWDQXi2t5LPWvaCXejd1TS+nzP//Z'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Monday Mavens Meeting', contact: 'Amy Graves', email: 'Amy@hiddenconsumers.com', color: '#f4c4c4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith / Jason ', contact: 'Jason Spinney', email: 'jason@bitelabs.io', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…biQtDXY0AfEETnkNcN9bfWDQXi2t5LPWvaCXejd1TS+nzP//Z'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '9:30am Hydro Dr. Siddiqui', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'CPP Board meeting', contact: 'Janna Kimel', email: 'janna@chronicpainproject.org', color: '#e49bb4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith / Jason ', contact: 'Jason Spinney', email: 'jason@bitelabs.io', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…biQtDXY0AfEETnkNcN9bfWDQXi2t5LPWvaCXejd1TS+nzP//Z'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Monday Mavens Meeting', contact: 'Amy Graves', email: 'Amy@hiddenconsumers.com', color: '#f4c4c4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith / Jason ', contact: 'Jason Spinney', email: 'jason@bitelabs.io', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…biQtDXY0AfEETnkNcN9bfWDQXi2t5LPWvaCXejd1TS+nzP//Z'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'CPP Board meeting', contact: 'Janna Kimel', email: 'janna@chronicpainproject.org', color: '#e49bb4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'GSD Monday Mavens Huddle on GoogleMeet', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Cowork', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: '🎂 Ryan + Mer Birthday Getaway (2 nights)', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4:20pm vet j+m', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'KER + EM + MER', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'tentative nani play', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '8:30am Ryan Wisdom Teeth Removal 🦷', attendees: Array(2), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Rhonda women's retreat ", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '8:30am hydro Dr Siddiqui', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '11:15am Neuro Botox', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '9am Marisa (rescheduled from previous week to 9am)', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10am Marisa', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10am Dentist', attendees: Array(2), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10am Marisa', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10am Marisa', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '9:30am hydro Dr. Siddiqui', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10am Marisa', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10am Marisa', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '9:30am Hydro Dr. Siddiqui', attendees: Array(2), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10am Marisa', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '8:30am neuro botox', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10am Marisa', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Cigna botox', attendees: Array(2), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'KER + EM + MER 💕', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10:30am🧘🏼‍♀️ chair-lates with DK', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Andie/Ivan Here', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Monday Mavens Meeting', contact: 'Amy Graves', email: 'Amy@hiddenconsumers.com', color: '#f4c4c4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Monday Mavens Meeting', contact: 'Amy Graves', email: 'Amy@hiddenconsumers.com', color: '#f4c4c4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Monday Mavens Meeting', contact: 'Amy Graves', email: 'Amy@hiddenconsumers.com', color: '#f4c4c4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Cohort Call #1', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Cohort Call #2', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Cohort Call #3', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Cohort Call #4', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Cohort Call #5', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Cohort Call #6', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Cohort Call #7', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75590 📊 App.tsx counts calculation: {today: '2026-02-28', todayTasks: 4, activeTodayTasks: 4, todayContent: 0, todayNurtures: 0, …}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75630 🔍 [TIMELINE DEBUG] Filtering calendar events for today:
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75630   📅 Today's date (local): "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75630   📊 Total enriched events: 141
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75630   📋 Sample enriched events (first 3):
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632     1. "Ancil's Coffee Corner"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632        - startTime: "2026-01-30T18:00:00.000Z"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632        - Extracted date: "2026-01-30"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632     2. "Monday Morning Call"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632        - startTime: "2026-02-02T15:00:00.000Z"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632        - Extracted date: "2026-02-02"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632     3. "Ancil's Coffee Corner"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632        - startTime: "2026-02-06T18:00:00.000Z"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632        - Extracted date: "2026-02-06"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-01-30" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-02-02" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-02-06" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-02-09" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-02-13" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-02-16" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Vision board workshop" doesn't match: "2026-02-18" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-02-20" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-02-23" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-02-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-03-02" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Affiliate Partner Program interest meeting" doesn't match: "2026-03-03" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-03-06" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-03-09" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-03-13" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-03-16" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-03-20" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-03-23" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-03-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-03-30" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-04-03" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-04-06" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-04-10" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-04-13" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-04-17" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-04-20" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-04-24" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-04-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-05-01" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-05-04" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-05-08" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-05-11" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-05-15" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-05-18" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-05-22" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-05-25" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "5pm Dr. Speed " doesn't match: "2026-02-03" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Caitlin" doesn't match: "2026-02-10" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Caitlin" doesn't match: "2026-02-24" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Caitlin" doesn't match: "2026-03-10" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "9:20am Dr. Speed" doesn't match: "2026-03-17" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Caitlin" doesn't match: "2026-03-24" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Caitlin" doesn't match: "2026-04-07" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Caitlin" doesn't match: "2026-04-21" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "🩸 GET LABS FOR DR. AHMED DONE THIS WEEK" doesn't match: "2026-04-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Caitlin" doesn't match: "2026-05-05" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10:30am Dr. Shabina Ahmed (virtual) - LABS ONE WK IN ADVANCE" doesn't match: "2026-05-11" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Caitlin" doesn't match: "2026-05-19" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Alex (Protoqual) + Meredith (EHS) Reconnect" doesn't match: "2026-01-29" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "CPP Board meeting" doesn't match: "2026-01-30" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Tracy + Mer: Chat+Cowork" doesn't match: "2026-02-02" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Loraine + Meredith" doesn't match: "2026-02-02" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "PCORI Virtual Community Roundtable on Harnessing Digital Health Technologies - Part 2" doesn't match: "2026-02-03" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Sophie + Meredith" doesn't match: "2026-02-03" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil" doesn't match: "2026-02-04" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10-11:30 PEOF Setting the Table for the Future of Digital Health" doesn't match: "2026-02-05" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Setting the Table for the Future of Digital Health" doesn't match: "2026-02-05" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith Mangold and Ancil Lea" doesn't match: "2026-02-06" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Mavens Meeting" doesn't match: "2026-02-09" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith / Jason " doesn't match: "2026-02-11" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Mo-ments of Experience with Meredith Mangold" doesn't match: "2026-02-12" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Vishal + Meredith" doesn't match: "2026-02-13" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "11:30am Maylin + Meredith" doesn't match: "2026-02-15" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Suzi Hunn" doesn't match: "2026-02-17" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Mavens Coworking 👯‍♀️ ✨" doesn't match: "2026-02-17" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "test event you can ignore" doesn't match: "2026-02-18" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "mm839" doesn't match: "2026-02-18" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Re: Follow up Meredith/Wael HRC/LinkedIn patient experience" doesn't match: "2026-02-19" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil Lea" doesn't match: "2026-02-19" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "CPP Board meeting" doesn't match: "2026-02-20" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Katie + Mer 💕" doesn't match: "2026-02-23" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Sophie + Meredith" doesn't match: "2026-02-23" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Chat - Meredith - ancil" doesn't match: "2026-02-24" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith / Jason " doesn't match: "2026-02-25" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Zhen - 30 Minute (Meredith Mangold)" doesn't match: "2026-02-25" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith Mangold and It Happened To Me Podcast" doesn't match: "2026-02-26" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "CM/EHS Partnership video" doesn't match: "2026-02-26" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Career Chat (Meredith Mangold)" doesn't match: "2026-02-26" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil/Betty Lou/Meredith" doesn't match: "2026-02-26" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Marc + Meredith" doesn't match: "2026-02-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "send sophie videos" doesn't match: "2026-02-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "!!! cancel honeybook account" doesn't match: "2026-03-01" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meet with Rob (Meredith Mangold)" doesn't match: "2026-03-03" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "prep for tmrw" doesn't match: "2026-03-04" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "KER + EM + MER" doesn't match: "2026-03-04" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "AAPM" doesn't match: "2026-03-05" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "prep for BL" doesn't match: "2026-03-05" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "BiteLabs USA (Winter 2026) Workshop : Workshop Lead Invitation" doesn't match: "2026-03-05" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Mavens Meeting" doesn't match: "2026-03-09" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith / Jason " doesn't match: "2026-03-11" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Kwazema  Abakporo" doesn't match: "2026-03-18" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "potentially CM fellowship" doesn't match: "2026-03-23" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith / Jason " doesn't match: "2026-03-25" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "CPP Board meeting" doesn't match: "2026-03-25" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "potentially CM fellowship" doesn't match: "2026-03-26" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "potentially CM fellowship" doesn't match: "2026-03-30" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith / Jason " doesn't match: "2026-04-08" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Mavens Meeting" doesn't match: "2026-04-13" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith / Jason " doesn't match: "2026-04-22" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "9:30am Hydro Dr. Siddiqui" doesn't match: "2026-04-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "CPP Board meeting" doesn't match: "2026-04-29" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith / Jason " doesn't match: "2026-05-06" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Mavens Meeting" doesn't match: "2026-05-11" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith / Jason " doesn't match: "2026-05-20" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "CPP Board meeting" doesn't match: "2026-05-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "GSD Monday Mavens Huddle on GoogleMeet" doesn't match: "2026-01-30" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Cowork" doesn't match: "2026-02-13" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "🎂 Ryan + Mer Birthday Getaway (2 nights)" doesn't match: "2026-02-08" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4:20pm vet j+m" doesn't match: "2026-02-16" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "KER + EM + MER" doesn't match: "2026-03-04" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "tentative nani play" doesn't match: "2026-03-07" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "8:30am Ryan Wisdom Teeth Removal 🦷" doesn't match: "2026-03-20" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Rhonda women's retreat " doesn't match: "2026-04-10" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "8:30am hydro Dr Siddiqui" doesn't match: "2026-01-30" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "11:15am Neuro Botox" doesn't match: "2026-02-03" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "9am Marisa (rescheduled from previous week to 9am)" doesn't match: "2026-02-17" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10am Marisa" doesn't match: "2026-02-24" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10am Dentist" doesn't match: "2026-02-25" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10am Marisa" doesn't match: "2026-03-10" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10am Marisa" doesn't match: "2026-03-24" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "9:30am hydro Dr. Siddiqui" doesn't match: "2026-03-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10am Marisa" doesn't match: "2026-04-07" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10am Marisa" doesn't match: "2026-04-21" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "9:30am Hydro Dr. Siddiqui" doesn't match: "2026-04-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10am Marisa" doesn't match: "2026-05-05" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "8:30am neuro botox" doesn't match: "2026-05-07" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10am Marisa" doesn't match: "2026-05-19" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Cigna botox" doesn't match: "2026-05-20" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "KER + EM + MER 💕" doesn't match: "2026-02-06" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10:30am🧘🏼‍♀️ chair-lates with DK" doesn't match: "2026-02-09" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Andie/Ivan Here" doesn't match: "2026-03-06" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Mavens Meeting" doesn't match: "2026-03-09" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Mavens Meeting" doesn't match: "2026-04-13" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Mavens Meeting" doesn't match: "2026-05-11" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Cohort Call #1" doesn't match: "2026-02-13" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Cohort Call #2" doesn't match: "2026-02-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Cohort Call #3" doesn't match: "2026-03-12" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Cohort Call #4" doesn't match: "2026-04-10" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Cohort Call #5" doesn't match: "2026-04-24" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Cohort Call #6" doesn't match: "2026-05-08" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Cohort Call #7" doesn't match: "2026-05-22" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75640 📅 RESULT: 0 out of 141 events match today (2026-02-28)
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75675 🔍 Calendar callback check: {isCalendarCallback: false, calendarCode: undefined, calendarError: null}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75680 🔍 LinkedIn callback check: {isLinkedInCallback: false, linkedInCode: undefined, linkedInError: null}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:76221 🚀 App.tsx proceeding to full app render...
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:76221 🔍 URL params: {page: 'today'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75271 ✅ Contacts saved to localStorage: 171
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:74563 📅 Filtered 141/141 events based on interaction settings
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75311 📧 All missing contacts were previously dismissed, skipping notification
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75315 📅 Syncing contacts with calendar events... {contactsCount: 171, eventsCount: 141}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Amy Graves', email: 'amy@hiddenconsumers.com', event: 'Monday Mavens Meeting', attendees: Array(17)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Amy Graves', email: 'amy@hiddenconsumers.com', event: 'Monday Mavens Meeting', attendees: Array(17)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Amy Graves', email: 'amy@hiddenconsumers.com', event: 'Monday Mavens Meeting', attendees: Array(17)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Amy Graves', email: 'amy@hiddenconsumers.com', event: 'Monday Mavens Meeting', attendees: Array(17)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Amy Graves', email: 'amy@hiddenconsumers.com', event: 'Monday Mavens Meeting', attendees: Array(17)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Amy Graves', email: 'amy@hiddenconsumers.com', event: 'Monday Mavens Meeting', attendees: Array(17)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45301 ✅ Setting nextCallDate for Amy Graves : 2026-03-09T16:00:00.000Z
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Janna Kimel', email: 'janna@chronicpainproject.org', event: 'CPP Board meeting', attendees: Array(4)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Janna Kimel', email: 'janna@chronicpainproject.org', event: 'CPP Board meeting', attendees: Array(4)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Janna Kimel', email: 'janna@chronicpainproject.org', event: 'CPP Board meeting', attendees: Array(4)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45301 ✅ Setting nextCallDate for Janna Kimel : 2026-03-25T21:00:00.000Z
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Jason Spinney', email: 'jason@bitelabs.io', event: 'Meredith / Jason ', attendees: Array(1)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Jason Spinney', email: 'jason@bitelabs.io', event: 'Meredith / Jason ', attendees: Array(1)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Jason Spinney', email: 'jason@bitelabs.io', event: 'Meredith / Jason ', attendees: Array(1)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Jason Spinney', email: 'jason@bitelabs.io', event: 'Meredith / Jason ', attendees: Array(1)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Jason Spinney', email: 'jason@bitelabs.io', event: 'Meredith / Jason ', attendees: Array(1)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Jason Spinney', email: 'jason@bitelabs.io', event: 'Meredith / Jason ', attendees: Array(1)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45301 ✅ Setting nextCallDate for Jason Spinney : 2026-03-11T17:00:00.000Z
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'Meet with Rob (Meredith Mangold)'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'KER + EM + MER'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'Meredith / Jason '}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'Meredith / Jason '}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'Meredith / Jason '}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'Meredith / Jason '}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'Meredith / Jason '}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'Meredith / Jason '}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'KER + EM + MER'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45301 ✅ Setting nextCallDate for mer : 2026-03-03T19:30:00.000Z
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Kwazema Abakporo', email: 'kwaztobak@gmail.com', event: 'Kwazema  Abakporo', attendees: Array(1)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45301 ✅ Setting nextCallDate for Kwazema Abakporo : 2026-03-18T17:00:00.000Z
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Robert Howell', email: 'roberth2mstrategies@gmail.com', event: 'Meet with Rob (Meredith Mangold)', attendees: Array(1)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45301 ✅ Setting nextCallDate for Robert Howell : 2026-03-03T19:30:00.000Z
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75402 💾 Saving 3 content items to localStorage
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75402 ✅ Successfully saved to localStorage
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 🚀 App component rendering...
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 📍 Current URL: https://skill-stove-47070579.figma.site/?page=today
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 📍 Current pathname: /
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 📍 Current search: ?page=today
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75016 🔍 State: {currentPage: 'today', showFullApp: true, viewParam: null}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75675 🔍 Calendar callback check: {isCalendarCallback: false, calendarCode: undefined, calendarError: null}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75680 🔍 LinkedIn callback check: {isLinkedInCallback: false, linkedInCode: undefined, linkedInError: null}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:76221 🚀 App.tsx proceeding to full app render...
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:76221 🔍 URL params: {page: 'today'}
+content.js:3715 [VideoPiP] No video found, retry 1/4
+content.js:3715 [VideoPiP] No video found, retry 2/4
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75158 ✅ Server reports calendar is connected - activating integration
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:72129 🔌 Activating server-side calendar integration...
+content.js:3715 [VideoPiP] No video found, retry 3/4
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:71972 📅 Using real Google Calendar API
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:72007 🔍 [FETCH] Fetching calendar events from: https://cthtyfkutjfjawnkuucf.supabase.co/functions/v1/make-server-a89809a8/calendar/events
+content.js:3715 [VideoPiP] No video found, retry 4/4
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:33807 💾 Saving timeline activities to: https://cthtyfkutjfjawnkuucf.supabase.co/functions/v1/make-server-a89809a8/kv/timeline_activities
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:33817 ✅ Timeline activities saved successfully
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:72013 🔍 [FETCH] Response status: 200 true
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:72016 🔍 [FETCH] Raw data from server: {dataType: 'object', isArray: false, length: 'N/A', hasEvents: true, eventsLength: 141, …}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:72025 📅 Fetched 141 events from server endpoint
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:71957 ✅ Synced 141 calendar events
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 🚀 App component rendering...
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 📍 Current URL: https://skill-stove-47070579.figma.site/?page=today
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 📍 Current pathname: /
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 📍 Current search: ?page=today
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75016 🔍 State: {currentPage: 'today', showFullApp: true, viewParam: null}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75326 🎨 ENRICHMENT: About to enrich calendar events
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75326   Calendar events: 141
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75326   Contacts: 171
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75326   Contacts loaded: true
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75330 
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75330 ═══════════════════════════════════════════════════════
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75330 📋 ALL CALENDAR IDs (for SubwayTimeline buffer config):
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75330 ═══════════════════════════════════════════════════════
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "c_db8c7da6c97cceca59f02acc7b2f85d3bd4606dcf8e32e39a78149e74ca81ea1@group.calendar.google.com",  // Common Grounds Community - Events
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "c_c335af726b18d27166b2f36c1c5d9fbb1fd92649a49eacfc0816adf890038992@group.calendar.google.com",  // 🩺 Virtual Appts
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "meredith@empowerhealthstrategies.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "janna@chronicpainproject.org",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "ancil@ancillea.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "liz@socialwithpurpose.co",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "jason@bitelabs.io",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "scheduledevents@riverside.fm",  // PFN Riverside 1
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "suzi@teachyourthing.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "waelsaasouh@gmail.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "zhen@grapevyne.health",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "ithappenedtomepod@gmail.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "careers@flightforty.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "roberth2mstrategies@gmail.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "c_63de4d845029e69906675f62e92609302f7fbd4aea58aaa3da8834fb1e7e033c@group.calendar.google.com",  // Gildergold Family 🏠
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "admin@bitelabs.io",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "c_a180db3bb003b2be8eaebb1e9f7d6c347b424b9dd139e634de4962fa1329e5c5@group.calendar.google.com",  // 🩺 Medical Appts
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "c_382c8c85a87aa01141ef1e99873b54663eb5c49e2690ae5f1cc200774085ca3e@group.calendar.google.com",  // CBC 👠
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "meredith.mangold@gmail.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "ryan.gsleeve@gmail.com",  // Google Calendar
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75331 "vmp886lrea7ba57tlqd9qc829auqg23s@import.calendar.google.com",  // _2026_Spring
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75332 ═══════════════════════════════════════════════════════
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75332 
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45347 🔍 ENRICHMENT DEBUG: Starting enrichment process
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45347   📅 Calendar Events: 141
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45347   👥 Contacts: 171
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45349   📋 Sample Event: {title: "Ancil's Coffee Corner", attendees: Array(0), contact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45357   📋 Sample Contact: {name: 'Sarah Mitchell', email: 'sarah@techstartup.com'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Vision board workshop', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Affiliate Partner Program interest meeting', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Ancil's Coffee Corner", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Monday Morning Call', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '5pm Dr. Speed ', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Caitlin', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Caitlin', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Caitlin', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '9:20am Dr. Speed', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Caitlin', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Caitlin', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Caitlin', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '🩸 GET LABS FOR DR. AHMED DONE THIS WEEK', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Caitlin', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10:30am Dr. Shabina Ahmed (virtual) - LABS ONE WK IN ADVANCE', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Caitlin', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Alex (Protoqual) + Meredith (EHS) Reconnect', contact: 'Alex Altman', email: 'alex@protoqual.com', color: '#c6686d', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…kgYH5huPfFDSMDgAAgA1xNNk5J7g4+lDtPhj8qq5c8nI//9k='}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'CPP Board meeting', contact: 'Janna Kimel', email: 'janna@chronicpainproject.org', color: '#e49bb4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Tracy + Mer: Chat+Cowork', contact: 'Tracy Steffek', email: 'tracy@remedyandroot.com', color: '#5a6d5f', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Loraine + Meredith', contact: 'Loraine Coleman', email: 'lcoleman@informs.org', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'PCORI Virtual Community Roundtable on Harnessing Digital Health Technologies - Part 2', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Sophie + Meredith', contact: 'Sophie Shah', email: 'sophie.s.shah@gmail.com', color: '#7fa383', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Ancil', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10-11:30 PEOF Setting the Table for the Future of Digital Health', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Setting the Table for the Future of Digital Health', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith Mangold and Ancil Lea', contact: 'Ancil Lea', email: 'ancil@ancillea.com', color: '#c6686d', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Monday Mavens Meeting', contact: 'Amy Graves', email: 'Amy@hiddenconsumers.com', color: '#f4c4c4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith / Jason ', contact: 'Jason Spinney', email: 'jason@bitelabs.io', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…biQtDXY0AfEETnkNcN9bfWDQXi2t5LPWvaCXejd1TS+nzP//Z'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Mo-ments of Experience with Meredith Mangold', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Vishal + Meredith', contact: 'Vishal Goyal', email: 'vishal0073@gmail.com', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…kbzQvV8fj/fJE+VucRVN6NmGDcuRjbD0POsOE4Somf5cz/9k='}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: '11:30am Maylin + Meredith', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Suzi Hunn', contact: 'Suzi Hunn', email: 'suzi@teachyourthing.com', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Mavens Coworking 👯‍♀️ ✨', attendees: Array(3), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'test event you can ignore', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'mm839', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Re: Follow up Meredith/Wael HRC/LinkedIn patient experience', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Ancil Lea', contact: 'Ancil Lea', email: 'ancil@ancillea.com', color: '#c6686d', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'CPP Board meeting', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Katie + Mer 💕', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Sophie + Meredith', contact: 'Sophie Shah', email: 'sophie.s.shah@gmail.com', color: '#7fa383', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Chat - Meredith - ancil', contact: 'Ancil Lea', email: 'ancil@ancillea.com', color: '#c6686d', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith / Jason ', contact: 'Jason Spinney', email: 'jason@bitelabs.io', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…biQtDXY0AfEETnkNcN9bfWDQXi2t5LPWvaCXejd1TS+nzP//Z'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Zhen - 30 Minute (Meredith Mangold)', contact: 'Zhen Chan', email: 'zhen@grapevyne.health', color: '#7ea5b4', imageUrl: ''}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith Mangold and It Happened To Me Podcast', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'CM/EHS Partnership video', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Career Chat (Meredith Mangold)', contact: 'Michael Stinnett', email: 'careers@flightforty.com', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Ancil/Betty Lou/Meredith', contact: 'Ancil Lea', email: 'ancil@ancillea.com', color: '#c6686d', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Marc + Meredith', contact: 'Marc Jett', email: 'mjett@thrivesls.com', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'send sophie videos', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '!!! cancel honeybook account', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meet with Rob (Meredith Mangold)', contact: 'Robert Howell', email: 'roberth2mstrategies@gmail.com', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'prep for tmrw', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'KER + EM + MER', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'AAPM', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'prep for BL', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'BiteLabs USA (Winter 2026) Workshop : Workshop Lead Invitation', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Monday Mavens Meeting', contact: 'Amy Graves', email: 'Amy@hiddenconsumers.com', color: '#f4c4c4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith / Jason ', contact: 'Jason Spinney', email: 'jason@bitelabs.io', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…biQtDXY0AfEETnkNcN9bfWDQXi2t5LPWvaCXejd1TS+nzP//Z'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Kwazema  Abakporo', contact: 'Kwazema Abakporo', email: 'kwaztobak@gmail.com', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'potentially CM fellowship', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith / Jason ', contact: 'Jason Spinney', email: 'jason@bitelabs.io', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…biQtDXY0AfEETnkNcN9bfWDQXi2t5LPWvaCXejd1TS+nzP//Z'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'CPP Board meeting', contact: 'Janna Kimel', email: 'janna@chronicpainproject.org', color: '#e49bb4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'potentially CM fellowship', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'potentially CM fellowship', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith / Jason ', contact: 'Jason Spinney', email: 'jason@bitelabs.io', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…biQtDXY0AfEETnkNcN9bfWDQXi2t5LPWvaCXejd1TS+nzP//Z'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Monday Mavens Meeting', contact: 'Amy Graves', email: 'Amy@hiddenconsumers.com', color: '#f4c4c4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith / Jason ', contact: 'Jason Spinney', email: 'jason@bitelabs.io', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…biQtDXY0AfEETnkNcN9bfWDQXi2t5LPWvaCXejd1TS+nzP//Z'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '9:30am Hydro Dr. Siddiqui', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'CPP Board meeting', contact: 'Janna Kimel', email: 'janna@chronicpainproject.org', color: '#e49bb4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith / Jason ', contact: 'Jason Spinney', email: 'jason@bitelabs.io', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…biQtDXY0AfEETnkNcN9bfWDQXi2t5LPWvaCXejd1TS+nzP//Z'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Monday Mavens Meeting', contact: 'Amy Graves', email: 'Amy@hiddenconsumers.com', color: '#f4c4c4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Meredith / Jason ', contact: 'Jason Spinney', email: 'jason@bitelabs.io', color: '#7ea5b4', imageUrl: 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD…biQtDXY0AfEETnkNcN9bfWDQXi2t5LPWvaCXejd1TS+nzP//Z'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'CPP Board meeting', contact: 'Janna Kimel', email: 'janna@chronicpainproject.org', color: '#e49bb4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'GSD Monday Mavens Huddle on GoogleMeet', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Cowork', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: '🎂 Ryan + Mer Birthday Getaway (2 nights)', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4:20pm vet j+m', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'KER + EM + MER', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'tentative nani play', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '8:30am Ryan Wisdom Teeth Removal 🦷', attendees: Array(2), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: "Rhonda women's retreat ", attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '8:30am hydro Dr Siddiqui', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '11:15am Neuro Botox', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '9am Marisa (rescheduled from previous week to 9am)', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10am Marisa', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10am Dentist', attendees: Array(2), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10am Marisa', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10am Marisa', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '9:30am hydro Dr. Siddiqui', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10am Marisa', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10am Marisa', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '9:30am Hydro Dr. Siddiqui', attendees: Array(2), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10am Marisa', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '8:30am neuro botox', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10am Marisa', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '4pm Cigna botox', attendees: Array(2), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'KER + EM + MER 💕', contact: 'mer', email: 'mm839@georgetown.edu', color: undefined, imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: '10:30am🧘🏼‍♀️ chair-lates with DK', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Andie/Ivan Here', attendees: Array(1), eventContact: {…}}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Monday Mavens Meeting', contact: 'Amy Graves', email: 'Amy@hiddenconsumers.com', color: '#f4c4c4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Monday Mavens Meeting', contact: 'Amy Graves', email: 'Amy@hiddenconsumers.com', color: '#f4c4c4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45364 ✅ Enriching event with contact: {event: 'Monday Mavens Meeting', contact: 'Amy Graves', email: 'Amy@hiddenconsumers.com', color: '#f4c4c4', imageUrl: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Cohort Call #1', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Cohort Call #2', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Cohort Call #3', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Cohort Call #4', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Cohort Call #5', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Cohort Call #6', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45389 ⚠️ No contact match for event: {title: 'Cohort Call #7', attendees: Array(0), eventContact: undefined}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75590 📊 App.tsx counts calculation: {today: '2026-02-28', todayTasks: 4, activeTodayTasks: 4, todayContent: 0, todayNurtures: 0, …}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75630 🔍 [TIMELINE DEBUG] Filtering calendar events for today:
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75630   📅 Today's date (local): "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75630   📊 Total enriched events: 141
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75630   📋 Sample enriched events (first 3):
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632     1. "Ancil's Coffee Corner"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632        - startTime: "2026-01-30T18:00:00.000Z"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632        - Extracted date: "2026-01-30"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632     2. "Monday Morning Call"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632        - startTime: "2026-02-02T15:00:00.000Z"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632        - Extracted date: "2026-02-02"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632     3. "Ancil's Coffee Corner"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632        - startTime: "2026-02-06T18:00:00.000Z"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75632        - Extracted date: "2026-02-06"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-01-30" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-02-02" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-02-06" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-02-09" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-02-13" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-02-16" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Vision board workshop" doesn't match: "2026-02-18" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-02-20" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-02-23" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-02-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-03-02" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Affiliate Partner Program interest meeting" doesn't match: "2026-03-03" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-03-06" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-03-09" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-03-13" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-03-16" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-03-20" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-03-23" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-03-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-03-30" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-04-03" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-04-06" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-04-10" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-04-13" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-04-17" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-04-20" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-04-24" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-04-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-05-01" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-05-04" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-05-08" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-05-11" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-05-15" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-05-18" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil's Coffee Corner" doesn't match: "2026-05-22" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Morning Call" doesn't match: "2026-05-25" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "5pm Dr. Speed " doesn't match: "2026-02-03" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Caitlin" doesn't match: "2026-02-10" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Caitlin" doesn't match: "2026-02-24" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Caitlin" doesn't match: "2026-03-10" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "9:20am Dr. Speed" doesn't match: "2026-03-17" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Caitlin" doesn't match: "2026-03-24" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Caitlin" doesn't match: "2026-04-07" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Caitlin" doesn't match: "2026-04-21" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "🩸 GET LABS FOR DR. AHMED DONE THIS WEEK" doesn't match: "2026-04-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Caitlin" doesn't match: "2026-05-05" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10:30am Dr. Shabina Ahmed (virtual) - LABS ONE WK IN ADVANCE" doesn't match: "2026-05-11" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Caitlin" doesn't match: "2026-05-19" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Alex (Protoqual) + Meredith (EHS) Reconnect" doesn't match: "2026-01-29" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "CPP Board meeting" doesn't match: "2026-01-30" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Tracy + Mer: Chat+Cowork" doesn't match: "2026-02-02" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Loraine + Meredith" doesn't match: "2026-02-02" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "PCORI Virtual Community Roundtable on Harnessing Digital Health Technologies - Part 2" doesn't match: "2026-02-03" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Sophie + Meredith" doesn't match: "2026-02-03" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil" doesn't match: "2026-02-04" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10-11:30 PEOF Setting the Table for the Future of Digital Health" doesn't match: "2026-02-05" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Setting the Table for the Future of Digital Health" doesn't match: "2026-02-05" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith Mangold and Ancil Lea" doesn't match: "2026-02-06" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Mavens Meeting" doesn't match: "2026-02-09" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith / Jason " doesn't match: "2026-02-11" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Mo-ments of Experience with Meredith Mangold" doesn't match: "2026-02-12" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Vishal + Meredith" doesn't match: "2026-02-13" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "11:30am Maylin + Meredith" doesn't match: "2026-02-15" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Suzi Hunn" doesn't match: "2026-02-17" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Mavens Coworking 👯‍♀️ ✨" doesn't match: "2026-02-17" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "test event you can ignore" doesn't match: "2026-02-18" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "mm839" doesn't match: "2026-02-18" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Re: Follow up Meredith/Wael HRC/LinkedIn patient experience" doesn't match: "2026-02-19" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil Lea" doesn't match: "2026-02-19" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "CPP Board meeting" doesn't match: "2026-02-20" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Katie + Mer 💕" doesn't match: "2026-02-23" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Sophie + Meredith" doesn't match: "2026-02-23" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Chat - Meredith - ancil" doesn't match: "2026-02-24" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith / Jason " doesn't match: "2026-02-25" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Zhen - 30 Minute (Meredith Mangold)" doesn't match: "2026-02-25" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith Mangold and It Happened To Me Podcast" doesn't match: "2026-02-26" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "CM/EHS Partnership video" doesn't match: "2026-02-26" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Career Chat (Meredith Mangold)" doesn't match: "2026-02-26" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Ancil/Betty Lou/Meredith" doesn't match: "2026-02-26" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Marc + Meredith" doesn't match: "2026-02-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "send sophie videos" doesn't match: "2026-02-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "!!! cancel honeybook account" doesn't match: "2026-03-01" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meet with Rob (Meredith Mangold)" doesn't match: "2026-03-03" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "prep for tmrw" doesn't match: "2026-03-04" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "KER + EM + MER" doesn't match: "2026-03-04" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "AAPM" doesn't match: "2026-03-05" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "prep for BL" doesn't match: "2026-03-05" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "BiteLabs USA (Winter 2026) Workshop : Workshop Lead Invitation" doesn't match: "2026-03-05" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Mavens Meeting" doesn't match: "2026-03-09" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith / Jason " doesn't match: "2026-03-11" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Kwazema  Abakporo" doesn't match: "2026-03-18" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "potentially CM fellowship" doesn't match: "2026-03-23" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith / Jason " doesn't match: "2026-03-25" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "CPP Board meeting" doesn't match: "2026-03-25" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "potentially CM fellowship" doesn't match: "2026-03-26" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "potentially CM fellowship" doesn't match: "2026-03-30" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith / Jason " doesn't match: "2026-04-08" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Mavens Meeting" doesn't match: "2026-04-13" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith / Jason " doesn't match: "2026-04-22" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "9:30am Hydro Dr. Siddiqui" doesn't match: "2026-04-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "CPP Board meeting" doesn't match: "2026-04-29" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith / Jason " doesn't match: "2026-05-06" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Mavens Meeting" doesn't match: "2026-05-11" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Meredith / Jason " doesn't match: "2026-05-20" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "CPP Board meeting" doesn't match: "2026-05-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "GSD Monday Mavens Huddle on GoogleMeet" doesn't match: "2026-01-30" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Cowork" doesn't match: "2026-02-13" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "🎂 Ryan + Mer Birthday Getaway (2 nights)" doesn't match: "2026-02-08" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4:20pm vet j+m" doesn't match: "2026-02-16" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "KER + EM + MER" doesn't match: "2026-03-04" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "tentative nani play" doesn't match: "2026-03-07" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "8:30am Ryan Wisdom Teeth Removal 🦷" doesn't match: "2026-03-20" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Rhonda women's retreat " doesn't match: "2026-04-10" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "8:30am hydro Dr Siddiqui" doesn't match: "2026-01-30" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "11:15am Neuro Botox" doesn't match: "2026-02-03" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "9am Marisa (rescheduled from previous week to 9am)" doesn't match: "2026-02-17" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10am Marisa" doesn't match: "2026-02-24" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10am Dentist" doesn't match: "2026-02-25" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10am Marisa" doesn't match: "2026-03-10" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10am Marisa" doesn't match: "2026-03-24" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "9:30am hydro Dr. Siddiqui" doesn't match: "2026-03-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10am Marisa" doesn't match: "2026-04-07" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10am Marisa" doesn't match: "2026-04-21" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "9:30am Hydro Dr. Siddiqui" doesn't match: "2026-04-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10am Marisa" doesn't match: "2026-05-05" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "8:30am neuro botox" doesn't match: "2026-05-07" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10am Marisa" doesn't match: "2026-05-19" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "4pm Cigna botox" doesn't match: "2026-05-20" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "KER + EM + MER 💕" doesn't match: "2026-02-06" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "10:30am🧘🏼‍♀️ chair-lates with DK" doesn't match: "2026-02-09" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Andie/Ivan Here" doesn't match: "2026-03-06" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Mavens Meeting" doesn't match: "2026-03-09" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Mavens Meeting" doesn't match: "2026-04-13" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Monday Mavens Meeting" doesn't match: "2026-05-11" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Cohort Call #1" doesn't match: "2026-02-13" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Cohort Call #2" doesn't match: "2026-02-27" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Cohort Call #3" doesn't match: "2026-03-12" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Cohort Call #4" doesn't match: "2026-04-10" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Cohort Call #5" doesn't match: "2026-04-24" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Cohort Call #6" doesn't match: "2026-05-08" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75638   ❌ Event "Cohort Call #7" doesn't match: "2026-05-22" !== "2026-02-28"
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75640 📅 RESULT: 0 out of 141 events match today (2026-02-28)
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75675 🔍 Calendar callback check: {isCalendarCallback: false, calendarCode: undefined, calendarError: null}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75680 🔍 LinkedIn callback check: {isLinkedInCallback: false, linkedInCode: undefined, linkedInError: null}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:76221 🚀 App.tsx proceeding to full app render...
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:76221 🔍 URL params: {page: 'today'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:74563 📅 Filtered 141/141 events based on interaction settings
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75311 📧 All missing contacts were previously dismissed, skipping notification
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75315 📅 Syncing contacts with calendar events... {contactsCount: 171, eventsCount: 141}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Amy Graves', email: 'amy@hiddenconsumers.com', event: 'Monday Mavens Meeting', attendees: Array(17)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Amy Graves', email: 'amy@hiddenconsumers.com', event: 'Monday Mavens Meeting', attendees: Array(17)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Amy Graves', email: 'amy@hiddenconsumers.com', event: 'Monday Mavens Meeting', attendees: Array(17)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Amy Graves', email: 'amy@hiddenconsumers.com', event: 'Monday Mavens Meeting', attendees: Array(17)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Amy Graves', email: 'amy@hiddenconsumers.com', event: 'Monday Mavens Meeting', attendees: Array(17)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Amy Graves', email: 'amy@hiddenconsumers.com', event: 'Monday Mavens Meeting', attendees: Array(17)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45301 ✅ Setting nextCallDate for Amy Graves : 2026-03-09T16:00:00.000Z
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Janna Kimel', email: 'janna@chronicpainproject.org', event: 'CPP Board meeting', attendees: Array(4)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Janna Kimel', email: 'janna@chronicpainproject.org', event: 'CPP Board meeting', attendees: Array(4)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Janna Kimel', email: 'janna@chronicpainproject.org', event: 'CPP Board meeting', attendees: Array(4)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45301 ✅ Setting nextCallDate for Janna Kimel : 2026-03-25T21:00:00.000Z
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Jason Spinney', email: 'jason@bitelabs.io', event: 'Meredith / Jason ', attendees: Array(1)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Jason Spinney', email: 'jason@bitelabs.io', event: 'Meredith / Jason ', attendees: Array(1)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Jason Spinney', email: 'jason@bitelabs.io', event: 'Meredith / Jason ', attendees: Array(1)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Jason Spinney', email: 'jason@bitelabs.io', event: 'Meredith / Jason ', attendees: Array(1)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Jason Spinney', email: 'jason@bitelabs.io', event: 'Meredith / Jason ', attendees: Array(1)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Jason Spinney', email: 'jason@bitelabs.io', event: 'Meredith / Jason ', attendees: Array(1)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45301 ✅ Setting nextCallDate for Jason Spinney : 2026-03-11T17:00:00.000Z
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'Meet with Rob (Meredith Mangold)'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'KER + EM + MER'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'Meredith / Jason '}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'Meredith / Jason '}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'Meredith / Jason '}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'Meredith / Jason '}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'Meredith / Jason '}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'Meredith / Jason '}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45292 👤 Matched event by name: {contact: 'mer', event: 'KER + EM + MER'}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45301 ✅ Setting nextCallDate for mer : 2026-03-03T19:30:00.000Z
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Kwazema Abakporo', email: 'kwaztobak@gmail.com', event: 'Kwazema  Abakporo', attendees: Array(1)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45301 ✅ Setting nextCallDate for Kwazema Abakporo : 2026-03-18T17:00:00.000Z
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45282 📧 Matched event by email: {contact: 'Robert Howell', email: 'roberth2mstrategies@gmail.com', event: 'Meet with Rob (Meredith Mangold)', attendees: Array(1)}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:45301 ✅ Setting nextCallDate for Robert Howell : 2026-03-03T19:30:00.000Z
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 🚀 App component rendering...
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 📍 Current URL: https://skill-stove-47070579.figma.site/?page=today
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 📍 Current pathname: /
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75007 📍 Current search: ?page=today
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75016 🔍 State: {currentPage: 'today', showFullApp: true, viewParam: null}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75675 🔍 Calendar callback check: {isCalendarCallback: false, calendarCode: undefined, calendarError: null}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:75680 🔍 LinkedIn callback check: {isLinkedInCallback: false, linkedInCode: undefined, linkedInError: null}
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:76221 🚀 App.tsx proceeding to full app render...
+fd8f4c41d4803274c73388fdd2c595dc99f38f21.js:76221 🔍 URL params: {page: 'today'}
