@@ -306,9 +306,9 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
       case 'LI Post':
         return 'https://www.linkedin.com/feed/?shareActive=true';
       case 'LI Article':
-        return 'https://www.linkedin.com/post-editor/article/new/';
+        return 'https://www.linkedin.com/article/new/';
       case 'SS Post':
-        return 'https://substack.com/publish';
+        return 'https://empowerhealthstrategies.substack.com/publish/post';
       case 'SS Audio':
         return 'https://substack.com/publish?tab=podcast';
       default:
@@ -317,6 +317,17 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
   };
   
   const publishUrl = getPublishUrl();
+
+  // Handle publish click - copy content to clipboard
+  const handlePublishClick = async () => {
+    try {
+      await navigator.clipboard.writeText(editedItem.content || '');
+      toast.success('Content copied to clipboard!');
+    } catch (err) {
+      console.error('Failed to copy to clipboard:', err);
+      toast.error('Failed to copy content');
+    }
+  };
 
   // Get platform modules
   const getPlatformModules = () => {
@@ -438,6 +449,7 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
                 href={publishUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={handlePublishClick}
                 className="flex items-center gap-2 px-4 py-2 bg-slate-700 hover:bg-slate-800 text-white text-sm rounded-lg transition-colors"
               >
                 Publish to {editedItem.platform}
