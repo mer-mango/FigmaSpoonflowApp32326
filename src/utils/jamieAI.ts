@@ -3198,6 +3198,196 @@ Return ONLY the draft content as HTML (using <p>, <h2>, <h3>, <ul>, <li>, <stron
 }
 
 /**
+ * Generate 2 cohesive draft options for the Draft Builder
+ * Each draft has its own thesis/argument that drives all its structural elements
+ */
+export async function generate2DraftOptions(params: {
+  // Content planning inputs
+  selectedPovAngle?: string;
+  audiences?: string[];
+  goals?: string[];
+  notes?: string;
+  brainDump?: string;
+  
+  // Source content
+  sourceContent?: string;
+  sourceUrl?: string;
+  sourceAuthor?: string;
+  summary?: string;
+  mainPoints?: string[];
+  importantQuotes?: string[];
+  
+  // Platform context
+  platform?: string;
+  title?: string;
+}): Promise<Array<{
+  id: number;
+  jamiesThoughts: string;
+  relevantMainPoints: string[];
+  relevantQuotes: string[];
+  structuralSuggestions: {
+    hook: string;
+    context: string;
+    yourTake: string;
+    makeItUsable: string;
+    cta: string;
+  };
+}>> {
+  try {
+    const { projectId, publicAnonKey } = await import('./supabase/info');
+    
+    // Build comprehensive context
+    const contextStr = `
+CONTENT PLANNING INPUTS:
+- POV/Angle: ${params.selectedPovAngle || 'Not specified'}
+- Target Audiences: ${params.audiences?.join(', ') || 'Not specified'}
+- Goals: ${params.goals?.join(', ') || 'Not specified'}
+- Platform: ${params.platform || 'Not specified'}
+- Title: ${params.title || 'Untitled'}
+
+SOURCE MATERIAL:
+${params.summary ? `Summary: ${params.summary}` : ''}
+${params.sourceContent ? `\nSource Content:\n${params.sourceContent}` : ''}
+${params.sourceUrl ? `\nSource URL: ${params.sourceUrl}` : ''}
+${params.sourceAuthor ? `\nSource Author: ${params.sourceAuthor}` : ''}
+
+MAIN POINTS FROM SOURCE:
+${params.mainPoints && params.mainPoints.length > 0 ? params.mainPoints.map(p => `• ${p}`).join('\n') : 'None provided'}
+
+IMPORTANT QUOTES FROM SOURCE:
+${params.importantQuotes && params.importantQuotes.length > 0 ? params.importantQuotes.map(q => `"${q}"`).join('\n') : 'None provided'}
+
+MEREDITH'S NOTES:
+${params.notes || 'None'}
+
+MEREDITH'S BRAIN DUMP:
+${params.brainDump || 'None'}
+`;
+
+    const prompt = `You are Jamie, Meredith's AI assistant helping with content creation.
+
+YOUR TASK: Generate 2 DISTINCT draft options for Meredith to choose from. Each draft should feel like ONE COHESIVE ARGUMENT with all elements supporting that specific direction.
+
+${contextStr}
+
+IMPORTANT INSTRUCTIONS:
+
+For each draft:
+1. First, determine a DISTINCT TOPIC/ARGUMENT/THESIS for the draft
+2. Generate supporting source-based fields that align with that thesis:
+   - Relevant Main Points (3-5 points from the source that support THIS draft's direction)
+   - Relevant Quotes (2-4 quotes from the source that support THIS draft's direction)
+3. Generate structural suggestions that all align with that same draft direction:
+   - Hook (opening that pulls reader in for THIS specific angle)
+   - Context/Micro-story (either draft a contextual micro-story OR suggest what kind of personal story/experience Meredith should include)
+   - Your Take (Meredith's perspective on THIS specific angle)
+   - Make it Usable (practical takeaway for THIS argument)
+   - CTA (call-to-action that fits THIS direction)
+
+DRAFT OPTION 1 and DRAFT OPTION 2 should:
+- Have DIFFERENT thesis/argument/angle (not just slight variations)
+- Each feel internally consistent and cohesive
+- Pull from the source material but emphasize different aspects
+- Target the specified audience and goals but through different lenses
+
+VOICE GUIDELINES (Meredith's voice):
+- Clear, conversational, human
+- "Real talk" style - thoughtful but like a real person
+- Strong first sentences
+- Acknowledge complexity and nuance
+- Use patient-centered language: "patient journey", "real-life constraints", "care continuum"
+- AVOID: "nice-to-have", "deep insights", "game-changing", "unlock the power of", corporate jargon
+
+CONTEXT/MICRO-STORY OPTIONS:
+- You can either draft a full contextual micro-story (2-3 sentences)
+- OR suggest what kind of personal story/experience Meredith should add (e.g., "Add a story about a time you saw a patient struggle with X")
+
+Return your response as a JSON object with this EXACT structure:
+{
+  "draft1": {
+    "jamiesThoughts": "Draft 1: [1-2 sentences explaining the thesis/argument of this draft and what makes it distinct]",
+    "relevantMainPoints": ["Point 1", "Point 2", "Point 3"],
+    "relevantQuotes": ["\\"Quote 1\\"", "\\"Quote 2\\""],
+    "structuralSuggestions": {
+      "hook": "Opening hook text...",
+      "context": "Either a drafted micro-story OR a suggestion for what story to add...",
+      "yourTake": "Meredith's perspective text...",
+      "makeItUsable": "Practical takeaway text...",
+      "cta": "Call to action text..."
+    }
+  },
+  "draft2": {
+    "jamiesThoughts": "Draft 2: [1-2 sentences explaining the DIFFERENT thesis/argument of this draft]",
+    "relevantMainPoints": ["Point A", "Point B", "Point C"],
+    "relevantQuotes": ["\\"Quote X\\"", "\\"Quote Y\\""],
+    "structuralSuggestions": {
+      "hook": "Alternative opening hook...",
+      "context": "Alternative micro-story or suggestion...",
+      "yourTake": "Alternative perspective...",
+      "makeItUsable": "Alternative takeaway...",
+      "cta": "Alternative CTA..."
+    }
+  }
+}`;
+
+    const messages = [
+      { role: 'system', content: 'You are Jamie, an AI assistant that helps with content strategy. You are clear, conversational, and focused on creating cohesive, well-reasoned content.' },
+      { role: 'user', content: prompt }
+    ];
+
+    const response = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-a89809a8/jamie/chat`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${publicAnonKey}`
+      },
+      body: JSON.stringify({ messages })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      console.error('Jamie API error:', errorData);
+      throw new Error(`Jamie API error: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const content = data.choices[0].message.content.trim();
+    
+    // Extract JSON from response (may have markdown code fences)
+    const cleanedContent = stripMarkdownCodeFences(content);
+    
+    let parsed;
+    try {
+      parsed = JSON.parse(cleanedContent);
+    } catch (parseError) {
+      console.error('Failed to parse JSON response:', cleanedContent);
+      throw new Error('Jamie returned an invalid response format. Please try again.');
+    }
+    
+    // Transform into the format expected by the UI
+    return [
+      {
+        id: 1,
+        jamiesThoughts: parsed.draft1.jamiesThoughts,
+        relevantMainPoints: parsed.draft1.relevantMainPoints,
+        relevantQuotes: parsed.draft1.relevantQuotes,
+        structuralSuggestions: parsed.draft1.structuralSuggestions
+      },
+      {
+        id: 2,
+        jamiesThoughts: parsed.draft2.jamiesThoughts,
+        relevantMainPoints: parsed.draft2.relevantMainPoints,
+        relevantQuotes: parsed.draft2.relevantQuotes,
+        structuralSuggestions: parsed.draft2.structuralSuggestions
+      }
+    ];
+  } catch (error) {
+    console.error('Error generating draft options:', error);
+    throw error;
+  }
+}
+
+/**
  * Get tone-specific guidance to enforce proper voice matching
  */
 function getToneGuidance(tones: string[]): string {

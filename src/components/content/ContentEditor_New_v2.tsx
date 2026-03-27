@@ -1,22 +1,3 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { 
-  ChevronDown,
-  Save,
-  Sparkles,
-  Calendar,
-  Mic,
-  RefreshCw,
-  Bold,
-  Italic,
-  Underline,
-  List,
-  ListOrdered,
-  Heading1,
-  Heading2,
-  Heading3,
-  Link,
-  Quote
-} from 'lucide-react';
 import { toast } from 'sonner';
 import type { ContentItem, ContentStatus, Platform } from '../../types/content';
 import { platformPlaybook } from '../../config/platform_playbook';
@@ -24,6 +5,7 @@ import { PageHeader_Muted } from '../PageHeader_Muted';
 import { ExpandableWorkDrawer } from './ExpandableWorkDrawer';
 import { useNotifications } from '../../contexts/NotificationContext';
 import { DraftOptionsDisplay } from './DraftOptionsDisplay';
+import { generate2DraftOptions } from '../../utils/jamieAI';
 
 interface ContentEditorNewProps {
   item: ContentItem;
@@ -234,39 +216,35 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
   // Generate draft modules from all content
   const handleGenerateDraftPuzzlePieces = async () => {
     toast.info('Jamie is organizing your content...');
-    // TODO: Call AI to generate modules from summary, main points, quotes, and brain dump
-    // For now, show a mock response
-    setTimeout(() => {
-      setDraftOptions([
-        {
-          id: 1,
-          jamiesThoughts: 'Draft 1: This draft focuses on the key points and provides a clear structure for the content.',
-          relevantMainPoints: ['Point 1', 'Point 2', 'Point 3'],
-          relevantQuotes: ['"Quote 1"', '"Quote 2"'],
-          structuralSuggestions: {
-            hook: 'Generated hook based on your content...',
-            context: 'Generated context from your brain dump...',
-            yourTake: 'Your perspective based on main points...',
-            makeItUsable: 'Key takeaways compiled...',
-            cta: 'Suggested call to action...'
-          }
-        },
-        {
-          id: 2,
-          jamiesThoughts: 'Draft 2: This draft emphasizes the importance of the topic and provides a different angle.',
-          relevantMainPoints: ['Point A', 'Point B', 'Point C'],
-          relevantQuotes: ['"Quote X"', '"Quote Y"'],
-          structuralSuggestions: {
-            hook: 'Alternative hook based on your content...',
-            context: 'Alternative context from your brain dump...',
-            yourTake: 'Alternative perspective based on main points...',
-            makeItUsable: 'Alternative key takeaways compiled...',
-            cta: 'Alternative suggested call to action...'
-          }
-        }
-      ]);
-      toast.success('Draft puzzle pieces generated!');
-    }, 1500);
+    
+    try {
+      const generatedDraftOptions = await generate2DraftOptions({
+        // Content planning inputs
+        selectedPovAngle: editedItem.selectedPovAngles?.[0], // Use first selected angle
+        audiences: editedItem.audiences,
+        goals: editedItem.goals,
+        notes: editedItem.notes,
+        brainDump: brainDump,
+        
+        // Source content
+        sourceContent: editedItem.sourceContent,
+        sourceUrl: editedItem.sourceUrl,
+        sourceAuthor: editedItem.sourceAuthor,
+        summary: editedItem.summary,
+        mainPoints: editedItem.mainPoints,
+        importantQuotes: editedItem.importantQuotes,
+        
+        // Platform context
+        platform: editedItem.platform,
+        title: editedItem.title
+      });
+      
+      setDraftOptions(generatedDraftOptions);
+      toast.success('Jamie created 2 draft options!');
+    } catch (error) {
+      console.error('Error generating draft options:', error);
+      toast.error('Failed to generate drafts. Please try again.');
+    }
   };
 
   // Regenerate individual field
