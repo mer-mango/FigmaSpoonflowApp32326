@@ -15,6 +15,7 @@ import type { ContentItem, BrainDump, JamieSourceAnalysis } from '../../types/co
 import { BrainDumpModal } from './BrainDumpModal';
 import { analyzeSourceMaterial, checkVoiceGuidelines } from '../../utils/jamieAI';
 import { platformPlaybook } from '../../config/platform_playbook';
+import { copyToClipboard } from '../../utils/clipboard';
 
 type CheckStatus = 'pass' | 'warn' | 'fail';
 
@@ -416,10 +417,14 @@ export function JamiePanel({
                                 // Copy draft to clipboard
                                 const tempDiv = document.createElement('div');
                                 tempDiv.innerHTML = dump.jamieDraft || '';
-                                navigator.clipboard.writeText(tempDiv.innerText);
+                                const success = await copyToClipboard(tempDiv.innerText);
                                 // Show toast notification
                                 const { toast } = await import('sonner@2.0.3');
-                                toast.success('Draft copied to clipboard');
+                                if (success) {
+                                  toast.success('Draft copied to clipboard');
+                                } else {
+                                  toast.error('Failed to copy draft');
+                                }
                               }}
                               className="mt-2 text-xs text-[#6b2358] hover:text-[#5e2350] transition-colors"
                             >

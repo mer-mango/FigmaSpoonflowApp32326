@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { RefreshCw } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -24,6 +24,38 @@ interface DraftOptionsDisplayProps {
   setEditorContent: React.Dispatch<React.SetStateAction<string>>;
   setHasUnsavedChanges: React.Dispatch<React.SetStateAction<boolean>>;
   onRegenerateAll: () => void;
+}
+
+// Auto-expanding textarea component
+function AutoExpandTextarea({ 
+  value, 
+  onChange, 
+  className 
+}: { 
+  value: string; 
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void; 
+  className?: string;
+}) {
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      // Reset height to auto to get the correct scrollHeight
+      textareaRef.current.style.height = 'auto';
+      // Set the height to match the content
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  }, [value]);
+
+  return (
+    <textarea
+      ref={textareaRef}
+      value={value}
+      onChange={onChange}
+      className={className}
+      style={{ minHeight: '40px', overflow: 'hidden' }}
+    />
+  );
 }
 
 export function DraftOptionsDisplay({
@@ -57,27 +89,26 @@ export function DraftOptionsDisplay({
           {/* Jamie's Thoughts */}
           <div>
             <div className="text-sm font-semibold text-slate-800 mb-2">Jamie's thoughts:</div>
-            <textarea
+            <AutoExpandTextarea
               value={draft.jamiesThoughts}
               onChange={(e) => setDraftOptions(prev => {
                 const newDrafts = [...prev];
                 newDrafts[draftIndex].jamiesThoughts = e.target.value;
                 return newDrafts;
               })}
-              rows={4}
               className="w-full px-3 py-2 text-sm border border-slate-300 rounded bg-white resize-none outline-none focus:ring-2 focus:ring-[#6b2358] focus:border-transparent"
             />
           </div>
           
           {/* FROM THE SOURCE */}
           <div>
-            <div className="text-sm font-bold text-slate-900 mb-3 underline">FROM THE SOURCE:</div>
+            <div className="font-bold text-slate-900 mb-3 underline text-[16px]">FROM THE SOURCE:</div>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-4">
               {/* Relevant Main Points */}
-              <div>
+              <div className="bg-[#ffffff00]">
                 <div className="flex items-center justify-between mb-2">
-                  <div className="text-xs font-bold text-slate-800">Relevant Main Points:</div>
+                  <div className="font-bold text-slate-800 text-[14px]">Relevant Main Points:</div>
                   <div className="flex items-center gap-1">
                     <button
                       onClick={() => {
@@ -94,7 +125,7 @@ export function DraftOptionsDisplay({
                   {draft.relevantMainPoints.map((point, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-sm">
                       <button
-                        className="text-red-500 hover:text-red-700 flex-shrink-0 mt-0.5"
+                        className="hover:text-red-700 flex-shrink-0 mt-0.5 text-[#717171]"
                         onClick={() => {
                           setDraftOptions(prev => {
                             const newDrafts = [...prev];
@@ -105,16 +136,15 @@ export function DraftOptionsDisplay({
                       >
                         ✕
                       </button>
-                      <span className="text-slate-600 flex-shrink-0">○</span>
-                      <input
-                        type="text"
+                      
+                      <AutoExpandTextarea
                         value={point}
                         onChange={(e) => setDraftOptions(prev => {
                           const newDrafts = [...prev];
                           newDrafts[draftIndex].relevantMainPoints[idx] = e.target.value;
                           return newDrafts;
                         })}
-                        className="flex-1 bg-transparent border-none outline-none text-slate-800"
+                        className="flex-1 bg-transparent border-none outline-none text-slate-800 resize-none p-0"
                       />
                     </li>
                   ))}
@@ -124,7 +154,7 @@ export function DraftOptionsDisplay({
               {/* Relevant Quotes */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <div className="text-xs font-bold text-slate-800">Relevant Quotes:</div>
+                  <div className="font-bold text-slate-800 text-[14px]">Relevant Quotes:</div>
                   <div className="flex items-center gap-1">
                     <button
                       onClick={() => {
@@ -141,7 +171,7 @@ export function DraftOptionsDisplay({
                   {draft.relevantQuotes.map((quote, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-sm">
                       <button
-                        className="text-red-500 hover:text-red-700 flex-shrink-0 mt-0.5"
+                        className="hover:text-red-700 flex-shrink-0 mt-0.5 text-[#717171]"
                         onClick={() => {
                           setDraftOptions(prev => {
                             const newDrafts = [...prev];
@@ -152,16 +182,15 @@ export function DraftOptionsDisplay({
                       >
                         ✕
                       </button>
-                      <span className="text-slate-600 flex-shrink-0">○</span>
-                      <input
-                        type="text"
+                      
+                      <AutoExpandTextarea
                         value={quote}
                         onChange={(e) => setDraftOptions(prev => {
                           const newDrafts = [...prev];
                           newDrafts[draftIndex].relevantQuotes[idx] = e.target.value;
                           return newDrafts;
                         })}
-                        className="flex-1 bg-transparent border-none outline-none text-slate-800"
+                        className="flex-1 bg-transparent border-none outline-none text-slate-800 resize-none p-0"
                       />
                     </li>
                   ))}
@@ -174,14 +203,14 @@ export function DraftOptionsDisplay({
           
           {/* STRUCTURAL SUGGESTIONS */}
           <div>
-            <div className="text-sm font-bold text-slate-900 mb-3 underline">STRUCTURAL SUGGESTIONS:</div>
+            <div className="font-bold text-slate-900 mb-3 underline text-[16px]">STRUCTURAL SUGGESTIONS:</div>
             
             <div className="space-y-3">
               {/* Hook */}
               {draft.structuralSuggestions.hook && (
                 <div className="flex items-start gap-2">
                   <button
-                    className="text-red-500 hover:text-red-700 flex-shrink-0 mt-1"
+                    className="hover:text-red-700 flex-shrink-0 mt-1 text-[#717171]"
                     onClick={() => {
                       setDraftOptions(prev => {
                         const newDrafts = [...prev];
@@ -194,7 +223,7 @@ export function DraftOptionsDisplay({
                   </button>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-bold text-slate-800">Hook:</span>
+                      <span className="font-bold text-slate-800 text-[14px]">Hook:</span>
                       <div className="flex items-center gap-1">
                         <button
                           onClick={() => toast.info('Regenerating hook...')}
@@ -205,14 +234,13 @@ export function DraftOptionsDisplay({
                         </button>
                       </div>
                     </div>
-                    <textarea
+                    <AutoExpandTextarea
                       value={draft.structuralSuggestions.hook}
                       onChange={(e) => setDraftOptions(prev => {
                         const newDrafts = [...prev];
                         newDrafts[draftIndex].structuralSuggestions.hook = e.target.value;
                         return newDrafts;
                       })}
-                      rows={2}
                       className="w-full px-2 py-1.5 text-sm border border-slate-300 rounded bg-white resize-none outline-none focus:ring-1 focus:ring-[#6b2358]"
                     />
                   </div>
@@ -223,7 +251,7 @@ export function DraftOptionsDisplay({
               {draft.structuralSuggestions.context && (
                 <div className="flex items-start gap-2">
                   <button
-                    className="text-red-500 hover:text-red-700 flex-shrink-0 mt-1"
+                    className="hover:text-red-700 flex-shrink-0 mt-1 text-[#717171]"
                     onClick={() => {
                       setDraftOptions(prev => {
                         const newDrafts = [...prev];
@@ -236,7 +264,7 @@ export function DraftOptionsDisplay({
                   </button>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-bold text-slate-800">Context/Micro-story:</span>
+                      <span className="font-bold text-slate-800 text-[14px]">Context/Micro-story:</span>
                       <div className="flex items-center gap-1">
                         <button
                           onClick={() => toast.info('Regenerating context...')}
@@ -247,14 +275,13 @@ export function DraftOptionsDisplay({
                         </button>
                       </div>
                     </div>
-                    <textarea
+                    <AutoExpandTextarea
                       value={draft.structuralSuggestions.context}
                       onChange={(e) => setDraftOptions(prev => {
                         const newDrafts = [...prev];
                         newDrafts[draftIndex].structuralSuggestions.context = e.target.value;
                         return newDrafts;
                       })}
-                      rows={2}
                       className="w-full px-2 py-1.5 text-sm border border-slate-300 rounded bg-white resize-none outline-none focus:ring-1 focus:ring-[#6b2358]"
                     />
                   </div>
@@ -265,7 +292,7 @@ export function DraftOptionsDisplay({
               {draft.structuralSuggestions.yourTake && (
                 <div className="flex items-start gap-2">
                   <button
-                    className="text-red-500 hover:text-red-700 flex-shrink-0 mt-1"
+                    className="hover:text-red-700 flex-shrink-0 mt-1 text-[#717171]"
                     onClick={() => {
                       setDraftOptions(prev => {
                         const newDrafts = [...prev];
@@ -278,7 +305,7 @@ export function DraftOptionsDisplay({
                   </button>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-bold text-slate-800">Your Take:</span>
+                      <span className="font-bold text-slate-800 text-[14px]">Your Take:</span>
                       <div className="flex items-center gap-1">
                         <button
                           onClick={() => toast.info('Regenerating your take...')}
@@ -289,14 +316,13 @@ export function DraftOptionsDisplay({
                         </button>
                       </div>
                     </div>
-                    <textarea
+                    <AutoExpandTextarea
                       value={draft.structuralSuggestions.yourTake}
                       onChange={(e) => setDraftOptions(prev => {
                         const newDrafts = [...prev];
                         newDrafts[draftIndex].structuralSuggestions.yourTake = e.target.value;
                         return newDrafts;
                       })}
-                      rows={2}
                       className="w-full px-2 py-1.5 text-sm border border-slate-300 rounded bg-white resize-none outline-none focus:ring-1 focus:ring-[#6b2358]"
                     />
                   </div>
@@ -307,7 +333,7 @@ export function DraftOptionsDisplay({
               {draft.structuralSuggestions.makeItUsable && (
                 <div className="flex items-start gap-2">
                   <button
-                    className="text-red-500 hover:text-red-700 flex-shrink-0 mt-1"
+                    className="hover:text-red-700 flex-shrink-0 mt-1 text-[#717171]"
                     onClick={() => {
                       setDraftOptions(prev => {
                         const newDrafts = [...prev];
@@ -320,7 +346,7 @@ export function DraftOptionsDisplay({
                   </button>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-bold text-slate-800">Make it Usable:</span>
+                      <span className="font-bold text-slate-800 text-[14px]">Make it Usable:</span>
                       <div className="flex items-center gap-1">
                         <button
                           onClick={() => toast.info('Regenerating make it usable...')}
@@ -331,14 +357,13 @@ export function DraftOptionsDisplay({
                         </button>
                       </div>
                     </div>
-                    <textarea
+                    <AutoExpandTextarea
                       value={draft.structuralSuggestions.makeItUsable}
                       onChange={(e) => setDraftOptions(prev => {
                         const newDrafts = [...prev];
                         newDrafts[draftIndex].structuralSuggestions.makeItUsable = e.target.value;
                         return newDrafts;
                       })}
-                      rows={2}
                       className="w-full px-2 py-1.5 text-sm border border-slate-300 rounded bg-white resize-none outline-none focus:ring-1 focus:ring-[#6b2358]"
                     />
                   </div>
@@ -349,7 +374,7 @@ export function DraftOptionsDisplay({
               {draft.structuralSuggestions.cta && (
                 <div className="flex items-start gap-2">
                   <button
-                    className="text-red-500 hover:text-red-700 flex-shrink-0 mt-1"
+                    className="hover:text-red-700 flex-shrink-0 mt-1 text-[#717171]"
                     onClick={() => {
                       setDraftOptions(prev => {
                         const newDrafts = [...prev];
@@ -362,7 +387,7 @@ export function DraftOptionsDisplay({
                   </button>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs font-bold text-slate-800">CTA:</span>
+                      <span className="font-bold text-slate-800 text-[14px]">CTA:</span>
                       <div className="flex items-center gap-1">
                         <button
                           onClick={() => toast.info('Regenerating CTA...')}
@@ -373,14 +398,13 @@ export function DraftOptionsDisplay({
                         </button>
                       </div>
                     </div>
-                    <textarea
+                    <AutoExpandTextarea
                       value={draft.structuralSuggestions.cta}
                       onChange={(e) => setDraftOptions(prev => {
                         const newDrafts = [...prev];
                         newDrafts[draftIndex].structuralSuggestions.cta = e.target.value;
                         return newDrafts;
                       })}
-                      rows={2}
                       className="w-full px-2 py-1.5 text-sm border border-slate-300 rounded bg-white resize-none outline-none focus:ring-1 focus:ring-[#6b2358]"
                     />
                   </div>

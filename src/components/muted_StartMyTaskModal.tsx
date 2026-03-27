@@ -3,6 +3,7 @@ import { X, Lightbulb, FileText, Mail, CheckCircle2, Copy, ArrowRight, Sparkles,
 import { toast } from 'sonner@2.0.3';
 import { generateStartMyTaskDraft } from '../utils/jamieAI';
 import type { TaskType } from '../utils/taskTypes';
+import { copyToClipboard } from '../utils/clipboard';
 
 interface Contact {
   id: string;
@@ -48,9 +49,13 @@ export function StartMyTaskModal({
     }, 1500);
   };
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(generatedDraft);
-    toast.success('Draft copied to clipboard');
+  const handleCopy = async () => {
+    const success = await copyToClipboard(generatedDraft);
+    if (success) {
+      toast.success('Draft copied to clipboard');
+    } else {
+      toast.error('Failed to copy draft');
+    }
   };
 
   const handleApply = () => {

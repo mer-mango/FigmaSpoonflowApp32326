@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { AlertCircle, CheckCircle2, Loader2 } from 'lucide-react';
 import { projectId, publicAnonKey } from '../utils/supabase/info';
+import { copyToClipboard } from '../utils/clipboard';
+import { toast } from 'sonner';
 
 export function FathomDiagnostic() {
   const [results, setResults] = useState<any>(null);
@@ -185,9 +187,13 @@ export function FathomDiagnostic() {
                   {webhookUrl}
                 </div>
                 <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(webhookUrl);
-                    alert('Copied to clipboard!');
+                  onClick={async () => {
+                    const success = await copyToClipboard(webhookUrl);
+                    if (success) {
+                      toast.success('Copied to clipboard!');
+                    } else {
+                      toast.error('Failed to copy');
+                    }
                   }}
                   className="mt-2 text-xs text-purple-600 hover:text-purple-800 font-medium"
                 >

@@ -18,7 +18,8 @@ import {
   List,
   RefreshCw,
   Eye,
-  Wand2
+  Wand2,
+  Type
 } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';
 import { ContentPlanningWizard } from './content/ContentPlanningWizard';
@@ -137,6 +138,11 @@ export default function MutedContentPageIntegrated({ onQuickAddSelect, onJamieAc
   const [repurposingPost, setRepurposingPost] = useState<ContentItem | null>(null);
   const [repurposingTriggeredByPublish, setRepurposingTriggeredByPublish] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>('table');
+  
+  // Rename modal state
+  const [showRenameModal, setShowRenameModal] = useState(false);
+  const [renamingItemId, setRenamingItemId] = useState<string | null>(null);
+  const [renameValue, setRenameValue] = useState('');
   
   // Quick Preview modal state
   const [previewOpen, setPreviewOpen] = useState(false);
@@ -562,6 +568,33 @@ export default function MutedContentPageIntegrated({ onQuickAddSelect, onJamieAc
     });
     setPreviewOpen(true);
     setShowActionsMenu(null); // Close the actions menu
+  };
+
+  // Handle rename content item
+  const handleRenameContent = (itemId: string) => {
+    const item = contentItems.find(i => i.id === itemId);
+    if (item) {
+      setRenamingItemId(itemId);
+      setRenameValue(item.title);
+      setShowRenameModal(true);
+      setShowActionsMenu(null);
+    }
+  };
+
+  const handleSaveRename = () => {
+    if (renamingItemId && renameValue.trim()) {
+      setContentItems(prev => 
+        prev.map(item => 
+          item.id === renamingItemId 
+            ? { ...item, title: renameValue.trim() }
+            : item
+        )
+      );
+      toast.success('Title updated');
+      setShowRenameModal(false);
+      setRenamingItemId(null);
+      setRenameValue('');
+    }
   };
 
   const handleSaveAsIdeaAndOpenEditor = (inboxItem: typeof inboxItems[0]) => {
@@ -1296,6 +1329,15 @@ export default function MutedContentPageIntegrated({ onQuickAddSelect, onJamieAc
                             </button>
                             <button 
                               onClick={() => {
+                                handleRenameContent(item.id);
+                              }}
+                              className="w-full px-3 py-1.5 text-xs text-slate-700 hover:bg-slate-50 text-left transition-colors flex items-center gap-2"
+                            >
+                              <Type className="w-3 h-3" />
+                              Rename
+                            </button>
+                            <button 
+                              onClick={() => {
                                 setWizardItemId(item.id);
                                 setShowContentWizard(true);
                                 setShowActionsMenu(null);
@@ -1731,6 +1773,50 @@ export default function MutedContentPageIntegrated({ onQuickAddSelect, onJamieAc
           summary: ''
         }}
       />
+
+      {/* Rename Modal */}
+      {showRenameModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl shadow-xl w-full max-w-md p-6">
+            <h3 className="text-lg font-semibold text-slate-900 mb-4">Rename Content</h3>
+            <input
+              type="text"
+              value={renameValue}
+              onChange={(e) => setRenameValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleSaveRename();
+                } else if (e.key === 'Escape') {
+                  setShowRenameModal(false);
+                  setRenamingItemId(null);
+                  setRenameValue('');
+                }
+              }}
+              autoFocus
+              className="w-full px-4 py-2 border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#c198ad]"
+            />
+            <div className="flex items-center justify-end gap-2 mt-4">
+              <button
+                onClick={() => {
+                  setShowRenameModal(false);
+                  setRenamingItemId(null);
+                  setRenameValue('');
+                }}
+                className="px-4 py-2 text-sm text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleSaveRename}
+                disabled={!renameValue.trim()}
+                className="px-4 py-2 text-sm bg-[#c198ad] hover:bg-[#c198ad]/90 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* First Draft Popup (PROMPT 3) */}
       {showFirstDraftPopup && (

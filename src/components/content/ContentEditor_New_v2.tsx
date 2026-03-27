@@ -1,4 +1,23 @@
+import { useState, useRef, useEffect } from 'react';
 import { toast } from 'sonner';
+import { 
+  ChevronDown, 
+  Calendar, 
+  Save, 
+  Bold, 
+  Italic, 
+  Underline, 
+  Heading1, 
+  Heading2, 
+  Heading3, 
+  List, 
+  ListOrdered, 
+  Quote, 
+  Link, 
+  Sparkles, 
+  RefreshCw, 
+  Mic 
+} from 'lucide-react';
 import type { ContentItem, ContentStatus, Platform } from '../../types/content';
 import { platformPlaybook } from '../../config/platform_playbook';
 import { PageHeader_Muted } from '../PageHeader_Muted';
@@ -6,6 +25,7 @@ import { ExpandableWorkDrawer } from './ExpandableWorkDrawer';
 import { useNotifications } from '../../contexts/NotificationContext';
 import { DraftOptionsDisplay } from './DraftOptionsDisplay';
 import { generate2DraftOptions } from '../../utils/jamieAI';
+import { copyToClipboard } from '../../utils/clipboard';
 
 interface ContentEditorNewProps {
   item: ContentItem;
@@ -91,7 +111,7 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
         clearTimeout(autoSaveTimerRef.current);
       }
     };
-  }, [editorContent, hasUnsavedChanges]);
+  }, [editorContent, editedItem.title, hasUnsavedChanges]);
 
   const handleSave = (silent = false) => {
     const updatedItem = {
@@ -381,11 +401,10 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
 
   // Handle publish click - copy content to clipboard
   const handlePublishClick = async () => {
-    try {
-      await navigator.clipboard.writeText(editedItem.content || '');
+    const success = await copyToClipboard(editedItem.content || '');
+    if (success) {
       toast.success('Content copied to clipboard!');
-    } catch (err) {
-      console.error('Failed to copy to clipboard:', err);
+    } else {
       toast.error('Failed to copy content');
     }
   };
@@ -411,7 +430,7 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
       />
       
       {/* Header Bar */}
-      <div className="bg-white border-b border-slate-200 px-8 py-4">
+      <div className="bg-white border-b border-slate-200 px-8 py-4 bg-[#f7f7f9]">
         <div className="flex items-center justify-between gap-4">
           {/* Title Input */}
           
@@ -536,7 +555,7 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
 
       {/* Main Content Area */}
       <div className="flex-1 overflow-y-auto">
-        <div className="max-w-5xl mx-auto px-8 py-6 space-y-4">
+        <div className="max-w-5xl mx-auto px-8 py-6 space-y-4 bg-[#f7f7f940]">
           
           {/* Rich Text Toolbar */}
           <div className="flex items-center gap-1 py-2 border-b border-slate-200">
@@ -652,34 +671,34 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
             <div className="space-y-6">
               
               {/* Jamie-Generated Content (Read-only) */}
-              <div className="space-y-4">
-                <h4 className="text-sm font-semibold text-slate-800">From Content Planning Wizard</h4>
+              <div className="space-y-4 p-[0px]">
+                <h4 className="font-semibold text-[#000000] text-[20px]">From Content Planning Wizard</h4>
                 
                 {/* Summary */}
                 {editedItem.summary && (
-                  <div className="bg-blue-50 border border-blue-100 rounded-lg p-3">
+                  <div className="border border-blue-100 rounded-lg p-[20px] bg-[#ffffff]">
                     <div className="flex items-center justify-between mb-1.5">
-                      <div className="text-xs font-medium text-blue-900">Jamie-generated summary</div>
+                      <div className="font-medium text-[15px] text-[#070707] px-[0px] py-[10px] bg-[#ffffff00]"><span className="">Jamie-Generated Summary</span></div>
                       <button
                         onClick={() => handleRegenerateField('summary')}
-                        className="text-xs text-blue-700 hover:text-blue-900 flex items-center gap-1"
+                        className="text-xs hover:text-blue-900 flex items-center gap-1 text-[#6b2358]"
                       >
                         <RefreshCw className="w-3 h-3" />
                         Regenerate
                       </button>
                     </div>
-                    <p className="text-sm text-blue-800">{editedItem.summary}</p>
+                    <p className="text-sm text-[#000000] p-[5px]">{editedItem.summary}</p>
                   </div>
                 )}
                 
                 {/* Main Points */}
                 {editedItem.mainPoints && editedItem.mainPoints.length > 0 && (
-                  <div className="bg-blue-50 border border-blue-100 rounded-lg p-3">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="text-xs font-medium text-blue-900">Main points</div>
+                  <div className="border border-blue-100 rounded-lg p-[20px] bg-[#ffffff]">
+                    <div className="flex items-center justify-between mb-2 px-[0px] py-[10px]">
+                      <div className="font-medium text-[16px] text-[#000000]">Main Points</div>
                       <button
                         onClick={() => handleRegenerateField('mainPoints')}
-                        className="text-xs text-blue-700 hover:text-blue-900 flex items-center gap-1"
+                        className="text-xs hover:text-blue-900 flex items-center gap-1 text-[#6b2358]"
                       >
                         <RefreshCw className="w-3 h-3" />
                         Regenerate
@@ -688,8 +707,8 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
                     <ul className="space-y-1.5">
                       {editedItem.mainPoints.map((point, idx) => (
                         <li key={idx} className="text-sm text-blue-800 flex items-start gap-2">
-                          <span className="text-blue-600 mt-0.5">•</span>
-                          <span>{point}</span>
+                          
+                          <span className="text-[#848a9e] text-[#83889c] text-[#82879b] text-[#808699] text-[#7c8194] text-[#757a8c] text-[#6f7485] text-[#696d7d] text-[#5b5f6c] text-[#525561] text-[#3d3f46] text-[#2f3034] text-[#28292d] text-[#26272b] text-[#191a1b] text-[#101011] text-[#080909] text-[#050505] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] px-[10px] py-[8px]">{point}</span>
                         </li>
                       ))}
                     </ul>
@@ -698,12 +717,12 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
                 
                 {/* Important Quotes */}
                 {editedItem.importantQuotes && editedItem.importantQuotes.length > 0 && (
-                  <div className="bg-blue-50 border border-blue-100 rounded-lg p-3">
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="text-xs font-medium text-blue-900">Important quotes</div>
+                  <div className="border border-blue-100 rounded-lg p-[20px] bg-[#ffffff]">
+                    <div className="flex items-center justify-between mb-2 px-[0px] py-[10px]">
+                      <div className="font-medium text-[15px] text-[#000000]">Important Quotes</div>
                       <button
                         onClick={() => handleRegenerateField('quotes')}
-                        className="text-xs text-blue-700 hover:text-blue-900 flex items-center gap-1"
+                        className="text-xs hover:text-blue-900 flex items-center gap-1 text-[#6b2358]"
                       >
                         <RefreshCw className="w-3 h-3" />
                         Regenerate
@@ -711,9 +730,9 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
                     </div>
                     <ul className="space-y-1.5">
                       {editedItem.importantQuotes.map((quote, idx) => (
-                        <li key={idx} className="text-sm text-blue-800 italic flex items-start gap-2">
-                          <span className="text-blue-600 mt-0.5">"</span>
-                          <span>{quote}</span>
+                        <li key={idx} className="text-sm text-blue-800 italic flex items-start gap-2 px-[0px] py-[8px]">
+                          <span className="mt-0.5 text-[#000000]">"</span>
+                          <span className="text-[#282a30] text-[#282a30] text-[#222327] text-[#1e2023] text-[#1a1b1d] text-[#121314] text-[#101011] text-[#0b0b0c] text-[#070808] text-[#060607] text-[#040404] text-[#030303] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] p-[0px]">{quote}</span>
                         </li>
                       ))}
                     </ul>
@@ -722,15 +741,15 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
                 
                 {/* POV/Angle Suggestions */}
                 {editedItem.selectedPovAngles && editedItem.selectedPovAngles.length > 0 && (
-                  <div className="bg-blue-50 border border-blue-100 rounded-lg p-3">
+                  <div className="border border-blue-100 rounded-lg bg-[#ffffff] p-[20px]">
                     <div className="flex items-center justify-between mb-2">
-                      <div className="text-xs font-medium text-blue-900">POV/Angle Suggestions</div>
+                      <div className="font-medium text-[#000000] text-[16px] px-[0px] py-[10px]">POV/Angle Suggestions</div>
                     </div>
                     <ul className="space-y-1.5">
                       {editedItem.selectedPovAngles.map((angle, idx) => (
                         <li key={idx} className="text-sm text-blue-800 flex items-start gap-2">
-                          <span className="text-blue-600 mt-0.5">→</span>
-                          <span>{angle}</span>
+                          
+                          <span className="text-[#515975] text-[#515874] text-[#4f5671] text-[#4e5570] text-[#484f67] text-[#454b60] text-[#404556] text-[#393d4b] text-[#2d3038] text-[#292b32] text-[#25262c] text-[#232429] text-[#1e1f23] text-[#1c1d20] text-[#191a1c] text-[#17181a] text-[#161618] text-[#151617] text-[#141415] text-[#0d0d0d] text-[#070707] text-[#040404] text-[#040404] text-[#030303] text-[#030303] text-[#010101] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000] text-[#000000]">{angle}</span>
                         </li>
                       ))}
                     </ul>
@@ -751,7 +770,7 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
               {/* Brain Dump Section */}
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <h4 className="text-sm font-semibold text-slate-800">Brain Dump</h4>
+                  <h4 className="font-semibold text-slate-800 text-[20px]">Brain Dump</h4>
                   <div className="flex items-center gap-2">
                     {brainDump.trim() && (
                       <button
@@ -764,11 +783,7 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
                     )}
                     <button
                       onClick={handleVoiceInput}
-                      className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                        isVoiceRecording
-                          ? 'bg-red-100 text-red-700 hover:bg-red-200'
-                          : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-                      }`}
+                      className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${ isVoiceRecording ? 'bg-red-100 text-red-700 hover:bg-red-200' : 'bg-slate-100 hover:bg-slate-200' } text-[#6b2358]`}
                     >
                       <Mic className="w-4 h-4" />
                       {isVoiceRecording ? 'Stop' : 'Voice input'}

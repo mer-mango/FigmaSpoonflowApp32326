@@ -53,6 +53,7 @@ import {
 } from '../utils/outreachHelpers';
 import { generateStartMyTaskDraft } from '../utils/jamieAI';
 import { sortContactsByLastName } from '../utils/contactSorting';
+import { copyToClipboard } from '../utils/clipboard';
 
 export interface Contact {
   id: string;
@@ -622,9 +623,13 @@ Meredith`;
     }, 1500);
   };
 
-  const handleCopyDraft = () => {
-    navigator.clipboard.writeText(generatedDraft);
-    toast.success('Draft copied to clipboard');
+  const handleCopyDraft = async () => {
+    const success = await copyToClipboard(generatedDraft);
+    if (success) {
+      toast.success('Draft copied to clipboard');
+    } else {
+      toast.error('Failed to copy draft');
+    }
   };
 
   if (!isOpen) return null;

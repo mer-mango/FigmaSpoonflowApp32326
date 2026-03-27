@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Copy, Check, RefreshCw, ExternalLink, AlertCircle, CheckCircle, XCircle, Calendar, User } from 'lucide-react';
 import { projectId, publicAnonKey } from '../../utils/supabase/info';
 import { toast } from 'sonner';
+import { copyToClipboard } from '../../utils/clipboard';
 
 interface SyncLogEntry {
   id: string;
@@ -85,43 +86,13 @@ export function FathomZapierSettings() {
   };
 
   const handleCopyUrl = async () => {
-    try {
-      // Try modern clipboard API first
-      await navigator.clipboard.writeText(webhookUrl);
+    const success = await copyToClipboard(webhookUrl);
+    if (success) {
       setCopied(true);
       toast.success('Webhook URL copied to clipboard!');
       setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      // Fallback to older method
-      try {
-        const textArea = document.createElement('textarea');
-        textArea.value = webhookUrl;
-        textArea.style.position = 'fixed';
-        textArea.style.left = '-999999px';
-        textArea.style.top = '-999999px';
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        const successful = document.execCommand('copy');
-        document.body.removeChild(textArea);
-        
-        if (successful) {
-          setCopied(true);
-          toast.success('Webhook URL copied to clipboard!');
-          setTimeout(() => setCopied(false), 2000);
-        } else {
-          throw new Error('Copy command failed');
-        }
-      } catch (fallbackErr) {
-        // If all else fails, select the input text
-        const input = document.querySelector('input[readonly]') as HTMLInputElement;
-        if (input) {
-          input.select();
-          toast.info('URL selected - press Ctrl+C (or Cmd+C) to copy');
-        } else {
-          toast.error('Unable to copy. Please manually select and copy the URL.');
-        }
-      }
+    } else {
+      toast.error('Failed to copy. Please manually select and copy the URL.');
     }
   };
 

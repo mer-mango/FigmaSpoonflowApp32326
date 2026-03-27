@@ -9,6 +9,7 @@ import { projectId, publicAnonKey } from '../utils/supabase/info';
 import React from 'react';
 import { getTodayLocal, getTomorrowLocal, dateToLocalString } from '../utils/dateUtils';
 import { sortContactsByLastName } from '../utils/contactSorting';
+import { copyToClipboard } from '../utils/clipboard';
 
 interface Meeting {
   id: string;
@@ -1087,9 +1088,13 @@ export function MutedPostMeetingWizard({
                 {/* Action buttons */}
                 <div className="flex gap-3">
                   <button
-                    onClick={() => {
-                      navigator.clipboard.writeText(thankYouState.body);
-                      toast.success('Email copied to clipboard!');
+                    onClick={async () => {
+                      const success = await copyToClipboard(thankYouState.body);
+                      if (success) {
+                        toast.success('Email copied to clipboard!');
+                      } else {
+                        toast.error('Failed to copy email');
+                      }
                     }}
                     className="flex-1 px-6 py-3 bg-white border-2 border-slate-200 hover:border-[#6b2358]/50 text-slate-700 rounded-xl transition-all flex items-center justify-center gap-2"
                   >

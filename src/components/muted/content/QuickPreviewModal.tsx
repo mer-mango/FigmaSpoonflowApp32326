@@ -4,70 +4,97 @@
  */
 
 import React from 'react';
-import { X } from 'lucide-react';
-import type { ContentItem } from '../../../types/content';
+import { X, ExternalLink } from 'lucide-react';
 
-interface QuickPreviewModalProps {
-  item: ContentItem | null;
-  isOpen: boolean;
-  onClose: () => void;
-  onEdit?: (item: ContentItem) => void;
+interface QuickPreviewData {
+  title: string;
+  source?: string;
+  sourceUrl?: string;
+  date?: string;
+  content?: string;
+  snippet?: string;
+  summary?: string;
 }
 
-export function QuickPreviewModal({ item, isOpen, onClose, onEdit }: QuickPreviewModalProps) {
-  if (!isOpen || !item) return null;
+interface QuickPreviewModalProps {
+  data: QuickPreviewData;
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export function QuickPreviewModal({ data, isOpen, onClose }: QuickPreviewModalProps) {
+  if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 max-w-3xl w-full mx-4 max-h-[80vh] overflow-y-auto">
-        <div className="flex justify-between items-start mb-4">
-          <div>
-            <h2 className="text-2xl font-bold">{item.title}</h2>
-            <div className="flex gap-2 mt-2">
-              {item.platform && (
-                <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded text-sm">
-                  {item.platform}
-                </span>
-              )}
-              <span className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-sm">
-                {item.status}
-              </span>
-            </div>
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={onClose}>
+      <div className="bg-white rounded-xl shadow-xl max-w-3xl w-full mx-4 max-h-[80vh] overflow-hidden flex flex-col" onClick={(e) => e.stopPropagation()}>
+        {/* Header */}
+        <div className="flex items-start justify-between px-6 py-4 border-b border-slate-200">
+          <div className="flex-1 pr-4">
+            <h2 className="text-xl font-semibold text-slate-900" style={{ fontFamily: 'Lora, serif' }}>{data.title}</h2>
+            {(data.source || data.date) && (
+              <div className="flex items-center gap-2 mt-1 text-sm text-slate-500">
+                {data.source && <span>{data.source}</span>}
+                {data.source && data.date && <span>•</span>}
+                {data.date && <span>{data.date}</span>}
+              </div>
+            )}
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-full"
+            className="p-2 hover:bg-slate-100 rounded-lg transition-colors flex-shrink-0"
           >
-            <X className="h-5 w-5" />
+            <X className="w-5 h-5 text-slate-400" />
           </button>
         </div>
 
-        <div className="prose max-w-none">
-          {item.content ? (
-            <div dangerouslySetInnerHTML={{ __html: item.content }} />
-          ) : (
-            <p className="text-gray-500 italic">No content yet</p>
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto px-6 py-4">
+          {data.summary && (
+            <div className="mb-4 p-4 bg-blue-50 border border-blue-100 rounded-lg">
+              <div className="text-xs font-medium text-blue-900 mb-1">Summary</div>
+              <p className="text-sm text-blue-800">{data.summary}</p>
+            </div>
+          )}
+          
+          {data.content && (
+            <div className="prose prose-slate max-w-none">
+              <div className="whitespace-pre-wrap text-slate-700">{data.content}</div>
+            </div>
+          )}
+          
+          {!data.content && data.snippet && (
+            <div className="prose prose-slate max-w-none">
+              <p className="text-slate-600">{data.snippet}</p>
+            </div>
+          )}
+          
+          {!data.content && !data.snippet && (
+            <p className="text-slate-400 italic">No content to preview</p>
           )}
         </div>
 
-        <div className="flex justify-end gap-2 mt-6 pt-4 border-t">
+        {/* Footer */}
+        <div className="flex items-center justify-between px-6 py-4 border-t border-slate-200 bg-slate-50">
+          <div>
+            {data.sourceUrl && (
+              <a
+                href={data.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm text-[#879fb5] hover:text-[#5f7e9a] transition-colors"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                View Original
+              </a>
+            )}
+          </div>
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300"
+            className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg transition-colors text-sm font-medium"
           >
             Close
           </button>
-          {onEdit && (
-            <button
-              onClick={() => {
-                onEdit(item);
-                onClose();
-              }}
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-            >
-              Edit
-            </button>
-          )}
         </div>
       </div>
     </div>

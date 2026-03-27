@@ -32,7 +32,7 @@ export function ExpandableWorkDrawer({
             </div>
           )}
           <div className="text-left">
-            <h3 className="text-lg font-medium text-slate-800">{title}</h3>
+            <h3 className="font-medium text-slate-800 text-[20px]">{title}</h3>
             {!isExpanded && (
               <p className="text-sm text-slate-500">{summary}</p>
             )}
@@ -60,7 +60,7 @@ export function ExpandableWorkDrawer({
           </div>
           
           {/* Drawer Content */}
-          <div className="p-6">
+          <div className="p-6 bg-[#f7f7f980]">
             {children}
           </div>
         </div>
