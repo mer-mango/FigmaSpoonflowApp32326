@@ -60,6 +60,7 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
   const [mainPoints, setMainPoints] = useState<string[]>(item?.mainPoints || []);
   const [importantQuotes, setImportantQuotes] = useState<string[]>(item?.importantQuotes || []);
   const [povAngles, setPovAngles] = useState<string[]>(item?.povAngles || []);
+  const [selectedPovAngles, setSelectedPovAngles] = useState<string[]>(item?.selectedPovAngles || []);
   
   const [selectedGoals, setSelectedGoals] = useState<string[]>(item?.goals || []);
   const [customGoal, setCustomGoal] = useState('');
@@ -97,6 +98,7 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
       setMainPoints(item?.mainPoints || []);
       setImportantQuotes(item?.importantQuotes || []);
       setPovAngles(item?.povAngles || []);
+      setSelectedPovAngles(item?.selectedPovAngles || []);
       setSelectedGoals(item?.goals || []);
       setSelectedAudiences(item?.audiences || []);
       setLength(item?.length || '');
@@ -160,6 +162,7 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
         mainPoints,
         importantQuotes,
         povAngles,
+        selectedPovAngles,
         goals: selectedGoals,
         audiences: selectedAudiences,
         length,
@@ -260,17 +263,20 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
     setQuotesError(null);
     
     try {
+      console.log('🚀 Starting quote generation...');
       const generatedQuotes = await generateImportantQuotes(
         availableSourceContent,
         availableSourceUrl,
         item?.sourceAuthor
       );
+      console.log('✅ Quotes generated successfully:', generatedQuotes);
       setImportantQuotes(generatedQuotes);
       toast.success('Important quotes extracted');
     } catch (error) {
-      console.error('Failed to generate quotes:', error);
-      setQuotesError(error instanceof Error ? error.message : 'Failed to generate quotes');
-      toast.error('Failed to generate quotes');
+      console.error('❌ Failed to generate quotes:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Failed to generate quotes';
+      setQuotesError(errorMessage);
+      toast.error(`Failed to generate quotes: ${errorMessage}`);
     } finally {
       setIsGeneratingQuotes(false);
     }
@@ -614,12 +620,12 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
                     </button>
                   </div>
                   <textarea
-                    value={mainPoints.join('\n')}
+                    value={mainPoints.join('\n\n')}
                     onChange={(e) => {
-                      const points = e.target.value.split('\n').filter(p => p.trim());
+                      const points = e.target.value.split('\n\n').map(p => p.trim()).filter(p => p);
                       setMainPoints(points);
                     }}
-                    placeholder="One main point per line..."
+                    placeholder="One main point per paragraph (separate with double line breaks)..."
                     rows={6}
                     className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#6b2358] focus:border-transparent resize-none"
                   />
@@ -906,18 +912,48 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
                     </div>
                     {povAngles.length > 0 ? (
                       <div className="space-y-2">
-                        {povAngles.map((angle, idx) => (
-                          <div key={idx} className="flex items-start gap-2 p-3 bg-white border border-[#6b2358]/30 rounded-lg">
-                            <Lightbulb className="w-5 h-5 text-[#6b2358] flex-shrink-0 mt-0.5" />
-                            <p className="text-sm text-slate-700 flex-1">{angle}</p>
-                            <button
-                              onClick={() => setPovAngles(povAngles.filter((_, i) => i !== idx))}
-                              className="text-slate-400 hover:text-red-500 transition-colors"
+                        {povAngles.map((angle, idx) => {
+                          const isSelected = selectedPovAngles.includes(angle);
+                          return (
+                            <div 
+                              key={idx} 
+                              className={`flex items-start gap-3 p-3 rounded-lg border-2 transition-all cursor-pointer ${
+                                isSelected 
+                                  ? 'bg-[#f5e5eb] border-[#6b2358]' 
+                                  : 'bg-white border-[#6b2358]/30 hover:border-[#6b2358]/50'
+                              }`}
+                              onClick={() => {
+                                if (isSelected) {
+                                  setSelectedPovAngles(selectedPovAngles.filter(a => a !== angle));
+                                } else {
+                                  setSelectedPovAngles([...selectedPovAngles, angle]);
+                                }
+                              }}
                             >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          </div>
-                        ))}
+                              {/* Checkbox */}
+                              <div className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                                isSelected 
+                                  ? 'bg-[#6b2358] border-[#6b2358]' 
+                                  : 'bg-white border-slate-300'
+                              }`}>
+                                {isSelected && <Check className="w-3 h-3 text-white" />}
+                              </div>
+                              
+                              <Lightbulb className="w-5 h-5 text-[#6b2358] flex-shrink-0 mt-0.5" />
+                              <p className="text-sm text-slate-700 flex-1">{angle}</p>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setPovAngles(povAngles.filter((_, i) => i !== idx));
+                                  setSelectedPovAngles(selectedPovAngles.filter(a => a !== angle));
+                                }}
+                                className="text-slate-400 hover:text-red-500 transition-colors"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            </div>
+                          );
+                        })}
                       </div>
                     ) : (
                       <p className="text-sm text-slate-500 italic">Jamie can suggest angles based on your source material, platform, audiences, and goals. Click "Generate with Jamie" above.</p>
@@ -1034,11 +1070,11 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
                       </div>
                     </div>
 
-                    {povAngles.length > 0 && (
+                    {selectedPovAngles.length > 0 && (
                       <div className="mt-4">
-                        <h4 className="text-sm font-medium text-slate-500 mb-2">POV Angles</h4>
+                        <h4 className="text-sm font-medium text-slate-500 mb-2">Selected POV Angles</h4>
                         <ul className="space-y-1.5">
-                          {povAngles.map((angle, idx) => (
+                          {selectedPovAngles.map((angle, idx) => (
                             <li key={idx} className="text-sm text-slate-700 flex items-start gap-2">
                               <Lightbulb className="w-4 h-4 text-[#6b2358] flex-shrink-0 mt-0.5" />
                               <span>{angle}</span>
@@ -1099,6 +1135,7 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
                     mainPoints,
                     importantQuotes,
                     povAngles,
+                    selectedPovAngles,
                     goals: selectedGoals.length > 0 ? selectedGoals : undefined,
                     audiences: selectedAudiences.length > 0 ? selectedAudiences : undefined,
                     length: length || undefined,
@@ -1126,6 +1163,7 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
                     mainPoints,
                     importantQuotes,
                     povAngles,
+                    selectedPovAngles,
                     goals: selectedGoals.length > 0 ? selectedGoals : undefined,
                     audiences: selectedAudiences.length > 0 ? selectedAudiences : undefined,
                     length: length || undefined,

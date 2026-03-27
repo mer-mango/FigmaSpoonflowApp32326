@@ -793,14 +793,14 @@ export function MeetingNotesDossier({
             </button>
           </div>
 
-          {/* Turn into Tasks Button */}
+          {/* Generate Task Draft Button */}
           {data.actionItems.length > 0 && taskDrafts.length === 0 && (
             <button
               onClick={handleTurnIntoTasks}
               className="w-full px-6 py-3 bg-gradient-to-r from-[#6b2358] to-[#8b3068] text-white rounded-lg font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
             >
               <Sparkles className="w-5 h-5" />
-              Turn Action Items into Tasks ({data.actionItems.length})
+              Generate Task Drafts ({selectedActionItems.size} selected)
             </button>
           )}
         </div>
@@ -926,7 +926,7 @@ export function MeetingNotesDossier({
               className="w-full px-6 py-3 bg-gradient-to-r from-[#6b2358] to-[#8b3068] text-white rounded-lg font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
             >
               <CheckCircle2 className="w-5 h-5" />
-              Create {taskDrafts.length} Task{taskDrafts.length !== 1 ? 's' : ''}
+              Turn Into {taskDrafts.length} Task{taskDrafts.length !== 1 ? 's' : ''}
             </button>
           </div>
         )}

@@ -2788,7 +2788,12 @@ Return your response as a JSON array of strings. Example format:
     const cleanedContent = stripMarkdownCodeFences(content);
     const points = JSON.parse(cleanedContent);
     
-    return Array.isArray(points) ? points : [];
+    // Format points with numbers and double line breaks
+    const formattedPoints = Array.isArray(points) 
+      ? points.map((point, idx) => `${idx + 1}. ${point}`)
+      : [];
+    
+    return formattedPoints;
   } catch (error) {
     console.error('Error generating main points:', error);
     throw error;
@@ -2805,8 +2810,19 @@ export async function generateImportantQuotes(
   sourceAuthor?: string
 ): Promise<string[]> {
   try {
+    // Validate input
+    if (!sourceContent || sourceContent.trim().length === 0) {
+      console.warn('⚠️ No source content provided for quote generation');
+      return [];
+    }
+
     const { projectId, publicAnonKey } = await import('./supabase/info');
     
+    if (!projectId || !publicAnonKey) {
+      console.error('❌ Missing Supabase credentials');
+      throw new Error('Configuration error: Missing Supabase credentials');
+    }
+
     const context = `You are Jamie, Meredith's AI assistant helping with content planning.
 
 Your task: Read the source content below and extract 3-6 of the most quotable, compelling direct quotes. These should be verbatim quotes that Meredith might want to reference or use in her content.
@@ -2832,6 +2848,9 @@ If there are no good quotes in the source, return an empty array: []`;
       { role: 'user', content: context }
     ];
 
+    console.log('🔄 Generating important quotes via Jamie...');
+    console.log('📤 Request URL:', `https://${projectId}.supabase.co/functions/v1/make-server-a89809a8/jamie/chat`);
+
     const response = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-a89809a8/jamie/chat`, {
       method: 'POST',
       headers: {
@@ -2842,12 +2861,23 @@ If there are no good quotes in the source, return an empty array: []`;
     });
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      console.error('Jamie API error:', errorData);
-      throw new Error(`Jamie API error: ${response.statusText}`);
+      const errorText = await response.text();
+      console.error('❌ Jamie API error generating quotes:', {
+        status: response.status,
+        statusText: response.statusText,
+        body: errorText
+      });
+      throw new Error(`Jamie API error: ${response.status} ${response.statusText}`);
     }
 
     const data = await response.json();
+    console.log('✅ Jamie response received for quotes');
+    
+    if (!data.choices || !data.choices[0] || !data.choices[0].message || !data.choices[0].message.content) {
+      console.error('❌ Invalid response structure from Jamie:', data);
+      throw new Error('Invalid response structure from Jamie');
+    }
+
     const content = data.choices[0].message.content.trim();
     
     // Parse the JSON response
@@ -2856,7 +2886,14 @@ If there are no good quotes in the source, return an empty array: []`;
     
     return Array.isArray(quotes) ? quotes : [];
   } catch (error) {
-    console.error('Error generating important quotes:', error);
+    console.error('❌ Error generating important quotes:', error);
+    if (error instanceof Error) {
+      console.error('Error details:', {
+        message: error.message,
+        stack: error.stack,
+        name: error.name
+      });
+    }
     throw error;
   }
 }

@@ -23,6 +23,7 @@ import { platformPlaybook } from '../../config/platform_playbook';
 import { PageHeader_Muted } from '../PageHeader_Muted';
 import { ExpandableWorkDrawer } from './ExpandableWorkDrawer';
 import { useNotifications } from '../../contexts/NotificationContext';
+import { DraftOptionsDisplay } from './DraftOptionsDisplay';
 
 interface ContentEditorNewProps {
   item: ContentItem;
@@ -32,12 +33,20 @@ interface ContentEditorNewProps {
   onJamieAction?: (type: 'plan-day' | 'wind-down' | 'post-meeting' | 'chat' | 'dev-skip-to-timeline') => void;
 }
 
-interface ModuleDraft {
+interface DraftStructuralElement {
   hook: string;
   context: string;
-  pov: string;
-  takeaways: string;
+  yourTake: string;
+  makeItUsable: string;
   cta: string;
+}
+
+interface DraftOption {
+  id: number;
+  jamiesThoughts: string;
+  relevantMainPoints: string[];
+  relevantQuotes: string[];
+  structuralSuggestions: DraftStructuralElement;
 }
 
 export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJamieAction }: ContentEditorNewProps) {
@@ -58,15 +67,9 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
   const [brainDump, setBrainDump] = useState('');
   const [isVoiceRecording, setIsVoiceRecording] = useState(false);
   
-  // Module drafts
-  const [modules, setModules] = useState<ModuleDraft>({
-    hook: '',
-    context: '',
-    pov: '',
-    takeaways: '',
-    cta: ''
-  });
-  
+  // Draft options (2 full drafts)
+  const [draftOptions, setDraftOptions] = useState<DraftOption[]>([]);
+
   // Editor content
   const [editorContent, setEditorContent] = useState(() => {
     if (item.content && item.content.trim()) {
@@ -163,11 +166,67 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
 
   // Handle voice input
   const handleVoiceInput = () => {
-    setIsVoiceRecording(!isVoiceRecording);
     if (!isVoiceRecording) {
-      toast.success('Voice recording started');
-      // TODO: Implement actual voice recording
+      // Start recording
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      
+      if (!SpeechRecognition) {
+        toast.error('Speech recognition is not supported in this browser.');
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+      recognition.lang = 'en-US';
+
+      recognition.onstart = () => {
+        setIsVoiceRecording(true);
+        toast.success('Voice recording started');
+      };
+
+      recognition.onresult = (event: any) => {
+        let interimTranscript = '';
+        let finalTranscript = '';
+
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          const transcript = event.results[i][0].transcript;
+          if (event.results[i].isFinal) {
+            finalTranscript += transcript + ' ';
+          } else {
+            interimTranscript += transcript;
+          }
+        }
+
+        // Update brain dump with transcribed text
+        if (finalTranscript) {
+          setBrainDump(prev => prev ? `${prev} ${finalTranscript}` : finalTranscript);
+        }
+      };
+
+      recognition.onerror = (event: any) => {
+        console.error('Speech recognition error:', event.error);
+        setIsVoiceRecording(false);
+        if (event.error !== 'aborted') {
+          toast.error(`Voice input error: ${event.error}`);
+        }
+      };
+
+      recognition.onend = () => {
+        setIsVoiceRecording(false);
+      };
+
+      // Store recognition instance in a ref for cleanup
+      (window as any).__activeRecognition = recognition;
+      recognition.start();
     } else {
+      // Stop recording
+      const recognition = (window as any).__activeRecognition;
+      if (recognition) {
+        recognition.stop();
+        (window as any).__activeRecognition = null;
+      }
+      setIsVoiceRecording(false);
       toast.success('Voice recording stopped');
     }
   };
@@ -178,13 +237,34 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
     // TODO: Call AI to generate modules from summary, main points, quotes, and brain dump
     // For now, show a mock response
     setTimeout(() => {
-      setModules({
-        hook: 'Generated hook based on your content...',
-        context: 'Generated context from your brain dump...',
-        pov: 'Your perspective based on main points...',
-        takeaways: 'Key takeaways compiled...',
-        cta: 'Suggested call to action...'
-      });
+      setDraftOptions([
+        {
+          id: 1,
+          jamiesThoughts: 'Draft 1: This draft focuses on the key points and provides a clear structure for the content.',
+          relevantMainPoints: ['Point 1', 'Point 2', 'Point 3'],
+          relevantQuotes: ['"Quote 1"', '"Quote 2"'],
+          structuralSuggestions: {
+            hook: 'Generated hook based on your content...',
+            context: 'Generated context from your brain dump...',
+            yourTake: 'Your perspective based on main points...',
+            makeItUsable: 'Key takeaways compiled...',
+            cta: 'Suggested call to action...'
+          }
+        },
+        {
+          id: 2,
+          jamiesThoughts: 'Draft 2: This draft emphasizes the importance of the topic and provides a different angle.',
+          relevantMainPoints: ['Point A', 'Point B', 'Point C'],
+          relevantQuotes: ['"Quote X"', '"Quote Y"'],
+          structuralSuggestions: {
+            hook: 'Alternative hook based on your content...',
+            context: 'Alternative context from your brain dump...',
+            yourTake: 'Alternative perspective based on main points...',
+            makeItUsable: 'Alternative key takeaways compiled...',
+            cta: 'Alternative suggested call to action...'
+          }
+        }
+      ]);
       toast.success('Draft puzzle pieces generated!');
     }, 1500);
   };
@@ -218,11 +298,14 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
       content += '\n\nBrain Dump:\n' + brainDump;
     }
     
-    if (modules.hook) content += '\n\nHook:\n' + modules.hook;
-    if (modules.context) content += '\n\nContext / Micro-story:\n' + modules.context;
-    if (modules.pov) content += '\n\nYour take:\n' + modules.pov;
-    if (modules.takeaways) content += '\n\nMake it usable:\n' + modules.takeaways;
-    if (modules.cta) content += '\n\nCTA:\n' + modules.cta;
+    if (draftOptions.length > 0) {
+      const selectedDraft = draftOptions[0].structuralSuggestions; // For now, use the first draft
+      if (selectedDraft.hook) content += '\n\nHook:\n' + selectedDraft.hook;
+      if (selectedDraft.context) content += '\n\nContext / Micro-story:\n' + selectedDraft.context;
+      if (selectedDraft.yourTake) content += '\n\nYour take:\n' + selectedDraft.yourTake;
+      if (selectedDraft.makeItUsable) content += '\n\nMake it usable:\n' + selectedDraft.makeItUsable;
+      if (selectedDraft.cta) content += '\n\nCTA:\n' + selectedDraft.cta;
+    }
     
     setEditorContent(content);
     setHasUnsavedChanges(true);
@@ -658,6 +741,33 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
                     </ul>
                   </div>
                 )}
+                
+                {/* POV/Angle Suggestions */}
+                {editedItem.selectedPovAngles && editedItem.selectedPovAngles.length > 0 && (
+                  <div className="bg-blue-50 border border-blue-100 rounded-lg p-3">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="text-xs font-medium text-blue-900">POV/Angle Suggestions</div>
+                    </div>
+                    <ul className="space-y-1.5">
+                      {editedItem.selectedPovAngles.map((angle, idx) => (
+                        <li key={idx} className="text-sm text-blue-800 flex items-start gap-2">
+                          <span className="text-blue-600 mt-0.5">→</span>
+                          <span>{angle}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                
+                {/* Notes */}
+                {editedItem.notes && (
+                  <div className="bg-blue-50 border border-blue-100 rounded-lg p-3">
+                    <div className="flex items-center justify-between mb-1.5">
+                      <div className="text-xs font-medium text-blue-900">Notes</div>
+                    </div>
+                    <p className="text-sm text-blue-800 whitespace-pre-wrap">{editedItem.notes}</p>
+                  </div>
+                )}
               </div>
 
               {/* Brain Dump Section */}
@@ -702,189 +812,19 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
                   className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#6b2358] hover:bg-[#6b2358]/90 disabled:bg-slate-300 disabled:cursor-not-allowed text-white rounded-lg transition-colors font-medium"
                 >
                   <Sparkles className="w-4 h-4" />
-                  Ask Jamie to generate draft puzzle pieces
+                  Ask Jamie to generate 2 draft options from this info
                 </button>
               </div>
 
-              {/* Draft Modules - Show after generation */}
-              {(modules.hook || modules.context || modules.pov || modules.takeaways || modules.cta) && (
-                <div className="space-y-3 pt-4 border-t border-slate-200">
-                  <div className="flex items-center justify-between">
-                    <h4 className="text-sm font-semibold text-slate-800">Draft Puzzle Pieces</h4>
-                    <button
-                      onClick={handleAddAllToEditor}
-                      className="text-xs text-[#6b2358] hover:underline font-medium"
-                    >
-                      + Add all to editor
-                    </button>
-                  </div>
-                  <p className="text-xs text-slate-500">Edit any section, then copy the ones you want to your editor below.</p>
-                  
-                  {/* Hook */}
-                  {modules.hook && (
-                    <div className="bg-slate-50 rounded-lg p-3 space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div className="text-xs font-medium text-slate-700">Hook</div>
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => handleRegenerateField('hook')}
-                            className="text-xs text-slate-600 hover:text-slate-900 flex items-center gap-1"
-                          >
-                            <RefreshCw className="w-3 h-3" />
-                          </button>
-                          <button
-                            onClick={() => {
-                              setEditorContent(prev => prev ? `${prev}\n\nHook:\n${modules.hook}` : `Hook:\n${modules.hook}`);
-                              setHasUnsavedChanges(true);
-                              toast.success('Added Hook to editor');
-                            }}
-                            className="text-xs text-[#6b2358] hover:underline"
-                          >
-                            + Add to editor
-                          </button>
-                        </div>
-                      </div>
-                      <textarea
-                        value={modules.hook}
-                        onChange={(e) => setModules(prev => ({ ...prev, hook: e.target.value }))}
-                        rows={2}
-                        className="w-full px-3 py-2 text-sm border border-slate-200 rounded bg-white resize-none outline-none focus:ring-2 focus:ring-[#6b2358] focus:border-transparent"
-                      />
-                    </div>
-                  )}
-                  
-                  {/* Context */}
-                  {modules.context && (
-                    <div className="bg-slate-50 rounded-lg p-3 space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div className="text-xs font-medium text-slate-700">Context / Micro-story</div>
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => handleRegenerateField('context')}
-                            className="text-xs text-slate-600 hover:text-slate-900 flex items-center gap-1"
-                          >
-                            <RefreshCw className="w-3 h-3" />
-                          </button>
-                          <button
-                            onClick={() => {
-                              setEditorContent(prev => prev ? `${prev}\n\nContext / Micro-story:\n${modules.context}` : `Context / Micro-story:\n${modules.context}`);
-                              setHasUnsavedChanges(true);
-                              toast.success('Added Context to editor');
-                            }}
-                            className="text-xs text-[#6b2358] hover:underline"
-                          >
-                            + Add to editor
-                          </button>
-                        </div>
-                      </div>
-                      <textarea
-                        value={modules.context}
-                        onChange={(e) => setModules(prev => ({ ...prev, context: e.target.value }))}
-                        rows={3}
-                        className="w-full px-3 py-2 text-sm border border-slate-200 rounded bg-white resize-none outline-none focus:ring-2 focus:ring-[#6b2358] focus:border-transparent"
-                      />
-                    </div>
-                  )}
-                  
-                  {/* POV */}
-                  {modules.pov && (
-                    <div className="bg-slate-50 rounded-lg p-3 space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div className="text-xs font-medium text-slate-700">Your take</div>
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => handleRegenerateField('pov')}
-                            className="text-xs text-slate-600 hover:text-slate-900 flex items-center gap-1"
-                          >
-                            <RefreshCw className="w-3 h-3" />
-                          </button>
-                          <button
-                            onClick={() => {
-                              setEditorContent(prev => prev ? `${prev}\n\nYour take:\n${modules.pov}` : `Your take:\n${modules.pov}`);
-                              setHasUnsavedChanges(true);
-                              toast.success('Added Your take to editor');
-                            }}
-                            className="text-xs text-[#6b2358] hover:underline"
-                          >
-                            + Add to editor
-                          </button>
-                        </div>
-                      </div>
-                      <textarea
-                        value={modules.pov}
-                        onChange={(e) => setModules(prev => ({ ...prev, pov: e.target.value }))}
-                        rows={3}
-                        className="w-full px-3 py-2 text-sm border border-slate-200 rounded bg-white resize-none outline-none focus:ring-2 focus:ring-[#6b2358] focus:border-transparent"
-                      />
-                    </div>
-                  )}
-                  
-                  {/* Takeaways */}
-                  {modules.takeaways && (
-                    <div className="bg-slate-50 rounded-lg p-3 space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div className="text-xs font-medium text-slate-700">Make it usable</div>
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => handleRegenerateField('takeaways')}
-                            className="text-xs text-slate-600 hover:text-slate-900 flex items-center gap-1"
-                          >
-                            <RefreshCw className="w-3 h-3" />
-                          </button>
-                          <button
-                            onClick={() => {
-                              setEditorContent(prev => prev ? `${prev}\n\nMake it usable:\n${modules.takeaways}` : `Make it usable:\n${modules.takeaways}`);
-                              setHasUnsavedChanges(true);
-                              toast.success('Added Make it usable to editor');
-                            }}
-                            className="text-xs text-[#6b2358] hover:underline"
-                          >
-                            + Add to editor
-                          </button>
-                        </div>
-                      </div>
-                      <textarea
-                        value={modules.takeaways}
-                        onChange={(e) => setModules(prev => ({ ...prev, takeaways: e.target.value }))}
-                        rows={3}
-                        className="w-full px-3 py-2 text-sm border border-slate-200 rounded bg-white resize-none outline-none focus:ring-2 focus:ring-[#6b2358] focus:border-transparent"
-                      />
-                    </div>
-                  )}
-                  
-                  {/* CTA */}
-                  {modules.cta && (
-                    <div className="bg-slate-50 rounded-lg p-3 space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div className="text-xs font-medium text-slate-700">CTA</div>
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => handleRegenerateField('cta')}
-                            className="text-xs text-slate-600 hover:text-slate-900 flex items-center gap-1"
-                          >
-                            <RefreshCw className="w-3 h-3" />
-                          </button>
-                          <button
-                            onClick={() => {
-                              setEditorContent(prev => prev ? `${prev}\n\nCTA:\n${modules.cta}` : `CTA:\n${modules.cta}`);
-                              setHasUnsavedChanges(true);
-                              toast.success('Added CTA to editor');
-                            }}
-                            className="text-xs text-[#6b2358] hover:underline"
-                          >
-                            + Add to editor
-                          </button>
-                        </div>
-                      </div>
-                      <textarea
-                        value={modules.cta}
-                        onChange={(e) => setModules(prev => ({ ...prev, cta: e.target.value }))}
-                        rows={2}
-                        className="w-full px-3 py-2 text-sm border border-slate-200 rounded bg-white resize-none outline-none focus:ring-2 focus:ring-[#6b2358] focus:border-transparent"
-                      />
-                    </div>
-                  )}
-                </div>
+              {/* Draft Options - Show after generation */}
+              {draftOptions.length > 0 && (
+                <DraftOptionsDisplay
+                  draftOptions={draftOptions}
+                  setDraftOptions={setDraftOptions}
+                  setEditorContent={setEditorContent}
+                  setHasUnsavedChanges={setHasUnsavedChanges}
+                  onRegenerateAll={handleGenerateDraftPuzzlePieces}
+                />
               )}
             </div>
           </ExpandableWorkDrawer>

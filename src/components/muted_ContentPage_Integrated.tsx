@@ -17,7 +17,8 @@ import {
   LayoutGrid,
   List,
   RefreshCw,
-  Eye
+  Eye,
+  Wand2
 } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';
 import { ContentPlanningWizard } from './content/ContentPlanningWizard';
@@ -1292,6 +1293,17 @@ export default function MutedContentPageIntegrated({ onQuickAddSelect, onJamieAc
                             >
                               <Eye className="w-3 h-3" />
                               Quick Preview
+                            </button>
+                            <button 
+                              onClick={() => {
+                                setWizardItemId(item.id);
+                                setShowContentWizard(true);
+                                setShowActionsMenu(null);
+                              }}
+                              className="w-full px-3 py-1.5 text-xs text-slate-700 hover:bg-slate-50 text-left transition-colors flex items-center gap-2"
+                            >
+                              <Wand2 className="w-3 h-3" />
+                              Open in Wizard
                             </button>
                             <button 
                               onClick={() => {

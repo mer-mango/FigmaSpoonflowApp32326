@@ -1203,6 +1203,15 @@ const SubwayTimelineComponent = ({ calendarEvents = [], onNavigateToContact, con
         return;
       }
       
+      // Check data size to avoid WORKER_LIMIT errors
+      const dataSize = JSON.stringify(dataToSave).length;
+      const MAX_BACKUP_SIZE = 200000; // 200KB limit for backend backup
+      
+      if (dataSize > MAX_BACKUP_SIZE) {
+        console.warn(`⚠️ Timeline data too large (${(dataSize / 1024).toFixed(1)}KB), skipping backend backup. localStorage is your primary storage.`);
+        return;
+      }
+      
       try {
         const url = `https://${projectId}.supabase.co/functions/v1/make-server-a89809a8/kv/timeline_activities`;
         
@@ -1217,7 +1226,10 @@ const SubwayTimelineComponent = ({ calendarEvents = [], onNavigateToContact, con
         
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}));
-          console.warn('⚠️ Backend save failed (localStorage still safe):', response.status, errorData);
+          // Only log warning if it's not a WORKER_LIMIT error (which we now prevent with size check)
+          if (errorData.code !== 'WORKER_LIMIT') {
+            console.warn('⚠️ Backend save failed (localStorage still safe):', response.status, errorData);
+          }
         } else {
           console.log('✅ Timeline activities also backed up to cloud');
         }
