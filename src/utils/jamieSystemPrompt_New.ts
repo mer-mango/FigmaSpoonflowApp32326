@@ -1,4 +1,27 @@
-import { MEREDITH_CONTEXT } from './meredithContext';
+// Meredith's context and expertise (embedded directly)
+const MEREDITH_CONTEXT = {
+  business: {
+    name: 'Empower Health Strategies',
+    expertise: 'Patient experience strategy, digital health consulting, co-design',
+    positioning: 'Helping digital health teams align solutions with real patient pain points and care continuum dynamics',
+  },
+  currentProjects: {
+    biteLabs: 'Faculty and partnership development, teaching PX course (Feb/March cohort)',
+    cpp: 'Chronic Pain Project board member - annual planning, fundraising, programming',
+    nhcPxi: 'National Health Council Patient Experience Innovation Center - high-priority relationship with Spencer',
+    chronicallyMe: 'Partnership exploration with Sophie on accelerator for young adults',
+    connectome: 'Light advisory work on chronic illness navigation app',
+    commonGrounds: 'Active in health tech networking community',
+  },
+  energyPatterns: {
+    notAMorningPerson: true,
+    peakFocusWindow: '12pm-3pm',
+    slowStartBefore: '11am',
+    lighterTasksAfter: '3:30pm',
+    hardStop: '6:30pm',
+    taskTimeGoal: '90 minutes/day for focused work',
+  },
+};
 
 interface Task {
   id: string;

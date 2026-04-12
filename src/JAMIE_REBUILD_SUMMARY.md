@@ -4,6 +4,12 @@
 
 Successfully rebuilt Jamie's chat capabilities to be **honest and focused** on what she can actually do.
 
+## ✅ Build Fix Applied
+
+**Issue:** Vercel build was failing due to missing import
+**Fix:** Embedded `MEREDITH_CONTEXT` directly in `/utils/jamieSystemPrompt_New.ts` instead of importing from non-existent file
+**Status:** Should now deploy successfully to Vercel
+
 ## Core Changes
 
 ### 1. New Honest System Prompt
