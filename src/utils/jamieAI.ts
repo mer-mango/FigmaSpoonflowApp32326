@@ -875,7 +875,7 @@ function generateGreetingResponse(): ChatMessage {
   return {
     id: `msg-${Date.now()}`,
     sender: 'jamie',
-    text: `${greeting}\n\nI can help with:\n• Managing tasks and priorities\n• Planning your day with time blocking\n• Finding and organizing contacts\n• Winding down at end of day\n• Answering questions about your schedule and projects\n\nWhat do you need?`,
+    text: `${greeting}\n\nI can help with:\n• Writing content (posts, emails, articles)\n• Answering questions about your tasks and contacts\n• Searching for articles and research\n• Providing suggestions based on context\n\nWhat do you need?`,
     timestamp: new Date(),
     quickActions: [
       createQuickAction('Plan my day', 'open-plan-day'),
@@ -955,16 +955,18 @@ function buildMetaQuestionResponse(stats: any, contactCount: number): string {
 • **Key principles**: ${MEREDITH_CONTEXT.engagementSystem.principles}
 • **Rules**: Forms are reusable, engagements are not. Nothing sent without preview. Admin approval required. All actions logged & timestamped.
 
-**What I Can Do:**
-• Plan your day with time blocking (respecting your energy patterns!)
-• Help you overcome perfectionism paralysis with tiny first steps
-• Draft outreach emails (I know your templates for Spencer, Jason, Sophie)
-• Create LinkedIn posts and articles in your voice
-• Generate content outlines on co-design, PX, empathy topics
-• Provide meeting prep and follow-up support
-• Find and organize contacts
-• Wind down at end of day
-• Manage client engagements through the Forms → Flows → Wizard system
+**What I Can Actually Help With:**
+• Help you write content - posts, emails, articles in your voice
+• Answer questions about your tasks and contacts (what you have, not what you should do)
+• Search the web for articles and research when you ask
+• Draft outlines and content on co-design, PX, empathy topics
+• Provide suggestions based on what page you're on
+
+**What I Can't Do (being honest):**
+• I can't see your calendar or schedule meetings
+• I can't create tasks directly (but I can suggest what they should be)
+• I can't read meeting notes or past conversation details
+• I can't send emails or take actions on your behalf
 
 What would you like help with?`;
 }
@@ -2052,7 +2054,43 @@ export async function generateJamieResponse(
   const scheduleRules = await loadScheduleSettings();
   const scheduleSettings = toPromptScheduleSettings(scheduleRules);
   
-  const systemPrompt = buildJamieSystemPrompt(currentPage, tasks, contacts, scheduleSettings, selectedItem);
+  // Prepare context for new honest prompt
+  const stats = getTaskStats(tasks);
+  const timeContext = getCurrentTimeContext();
+  
+  // RETRIEVE RELEVANT MEMORIES
+  const recentMemories = getRelevantMemories({
+    type: 'all',
+    timeframe: 'recent'
+  });
+  
+  const contentPatterns = analyzeContentPatterns();
+  
+  let memoryContext = '';
+  if (recentMemories.length > 0) {
+    memoryContext = '\n\n# RECENT CONTEXT FROM MEMORY\n';
+    recentMemories.slice(0, 5).forEach(memory => {
+      const timeAgo = formatTimeAgo(memory.timestamp);
+      memoryContext += `- ${timeAgo}: ${memory.summary}\n`;
+    });
+  }
+  
+  let contentInsights = '';
+  if (contentPatterns && Array.isArray(contentPatterns.contentGaps) && contentPatterns.contentGaps.length > 0) {
+    contentInsights = `\n\n# CONTENT INSIGHTS\n- Content gaps you haven't covered recently: ${contentPatterns.contentGaps.join(', ')}\n`;
+  }
+  
+  // Use the new honest system prompt
+  const { buildHonestJamieSystemPrompt } = await import('./jamieSystemPrompt_New');
+  const systemPrompt = buildHonestJamieSystemPrompt(
+    currentPage, 
+    tasks, 
+    contacts,
+    stats,
+    timeContext,
+    memoryContext,
+    contentInsights
+  );
   
   try {
     // Build conversation history for OpenAI (last 10 messages for context)
