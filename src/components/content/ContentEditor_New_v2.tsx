@@ -24,7 +24,13 @@ import { PageHeader_Muted } from '../PageHeader_Muted';
 import { ExpandableWorkDrawer } from './ExpandableWorkDrawer';
 import { useNotifications } from '../../contexts/NotificationContext';
 import { DraftOptionsDisplay } from './DraftOptionsDisplay';
-import { generate2DraftOptions } from '../../utils/jamieAI';
+import { 
+  generate2DraftOptions,
+  generateContentSummary,
+  generateMainPoints,
+  generateImportantQuotes,
+  generatePOVAngles
+} from '../../utils/jamieAI';
 import { copyToClipboard } from '../../utils/clipboard';
 
 interface ContentEditorNewProps {
@@ -268,12 +274,65 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
   };
 
   // Regenerate individual field
-  const handleRegenerateField = (field: 'summary' | 'mainPoints' | 'quotes' | 'brainDump' | 'hook' | 'context' | 'pov' | 'takeaways' | 'cta') => {
+  const handleRegenerateField = async (field: 'summary' | 'mainPoints' | 'quotes' | 'brainDump' | 'hook' | 'context' | 'pov' | 'takeaways' | 'cta') => {
     toast.info(`Regenerating ${field}...`);
-    // TODO: Implement actual regeneration logic
-    setTimeout(() => {
-      toast.success(`${field} regenerated!`);
-    }, 1000);
+    
+    try {
+      if (!editedItem.sourceContent) {
+        toast.error('No source content available to regenerate from.');
+        return;
+      }
+
+      // Regenerate based on field type
+      if (field === 'summary') {
+        const newSummary = await generateContentSummary(
+          editedItem.sourceContent,
+          editedItem.sourceUrl,
+          editedItem.sourceAuthor
+        );
+        setEditedItem({ ...editedItem, summary: newSummary });
+        toast.success('Summary regenerated!');
+      } 
+      else if (field === 'mainPoints') {
+        const newMainPoints = await generateMainPoints(
+          editedItem.sourceContent,
+          editedItem.sourceUrl,
+          editedItem.sourceAuthor
+        );
+        setEditedItem({ ...editedItem, mainPoints: newMainPoints });
+        toast.success('Main points regenerated!');
+      } 
+      else if (field === 'quotes') {
+        const newQuotes = await generateImportantQuotes(
+          editedItem.sourceContent,
+          editedItem.sourceUrl,
+          editedItem.sourceAuthor
+        );
+        setEditedItem({ ...editedItem, importantQuotes: newQuotes });
+        toast.success('Quotes regenerated!');
+      }
+      else if (field === 'pov') {
+        const newAngles = await generatePOVAngles(
+          editedItem.sourceContent,
+          editedItem.sourceUrl,
+          editedItem.sourceAuthor,
+          editedItem.summary,
+          editedItem.mainPoints
+        );
+        setEditedItem({ ...editedItem, povAngles: newAngles });
+        toast.success('POV angles regenerated!');
+      }
+      else if (field === 'hook' || field === 'context' || field === 'takeaways' || field === 'cta') {
+        // For draft structural elements, regenerate the entire draft options
+        await handleGenerateDraftPuzzlePieces();
+      }
+      else {
+        toast.info('This field doesn\'t support regeneration yet.');
+      }
+    } catch (error) {
+      console.error(`Error regenerating ${field}:`, error);
+      toast.error(`Failed to regenerate ${field}. Please try again.`);
+    }
   };
 
   // Add all brainstorming content to editor

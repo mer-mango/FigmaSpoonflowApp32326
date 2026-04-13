@@ -112,10 +112,10 @@ export function DraftOptionsDisplay({
                   <div className="flex items-center gap-1">
                     <button
                       onClick={() => {
-                        toast.info('Regenerating main points...');
+                        toast.info('Use "Regenerate both draft options" button below to create new variations');
                       }}
                       className="p-1 hover:bg-slate-200 rounded transition-colors"
-                      title="Regenerate"
+                      title="Use regenerate all button below"
                     >
                       <RefreshCw className="w-3 h-3 text-slate-600" />
                     </button>
@@ -158,10 +158,10 @@ export function DraftOptionsDisplay({
                   <div className="flex items-center gap-1">
                     <button
                       onClick={() => {
-                        toast.info('Regenerating quotes...');
+                        toast.info('Use "Regenerate both draft options" button below to create new variations');
                       }}
                       className="p-1 hover:bg-slate-200 rounded transition-colors"
-                      title="Regenerate"
+                      title="Use regenerate all button below"
                     >
                       <RefreshCw className="w-3 h-3 text-slate-600" />
                     </button>
@@ -226,9 +226,9 @@ export function DraftOptionsDisplay({
                       <span className="font-bold text-slate-800 text-[14px]">Hook:</span>
                       <div className="flex items-center gap-1">
                         <button
-                          onClick={() => toast.info('Regenerating hook...')}
+                          onClick={() => toast.info('Use "Regenerate both draft options" button below to create new variations')}
                           className="p-1 hover:bg-slate-200 rounded transition-colors"
-                          title="Regenerate"
+                          title="Use regenerate all button below"
                         >
                           <RefreshCw className="w-3 h-3 text-slate-600" />
                         </button>
@@ -267,9 +267,9 @@ export function DraftOptionsDisplay({
                       <span className="font-bold text-slate-800 text-[14px]">Context/Micro-story:</span>
                       <div className="flex items-center gap-1">
                         <button
-                          onClick={() => toast.info('Regenerating context...')}
+                          onClick={() => toast.info('Use "Regenerate both draft options" button below to create new variations')}
                           className="p-1 hover:bg-slate-200 rounded transition-colors"
-                          title="Regenerate"
+                          title="Use regenerate all button below"
                         >
                           <RefreshCw className="w-3 h-3 text-slate-600" />
                         </button>
@@ -308,9 +308,9 @@ export function DraftOptionsDisplay({
                       <span className="font-bold text-slate-800 text-[14px]">Your Take:</span>
                       <div className="flex items-center gap-1">
                         <button
-                          onClick={() => toast.info('Regenerating your take...')}
+                          onClick={() => toast.info('Use "Regenerate both draft options" button below to create new variations')}
                           className="p-1 hover:bg-slate-200 rounded transition-colors"
-                          title="Regenerate"
+                          title="Use regenerate all button below"
                         >
                           <RefreshCw className="w-3 h-3 text-slate-600" />
                         </button>
@@ -349,9 +349,9 @@ export function DraftOptionsDisplay({
                       <span className="font-bold text-slate-800 text-[14px]">Make it Usable:</span>
                       <div className="flex items-center gap-1">
                         <button
-                          onClick={() => toast.info('Regenerating make it usable...')}
+                          onClick={() => toast.info('Use "Regenerate both draft options" button below to create new variations')}
                           className="p-1 hover:bg-slate-200 rounded transition-colors"
-                          title="Regenerate"
+                          title="Use regenerate all button below"
                         >
                           <RefreshCw className="w-3 h-3 text-slate-600" />
                         </button>
@@ -390,9 +390,9 @@ export function DraftOptionsDisplay({
                       <span className="font-bold text-slate-800 text-[14px]">CTA:</span>
                       <div className="flex items-center gap-1">
                         <button
-                          onClick={() => toast.info('Regenerating CTA...')}
+                          onClick={() => toast.info('Use "Regenerate both draft options" button below to create new variations')}
                           className="p-1 hover:bg-slate-200 rounded transition-colors"
-                          title="Regenerate"
+                          title="Use regenerate all button below"
                         >
                           <RefreshCw className="w-3 h-3 text-slate-600" />
                         </button>
