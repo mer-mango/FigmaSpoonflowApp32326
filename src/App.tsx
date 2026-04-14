@@ -212,6 +212,25 @@ export function App() {
     localStorage.setItem('supabaseAnonKey', publicAnonKey);
   }, []);
   
+  // 🧹 CLEANUP: Remove demo calendar events from cache
+  useEffect(() => {
+    try {
+      const cachedEvents = localStorage.getItem('googleCalendarEvents');
+      if (cachedEvents) {
+        const parsed = JSON.parse(cachedEvents);
+        if (Array.isArray(parsed)) {
+          const cleanedEvents = parsed.filter(event => !event?.isDemoData);
+          if (cleanedEvents.length < parsed.length) {
+            console.log(`🧹 Removed ${parsed.length - cleanedEvents.length} demo calendar event(s) from cache`);
+            localStorage.setItem('googleCalendarEvents', JSON.stringify(cleanedEvents));
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Failed to clean calendar cache:', error);
+    }
+  }, []);
+  
   // ⚠️ ALL HOOKS MUST BE DECLARED BEFORE ANY CONDITIONAL RETURNS (Rules of Hooks)
   // OAuth routing checks moved to AFTER all hooks declarations (see bottom of component)
   
@@ -827,8 +846,35 @@ export function App() {
           const parsed = JSON.parse(stored);
           console.log('✅ Loaded contacts from localStorage:', parsed.length);
           
+          // 🧹 CLEANUP: Remove demo contacts
+          const demoContactNames = [
+            'Sarah Chen', 'Lisa Thompson', 'David Kim', 'Marcus Rodriguez', 'Emily Watson',
+            'Sarah Mitchell', 'Marcus Chen', 'Jessica Torres', 'David Park', 'Amanda Rodriguez'
+          ];
+          const demoContactEmails = [
+            'sarah@example.com', 'lisa@corp.com', 'david@startup.io', 
+            'marcus@clientco.com', 'emily@partner.com',
+            'sarah@techstartup.com', 'mchen@securedata.io', 'jtorres@innovate.design',
+            'dpark@greenfield.co', 'arodriguez@acmecorp.com'
+          ];
+          
+          const cleanedContacts = parsed.filter((contact: Contact) => {
+            const isDemoByName = demoContactNames.some(name => 
+              contact.name?.toLowerCase() === name.toLowerCase()
+            );
+            const isDemoByEmail = contact.email && demoContactEmails.some(email => 
+              contact.email?.toLowerCase() === email.toLowerCase()
+            );
+            return !isDemoByName && !isDemoByEmail;
+          });
+          
+          if (cleanedContacts.length < parsed.length) {
+            const removedCount = parsed.length - cleanedContacts.length;
+            console.log(`🧹 Removed ${removedCount} demo contact(s)`);
+          }
+          
           // 🔄 Migration: Set all contacts to "network" type
-          const migratedContacts = parsed.map((contact: Contact) => ({
+          const migratedContacts = cleanedContacts.map((contact: Contact) => ({
             ...contact,
             contactType: 'network' as const
           }));
@@ -863,22 +909,15 @@ export function App() {
             console.log('No backend backup found');
           }
           
-          console.log('⚠️ No contacts in localStorage or backend - loading demo data');
+          console.log('⚠️ No contacts in localStorage or backend - starting with empty contacts');
           console.log('💡 If your contacts are missing, navigate to: ?page=contact-recovery');
-          // Set example contacts to network type as well
-          const migratedExamples = exampleContacts.map(contact => ({
-            ...contact,
-            contactType: 'network' as const
-          }));
-          setAllContacts(migratedExamples);
+          // Start with empty contacts - no demo data
+          setAllContacts([]);
         }
       } catch (error) {
         console.error('Failed to load contacts from localStorage:', error);
-        const migratedExamples = exampleContacts.map(contact => ({
-          ...contact,
-          contactType: 'network' as const
-        }));
-        setAllContacts(migratedExamples);
+        // Start with empty contacts - no demo data
+        setAllContacts([]);
       } finally {
         setContactsLoaded(true);
       }

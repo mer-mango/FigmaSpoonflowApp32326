@@ -519,6 +519,7 @@ export function MutedCalendarPage({
 
   const filteredEvents = events
     .filter(e => !e.archived)
+    .filter(e => !e.isDemoData) // 🧹 CLEANUP: Filter out demo data
     // 🔧 FIX: Only filter by enabled calendars if we have calendars loaded
     // If enabledCalendars is empty, show all events (don't filter them out)
     .filter(e => enabledCalendars.length === 0 || enabledCalendars.includes(e.calendarId))
