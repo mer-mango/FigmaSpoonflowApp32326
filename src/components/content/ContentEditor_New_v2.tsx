@@ -29,7 +29,8 @@ import {
   generateContentSummary,
   generateMainPoints,
   generateImportantQuotes,
-  generatePOVAngles
+  generatePOVAngles,
+  generateJamiePolishOptions
 } from '../../utils/jamieAI';
 import { copyToClipboard } from '../../utils/clipboard';
 
@@ -85,6 +86,20 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
     }
     return '';
   });
+
+  // Jamie Polish feature state
+  const [selectedText, setSelectedText] = useState('');
+  const [selectionRange, setSelectionRange] = useState<{ start: number; end: number } | null>(null);
+  const [showPolishPill, setShowPolishPill] = useState(false);
+  const [pillPosition, setPillPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
+  const [showPolishTray, setShowPolishTray] = useState(false);
+  const [polishLoading, setPolishLoading] = useState(false);
+  const [polishOptions, setPolishOptions] = useState<Array<{
+    id: string;
+    label: string;
+    rationale: string;
+    text: string;
+  }>>([]);
 
   // Platform and status colors
   const platformColors: Record<Platform, string> = {
@@ -333,6 +348,150 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
       console.error(`Error regenerating ${field}:`, error);
       toast.error(`Failed to regenerate ${field}. Please try again.`);
     }
+  };
+
+  // Jamie Polish: Handle text selection in editor
+  const handleEditorSelect = () => {
+    if (!editorRef.current) return;
+    
+    const start = editorRef.current.selectionStart;
+    const end = editorRef.current.selectionEnd;
+    const selected = editorContent.substring(start, end);
+    
+    if (selected.trim().length > 0) {
+      setSelectedText(selected);
+      setSelectionRange({ start, end });
+      
+      // Calculate pill position
+      const textarea = editorRef.current;
+      const rect = textarea.getBoundingClientRect();
+      
+      // Position pill near the selection
+      setPillPosition({
+        top: rect.top - 40, // Above the textarea
+        left: rect.left + (rect.width / 2) - 75 // Centered
+      });
+      
+      setShowPolishPill(true);
+    } else {
+      setShowPolishPill(false);
+      setSelectedText('');
+      setSelectionRange(null);
+    }
+  };
+
+  // Jamie Polish: Generate rewrite options
+  const handlePolishWithJamie = async () => {
+    if (!selectedText.trim()) {
+      toast.error('Please select some text first');
+      return;
+    }
+
+    setPolishLoading(true);
+    setShowPolishPill(false);
+    setShowPolishTray(true);
+
+    try {
+      const options = await generateJamiePolishOptions({
+        selectedText,
+        title: editedItem.title,
+        platform: editedItem.platform,
+        summary: editedItem.summary,
+        notes: editedItem.notes,
+        selectedPovAngles: editedItem.selectedPovAngles,
+        goals: editedItem.goals,
+        audiences: editedItem.audiences,
+        mainPoints: editedItem.mainPoints,
+        importantQuotes: editedItem.importantQuotes,
+        sourceContent: editedItem.sourceContent,
+        sourceUrl: editedItem.sourceUrl,
+        sourceAuthor: editedItem.sourceAuthor,
+        fullEditorContent: editorContent,
+        cursorPosition: selectionRange?.start
+      });
+
+      setPolishOptions(options);
+      toast.success('Jamie created 2 rewrite options!');
+    } catch (error) {
+      console.error('Error generating polish options:', error);
+      toast.error('Failed to generate rewrites. Please try again.');
+      setShowPolishTray(false);
+    } finally {
+      setPolishLoading(false);
+    }
+  };
+
+  // Jamie Polish: Insert rewrite at cursor position
+  const handleInsertAtCursor = (text: string) => {
+    if (!editorRef.current || !selectionRange) return;
+
+    const before = editorContent.substring(0, selectionRange.end);
+    const after = editorContent.substring(selectionRange.end);
+    const newContent = before + '\n\n' + text + after;
+
+    setEditorContent(newContent);
+    setHasUnsavedChanges(true);
+    toast.success('Inserted at cursor position');
+    
+    // Close tray
+    setShowPolishTray(false);
+    setPolishOptions([]);
+  };
+
+  // Jamie Polish: Insert rewrite at bottom
+  const handleInsertAtBottom = (text: string) => {
+    const newContent = editorContent + '\n\n' + text;
+    setEditorContent(newContent);
+    setHasUnsavedChanges(true);
+    toast.success('Inserted at bottom');
+    
+    // Close tray
+    setShowPolishTray(false);
+    setPolishOptions([]);
+  };
+
+  // Jamie Polish: Regenerate single option
+  const handleRegeneratePolishOption = async (optionId: string) => {
+    toast.info('Regenerating this option...');
+    
+    try {
+      const options = await generateJamiePolishOptions({
+        selectedText,
+        title: editedItem.title,
+        platform: editedItem.platform,
+        summary: editedItem.summary,
+        notes: editedItem.notes,
+        selectedPovAngles: editedItem.selectedPovAngles,
+        goals: editedItem.goals,
+        audiences: editedItem.audiences,
+        mainPoints: editedItem.mainPoints,
+        importantQuotes: editedItem.importantQuotes,
+        sourceContent: editedItem.sourceContent,
+        sourceUrl: editedItem.sourceUrl,
+        sourceAuthor: editedItem.sourceAuthor,
+        fullEditorContent: editorContent,
+        cursorPosition: selectionRange?.start
+      });
+
+      // Replace the specific option
+      setPolishOptions(prev => 
+        prev.map(opt => opt.id === optionId ? options.find(o => o.id === optionId) || opt : opt)
+      );
+      
+      toast.success('Option regenerated!');
+    } catch (error) {
+      console.error('Error regenerating option:', error);
+      toast.error('Failed to regenerate. Please try again.');
+    }
+  };
+
+  // Jamie Polish: Close tray
+  const handleClosePolishTray = () => {
+    setShowPolishTray(false);
+    setPolishOptions([]);
+    setShowPolishPill(false);
+    setSelectedText('');
+    setSelectionRange(null);
   };
 
   // Add all brainstorming content to editor
@@ -887,6 +1046,8 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
               ref={editorRef}
               value={editorContent}
               onChange={(e) => handleEditorChange(e.target.value)}
+              onMouseUp={handleEditorSelect}
+              onKeyUp={handleEditorSelect}
               placeholder="Start writing..."
               className="w-full min-h-[calc(100vh-400px)] px-0 py-0 text-base border-none outline-none focus:ring-0 font-serif text-slate-800 leading-relaxed resize-none"
               style={{ 
@@ -894,6 +1055,100 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
                 fontSize: '16px'
               }}
             />
+
+            {/* Jamie Polish: Floating Pill */}
+            {showPolishPill && (
+              <div
+                style={{
+                  position: 'fixed',
+                  top: `${pillPosition.top}px`,
+                  left: `${pillPosition.left}px`,
+                  zIndex: 1000
+                }}
+                className="animate-in fade-in duration-200"
+              >
+                <button
+                  onClick={handlePolishWithJamie}
+                  className="flex items-center gap-2 px-4 py-2 bg-[#6b2358] hover:bg-[#6b2358]/90 text-white rounded-full shadow-lg transition-colors font-medium text-sm"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  Rewrite with Jamie
+                </button>
+              </div>
+            )}
+
+            {/* Jamie Polish: Rewrite Tray */}
+            {showPolishTray && (
+              <div className="mt-6 p-4 bg-slate-50 border border-slate-200 rounded-lg">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-semibold text-slate-800 flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-[#6b2358]" />
+                    Jamie's Rewrites
+                  </h3>
+                  <button
+                    onClick={handleClosePolishTray}
+                    className="text-sm text-slate-600 hover:text-slate-900"
+                  >
+                    Dismiss
+                  </button>
+                </div>
+
+                {polishLoading ? (
+                  <div className="flex items-center justify-center py-8">
+                    <div className="flex items-center gap-2 text-slate-600">
+                      <RefreshCw className="w-4 h-4 animate-spin" />
+                      <span>Jamie is polishing your text...</span>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {polishOptions.map((option) => (
+                      <div
+                        key={option.id}
+                        className="bg-white border border-slate-200 rounded-lg p-4"
+                      >
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="font-semibold text-sm text-[#6b2358]">
+                            {option.label}
+                          </div>
+                          <button
+                            onClick={() => handleRegeneratePolishOption(option.id)}
+                            className="text-xs text-slate-600 hover:text-slate-900 flex items-center gap-1"
+                            title="Try again"
+                          >
+                            <RefreshCw className="w-3 h-3" />
+                            Try again
+                          </button>
+                        </div>
+                        
+                        <p className="text-xs text-slate-600 mb-3 italic">
+                          {option.rationale}
+                        </p>
+                        
+                        <div className="text-sm text-slate-800 mb-3 p-3 bg-slate-50 rounded border border-slate-100">
+                          {option.text}
+                        </div>
+                        
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => handleInsertAtCursor(option.text)}
+                            className="text-xs px-3 py-1.5 bg-[#6b2358] hover:bg-[#6b2358]/90 text-white rounded transition-colors"
+                          >
+                            Insert after cursor
+                          </button>
+                          <button
+                            onClick={() => handleInsertAtBottom(option.text)}
+                            className="text-xs px-3 py-1.5 bg-slate-600 hover:bg-slate-700 text-white rounded transition-colors"
+                          >
+                            Insert at bottom
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
         </div>

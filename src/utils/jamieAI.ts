@@ -3,6 +3,7 @@ import { Task } from '../components/TasksPage';
 import { Contact } from '../components/ContactsPage';
 import { getUserSchedulingLink } from './userSettings';
 import { voiceProfile } from '../config/voice_profile';
+import { platformPlaybook } from '../config/platform_playbook';
 
 // Default schedule settings (ScheduleSettings component was deleted - scheduling disabled)
 interface SchedulingRules {
@@ -201,6 +202,119 @@ const JAMIE_PERSONALITY = {
   responseLength: 'short and direct by default, longer when detail requested',
   pronouns: { self: 'I', user: 'you' }
 };
+
+/**
+ * Helper: Generate comprehensive voice guidance from voice_profile.ts
+ */
+function getVoiceGuidanceText(): string {
+  const bannedPhrasesList = voiceProfile.banned.phrases.join('", "');
+  const bannedWordsList = voiceProfile.banned.words?.join('", "') || '';
+  const preferredVerbs = voiceProfile.preferred_language.preferred_verbs.join(', ');
+  
+  return `
+**MEREDITH'S VOICE RULES (from voice_profile.ts):**
+
+POV Rules:
+- Always write in FIRST PERSON SINGULAR ("I") when speaking as Meredith
+- NEVER use: "${voiceProfile.pov_rules.disallowed_phrases_unless_approved.join('", "')}" unless explicitly approved
+- When referring to Empower Health Strategies: "At Empower Health Strategies, I…"
+
+BANNED PHRASES (never use):
+"${bannedPhrasesList}"
+
+BANNED WORDS (use sparingly if at all):
+"${bannedWordsList}"
+
+Tone Spectrum:
+- Formal when: ${voiceProfile.tone_spectrum.formal_when.join(', ')}
+- Casual/warm when: ${voiceProfile.tone_spectrum.casual_warm_when.join(', ')}
+- NEVER: ${voiceProfile.tone_spectrum.never.join(', ')}
+
+Style Guardrails:
+- Always aim for: ${voiceProfile.style_guardrails.always_aim_for.join(' • ')}
+- Avoid: ${voiceProfile.style_guardrails.avoid.join(' • ')}
+- Default: ${voiceProfile.style_guardrails.defaults[voiceProfile.style_guardrails.defaults.length - 1]}
+
+Preferred Language:
+- Care & Journey: ${voiceProfile.preferred_language.care_and_journey.join(', ')}
+- Patient-Centered: ${voiceProfile.preferred_language.patient_centered.join(', ')}
+- Preferred Verbs: ${preferredVerbs}
+`;
+}
+
+/**
+ * Helper: Generate platform-specific guidance from platform_playbook.ts
+ */
+function getPlatformGuidanceText(platform?: string): string {
+  if (!platform) return '';
+  
+  const platformKey = platform as keyof typeof platformPlaybook.platforms;
+  const playbook = platformPlaybook.platforms[platformKey];
+  
+  if (!playbook) return '';
+  
+  return `
+**PLATFORM GUIDANCE for ${platform} (from platform_playbook.ts):**
+
+Purpose: ${playbook.purpose}
+Ideal length: ${playbook.ideal_length_words.min}–${playbook.ideal_length_words.max} words
+
+Best Practices:
+${playbook.best_practices.map((bp: string) => `• ${bp}`).join('\n')}
+
+DO:
+${playbook.do.map((d: string) => `• ${d}`).join('\n')}
+
+AVOID:
+${playbook.avoid.map((a: string) => `• ${a}`).join('\n')}
+
+Structure guidance:
+${playbook.structure.map((s: any) => `• ${s.label}: ${s.guidance}`).join('\n')}
+
+CTA Examples:
+${playbook.cta_examples.map((ex: string) => `• "${ex}"`).join('\n')}
+`;
+}
+
+/**
+ * Helper: Get key writing DNA excerpts from jamie-dna.md
+ */
+function getWritingDNAGuidance(): string {
+  return `
+**MEREDITH'S WRITING DNA (from jamie-dna.md):**
+
+Core Principles:
+• Clear, straightforward sentences
+• Human, conversational tone (not cutesy)
+• Warm and empathetic without melodrama
+• Strategic and thoughtful without jargon
+• Specific over vague
+
+Signature Style Elements:
+• Parenthetical asides for personality without breaking flow
+• Strategic fragments for emphasis
+
+Example Opening Hook Style:
+"If you're here, chances are you care about improving healthcare. Not just the technology or systems, but the foundational human experience of it all."
+
+Example Sentence Rhythm:
+"I've worked across the healthcare system in medical practices, hospitals, advocacy organizations, and the digital health world. But I feel my secret weapon and most valuable expertise comes from my personal healthcare experiences."
+
+Voice Quality:
+• Warm without being sentimental
+• Confident without being corporate
+• Personal without oversharing
+• Structured without being rigid
+• Invitational without being pushy
+
+Content Creation Approach:
+• Make content creation feel lighter, clearer, and less overwhelming
+• Help you think, structure, and refine — without taking over your voice
+• Offer 2–3 options that sound like you, not formulaic
+• Keep everything aligned with your voice and your no-no words
+• Shorten without losing nuance; tighten scattered sections
+`;
+}
 
 // ===== MEREDITH'S CONTEXT & KNOWLEDGE =====
 
@@ -3180,13 +3294,11 @@ You MUST match this tone precisely. The tone selection overrides default voice g
 - If tone includes "Inspiring" or "Provocative" → Use bold, vision-forward language
 - If tone includes "Storytelling" → Lead with narrative and personal anecdotes
 
-MEREDITH'S VOICE GUIDELINES (apply WITHIN the selected tone):
-- Empathetic, human, confident, encouraging, clear
-- "Meredith Real Talk" when tone is Conversational (not for Professional/Educational)
-- First person perspective when sharing personal experience
-- Avoid corporate jargon and academic language
-- Use specific examples and concrete details
-- Balance expertise with approachability
+${getVoiceGuidanceText()}
+
+${getWritingDNAGuidance()}
+
+NOTE: Apply the above voice rules and writing DNA WITHIN the selected tone. For example, if the tone is "Professional + Educational", still avoid banned phrases and use first person POV, but adopt a more formal register than you would for "Conversational".
 
 BRAIN DUMP (Meredith's raw thoughts):
 ${params.brainDump}
@@ -3328,13 +3440,11 @@ DRAFT OPTION 1 and DRAFT OPTION 2 should:
 - Pull from the source material but emphasize different aspects
 - Target the specified audience and goals but through different lenses
 
-VOICE GUIDELINES (Meredith's voice):
-- Clear, conversational, human
-- "Real talk" style - thoughtful but like a real person
-- Strong first sentences
-- Acknowledge complexity and nuance
-- Use patient-centered language: "patient journey", "real-life constraints", "care continuum"
-- AVOID: "nice-to-have", "deep insights", "game-changing", "unlock the power of", corporate jargon
+${getVoiceGuidanceText()}
+
+${getPlatformGuidanceText(params.platform)}
+
+${getWritingDNAGuidance()}
 
 CONTEXT/MICRO-STORY OPTIONS:
 - You can either draft a full contextual micro-story (2-3 sentences)
@@ -3726,6 +3836,178 @@ Format your response as JSON:
     }
   } catch (error) {
     console.error('Error generating SEO metadata:', error);
+    throw error;
+  }
+}
+
+/**
+ * Generate exactly 2 polished rewrite options for selected text
+ * Lightweight utility for the "Jamie Polish" feature in Content Editor
+ */
+export async function generateJamiePolishOptions(params: {
+  selectedText: string;
+  // Content context
+  title?: string;
+  platform?: string;
+  summary?: string;
+  notes?: string;
+  selectedPovAngles?: string[];
+  goals?: string[];
+  audiences?: string[];
+  mainPoints?: string[];
+  importantQuotes?: string[];
+  sourceContent?: string;
+  sourceUrl?: string;
+  sourceAuthor?: string;
+  // Cursor context
+  fullEditorContent?: string;
+  cursorPosition?: number;
+}): Promise<Array<{
+  id: string;
+  label: string;
+  rationale: string;
+  text: string;
+}>> {
+  try {
+    const { projectId, publicAnonKey } = await import('./supabase/info');
+    
+    // Build context sections
+    let contextInfo = '';
+    
+    if (params.title) {
+      contextInfo += `\n**Content Title:** ${params.title}`;
+    }
+    
+    if (params.platform) {
+      contextInfo += `\n**Platform:** ${params.platform}`;
+    }
+    
+    if (params.summary) {
+      contextInfo += `\n\n**Summary:** ${params.summary}`;
+    }
+    
+    if (params.selectedPovAngles && params.selectedPovAngles.length > 0) {
+      contextInfo += `\n\n**Selected Angle:** ${params.selectedPovAngles[0]}`;
+    }
+    
+    if (params.goals && params.goals.length > 0) {
+      contextInfo += `\n\n**Goals:** ${params.goals.join(', ')}`;
+    }
+    
+    if (params.audiences && params.audiences.length > 0) {
+      contextInfo += `\n\n**Target Audiences:** ${params.audiences.join(', ')}`;
+    }
+    
+    if (params.mainPoints && params.mainPoints.length > 0) {
+      contextInfo += `\n\n**Key Points to Consider:**\n${params.mainPoints.slice(0, 3).map(p => `• ${p}`).join('\n')}`;
+    }
+    
+    if (params.importantQuotes && params.importantQuotes.length > 0) {
+      contextInfo += `\n\n**Important Quotes:**\n${params.importantQuotes.slice(0, 2).map(q => `• "${q}"`).join('\n')}`;
+    }
+    
+    if (params.notes) {
+      contextInfo += `\n\n**Notes:** ${params.notes}`;
+    }
+    
+    if (params.sourceAuthor || params.sourceUrl) {
+      contextInfo += `\n\n**Source:** ${params.sourceAuthor || 'Unknown author'}${params.sourceUrl ? ` (${params.sourceUrl})` : ''}`;
+    }
+
+    const prompt = `You are Jamie, Meredith's AI writing assistant. Meredith has highlighted a section of text in her content editor and wants you to polish it.
+
+YOUR TASK:
+Generate exactly 2 distinct polished rewrite options for the selected text.
+
+SELECTED TEXT TO REWRITE:
+"${params.selectedText}"
+
+CONTENT CONTEXT:${contextInfo || '\n(No additional context provided)'}
+
+${params.fullEditorContent ? `\nFULL EDITOR CONTENT (for context):\n${params.fullEditorContent.substring(0, 1000)}${params.fullEditorContent.length > 1000 ? '...' : ''}` : ''}
+
+${getVoiceGuidanceText()}
+
+${getPlatformGuidanceText(params.platform)}
+
+${getWritingDNAGuidance()}
+
+WRITING RULES (Priority Order):
+1. **Preserve the core meaning** unless a stronger shift is clearly warranted
+2. **Use Meredith's voice**: Apply all voice rules, writing DNA, and platform guidance above
+3. **Use strategic context**: Let the goals/angles/audience guide tone and emphasis, but don't mechanically insert them
+4. **Make options meaningfully different**: Not just minor word swaps - offer distinct approaches (e.g., more concise vs more detailed, warmer vs more direct, etc.)
+
+RESPONSE FORMAT (JSON):
+Return exactly 2 options as a JSON array. Each option must include:
+- **id**: "option1" or "option2"
+- **label**: Short descriptive label (e.g., "More Direct," "Warmer Tone," "More Specific")
+- **rationale**: 1-2 sentences explaining what this version does well or what changed
+- **text**: The rewritten text
+
+Example structure:
+{
+  "options": [
+    {
+      "id": "option1",
+      "label": "More Concise",
+      "rationale": "Tightened the language and removed redundancy while keeping the core insight.",
+      "text": "..."
+    },
+    {
+      "id": "option2",
+      "label": "Warmer Tone",
+      "rationale": "Added more human connection and made the advice feel more accessible.",
+      "text": "..."
+    }
+  ]
+}
+
+Generate the 2 rewrite options now.`;
+
+    const messages = [
+      { role: 'user', content: prompt }
+    ];
+
+    const response = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-a89809a8/jamie/chat`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${publicAnonKey}`
+      },
+      body: JSON.stringify({ messages })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      console.error('Jamie API error:', errorData);
+      throw new Error(`Jamie API error: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const content = data.choices[0].message.content.trim();
+    
+    // Strip markdown code fences and parse JSON response
+    const cleanedContent = stripMarkdownCodeFences(content);
+    try {
+      const parsed = JSON.parse(cleanedContent);
+      
+      if (!parsed.options || !Array.isArray(parsed.options) || parsed.options.length !== 2) {
+        throw new Error('Jamie did not return exactly 2 options');
+      }
+      
+      return parsed.options.map((opt: any) => ({
+        id: opt.id,
+        label: opt.label || 'Rewrite',
+        rationale: opt.rationale || '',
+        text: opt.text || ''
+      }));
+    } catch (parseError) {
+      console.error('Failed to parse Jamie Polish response:', cleanedContent);
+      throw new Error('Jamie returned an invalid response format. Please try again.');
+    }
+  } catch (error) {
+    console.error('Error generating polish options:', error);
     throw error;
   }
 }
