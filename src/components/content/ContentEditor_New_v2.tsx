@@ -30,7 +30,8 @@ import {
   generateMainPoints,
   generateImportantQuotes,
   generatePOVAngles,
-  generateJamiePolishOptions
+  generateJamiePolishOptions,
+  generateJamieHelpMeWrite
 } from '../../utils/jamieAI';
 import { copyToClipboard } from '../../utils/clipboard';
 
@@ -87,19 +88,23 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
     return '';
   });
 
-  // Jamie Polish feature state
-  const [selectedText, setSelectedText] = useState('');
-  const [selectionRange, setSelectionRange] = useState<{ start: number; end: number } | null>(null);
-  const [showPolishPill, setShowPolishPill] = useState(false);
-  const [pillPosition, setPillPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
-  const [showPolishTray, setShowPolishTray] = useState(false);
-  const [polishLoading, setPolishLoading] = useState(false);
-  const [polishOptions, setPolishOptions] = useState<Array<{
+  // Jamie Writing Drawer state (shared for both Help me write + Rewrite modes)
+  const [jamieDrawerOpen, setJamieDrawerOpen] = useState(false);
+  const [jamieDrawerMode, setJamieDrawerMode] = useState<'help-me-write' | 'rewrite'>('help-me-write');
+  const [jamieDrawerPrompt, setJamieDrawerPrompt] = useState('');
+  const [jamieDrawerLoading, setJamieDrawerLoading] = useState(false);
+  const [jamieDrawerOptions, setJamieDrawerOptions] = useState<Array<{
     id: string;
     label: string;
     rationale: string;
     text: string;
   }>>([]);
+  
+  // Text selection state (for rewrite mode)
+  const [selectedText, setSelectedText] = useState('');
+  const [selectionRange, setSelectionRange] = useState<{ start: number; end: number } | null>(null);
+  const [showPolishPill, setShowPolishPill] = useState(false);
+  const [pillPosition, setPillPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
 
   // Platform and status colors
   const platformColors: Record<Platform, string> = {
@@ -380,16 +385,29 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
     }
   };
 
-  // Jamie Polish: Generate rewrite options
+  // Jamie Writing Drawer: Open in "Help me write" mode
+  const handleHelpMeWrite = () => {
+    setJamieDrawerMode('help-me-write');
+    setJamieDrawerPrompt('');
+    setJamieDrawerOptions([]);
+    setJamieDrawerOpen(true);
+  };
+
+  // Jamie Writing Drawer: Open in "Rewrite" mode
   const handlePolishWithJamie = async () => {
     if (!selectedText.trim()) {
       toast.error('Please select some text first');
       return;
     }
 
-    setPolishLoading(true);
+    setJamieDrawerMode('rewrite');
+    setJamieDrawerPrompt('');
+    setJamieDrawerOptions([]);
+    setJamieDrawerOpen(true);
     setShowPolishPill(false);
-    setShowPolishTray(true);
+    
+    // Auto-generate rewrites when opening
+    setJamieDrawerLoading(true);
 
     try {
       const options = await generateJamiePolishOptions({
@@ -410,85 +428,122 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
         cursorPosition: selectionRange?.start
       });
 
-      setPolishOptions(options);
+      setJamieDrawerOptions(options);
       toast.success('Jamie created 2 rewrite options!');
     } catch (error) {
-      console.error('Error generating polish options:', error);
+      console.error('Error generating rewrites:', error);
       toast.error('Failed to generate rewrites. Please try again.');
-      setShowPolishTray(false);
+      setJamieDrawerOpen(false);
     } finally {
-      setPolishLoading(false);
+      setJamieDrawerLoading(false);
     }
   };
 
-  // Jamie Polish: Insert rewrite at cursor position
-  const handleInsertAtCursor = (text: string) => {
-    if (!editorRef.current || !selectionRange) return;
+  // Jamie Writing Drawer: Generate writing (works for both modes)
+  const handleGenerateJamieWriting = async () => {
+    setJamieDrawerLoading(true);
 
-    const before = editorContent.substring(0, selectionRange.end);
-    const after = editorContent.substring(selectionRange.end);
+    try {
+      let options;
+      
+      if (jamieDrawerMode === 'rewrite') {
+        options = await generateJamiePolishOptions({
+          selectedText,
+          title: editedItem.title,
+          platform: editedItem.platform,
+          summary: editedItem.summary,
+          notes: editedItem.notes,
+          selectedPovAngles: editedItem.selectedPovAngles,
+          goals: editedItem.goals,
+          audiences: editedItem.audiences,
+          mainPoints: editedItem.mainPoints,
+          importantQuotes: editedItem.importantQuotes,
+          sourceContent: editedItem.sourceContent,
+          sourceUrl: editedItem.sourceUrl,
+          sourceAuthor: editedItem.sourceAuthor,
+          fullEditorContent: editorContent,
+          cursorPosition: selectionRange?.start
+        });
+      } else {
+        // Help me write mode
+        if (!jamieDrawerPrompt.trim()) {
+          toast.error('Please enter what you want Jamie to write');
+          setJamieDrawerLoading(false);
+          return;
+        }
+        
+        options = await generateJamieHelpMeWrite({
+          userPrompt: jamieDrawerPrompt,
+          title: editedItem.title,
+          platform: editedItem.platform,
+          summary: editedItem.summary,
+          notes: editedItem.notes,
+          selectedPovAngles: editedItem.selectedPovAngles,
+          goals: editedItem.goals,
+          audiences: editedItem.audiences,
+          mainPoints: editedItem.mainPoints,
+          importantQuotes: editedItem.importantQuotes,
+          sourceContent: editedItem.sourceContent,
+          sourceUrl: editedItem.sourceUrl,
+          sourceAuthor: editedItem.sourceAuthor,
+          currentEditorContent: editorContent
+        });
+      }
+
+      setJamieDrawerOptions(options);
+      toast.success('Jamie created 2 options!');
+    } catch (error) {
+      console.error('Error generating Jamie writing:', error);
+      toast.error('Failed to generate options. Please try again.');
+    } finally {
+      setJamieDrawerLoading(false);
+    }
+  };
+
+  // Jamie Writing Drawer: Insert at cursor
+  const handleJamieInsertAtCursor = (text: string) => {
+    if (!editorRef.current) return;
+
+    const cursorPos = selectionRange?.end || editorRef.current.selectionStart;
+    const before = editorContent.substring(0, cursorPos);
+    const after = editorContent.substring(cursorPos);
     const newContent = before + '\n\n' + text + after;
 
     setEditorContent(newContent);
     setHasUnsavedChanges(true);
     toast.success('Inserted at cursor position');
     
-    // Close tray
-    setShowPolishTray(false);
-    setPolishOptions([]);
+    // Close drawer
+    setJamieDrawerOpen(false);
+    setJamieDrawerOptions([]);
+    setSelectedText('');
+    setSelectionRange(null);
   };
 
-  // Jamie Polish: Insert rewrite at bottom
-  const handleInsertAtBottom = (text: string) => {
+  // Jamie Writing Drawer: Insert at bottom
+  const handleJamieInsertAtBottom = (text: string) => {
     const newContent = editorContent + '\n\n' + text;
     setEditorContent(newContent);
     setHasUnsavedChanges(true);
     toast.success('Inserted at bottom');
     
-    // Close tray
-    setShowPolishTray(false);
-    setPolishOptions([]);
+    // Close drawer
+    setJamieDrawerOpen(false);
+    setJamieDrawerOptions([]);
+    setSelectedText('');
+    setSelectionRange(null);
   };
 
-  // Jamie Polish: Regenerate single option
-  const handleRegeneratePolishOption = async (optionId: string) => {
-    toast.info('Regenerating this option...');
-    
-    try {
-      const options = await generateJamiePolishOptions({
-        selectedText,
-        title: editedItem.title,
-        platform: editedItem.platform,
-        summary: editedItem.summary,
-        notes: editedItem.notes,
-        selectedPovAngles: editedItem.selectedPovAngles,
-        goals: editedItem.goals,
-        audiences: editedItem.audiences,
-        mainPoints: editedItem.mainPoints,
-        importantQuotes: editedItem.importantQuotes,
-        sourceContent: editedItem.sourceContent,
-        sourceUrl: editedItem.sourceUrl,
-        sourceAuthor: editedItem.sourceAuthor,
-        fullEditorContent: editorContent,
-        cursorPosition: selectionRange?.start
-      });
-
-      // Replace the specific option
-      setPolishOptions(prev => 
-        prev.map(opt => opt.id === optionId ? options.find(o => o.id === optionId) || opt : opt)
-      );
-      
-      toast.success('Option regenerated!');
-    } catch (error) {
-      console.error('Error regenerating option:', error);
-      toast.error('Failed to regenerate. Please try again.');
-    }
+  // Jamie Writing Drawer: Regenerate (tries again)
+  const handleJamieRegenerateOption = async () => {
+    await handleGenerateJamieWriting();
   };
 
-  // Jamie Polish: Close tray
-  const handleClosePolishTray = () => {
-    setShowPolishTray(false);
-    setPolishOptions([]);
+  // Jamie Writing Drawer: Close
+  const handleCloseJamieDrawer = () => {
+    setJamieDrawerOpen(false);
+    setJamieDrawerOptions([]);
+    setJamieDrawerPrompt('');
     setShowPolishPill(false);
     setSelectedText('');
     setSelectionRange(null);
@@ -753,6 +808,15 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
                 Publish to {editedItem.platform}
               </a>
             )}
+            
+            {/* Help me write Button */}
+            <button
+              onClick={handleHelpMeWrite}
+              className="flex items-center gap-2 px-4 py-2 bg-[#6b2358] hover:bg-[#6b2358]/90 text-white text-sm rounded-lg transition-colors"
+            >
+              <Sparkles className="w-4 h-4" />
+              Help me write
+            </button>
             
             {/* Save Button */}
             <button
@@ -1040,6 +1104,118 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
             </div>
           </ExpandableWorkDrawer>
 
+          {/* Jamie Writing Drawer - Shared for both "Help me write" and "Rewrite with Jamie" */}
+          {jamieDrawerOpen && (
+            <div className="mt-4 p-4 bg-white border border-slate-200 rounded-lg">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-semibold text-slate-800 flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-[#6b2358]" />
+                  {jamieDrawerMode === 'rewrite' ? 'Rewrite with Jamie' : 'Help me write'}
+                </h3>
+                <button
+                  onClick={handleCloseJamieDrawer}
+                  className="text-sm text-slate-600 hover:text-slate-900"
+                >
+                  Dismiss
+                </button>
+              </div>
+
+              {/* Mode A: Help me write - Prompt input */}
+              {jamieDrawerMode === 'help-me-write' && jamieDrawerOptions.length === 0 && (
+                <div className="space-y-3">
+                  <input
+                    type="text"
+                    value={jamieDrawerPrompt}
+                    onChange={(e) => setJamieDrawerPrompt(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        handleGenerateJamieWriting();
+                      }
+                    }}
+                    placeholder="Tell Jamie what you want to write (e.g., 'Help me write 4 sentences about how a referral can make patients feel abandoned')"
+                    className="w-full px-4 py-3 text-sm border border-slate-200 rounded-lg outline-none focus:ring-2 focus:ring-[#6b2358] focus:border-transparent"
+                  />
+                  <button
+                    onClick={handleGenerateJamieWriting}
+                    disabled={!jamieDrawerPrompt.trim() || jamieDrawerLoading}
+                    className="flex items-center gap-2 px-4 py-2 bg-[#6b2358] hover:bg-[#6b2358]/90 disabled:bg-slate-300 disabled:cursor-not-allowed text-white rounded-lg transition-colors text-sm font-medium"
+                  >
+                    <Sparkles className="w-4 h-4" />
+                    Generate
+                  </button>
+                </div>
+              )}
+
+              {/* Mode B: Rewrite - Show selected text preview */}
+              {jamieDrawerMode === 'rewrite' && jamieDrawerOptions.length === 0 && selectedText && (
+                <div className="mb-4">
+                  <div className="text-xs text-slate-600 mb-2">Selected text:</div>
+                  <div className="p-3 bg-slate-50 border border-slate-200 rounded text-sm text-slate-700 italic">
+                    "{selectedText}"
+                  </div>
+                </div>
+              )}
+
+              {/* Loading state */}
+              {jamieDrawerLoading && (
+                <div className="flex items-center justify-center py-8">
+                  <div className="flex items-center gap-2 text-slate-600">
+                    <RefreshCw className="w-4 h-4 animate-spin" />
+                    <span>Jamie is writing...</span>
+                  </div>
+                </div>
+              )}
+
+              {/* Options display (for both modes) */}
+              {!jamieDrawerLoading && jamieDrawerOptions.length > 0 && (
+                <div className="space-y-3">
+                  {jamieDrawerOptions.map((option) => (
+                    <div
+                      key={option.id}
+                      className="bg-slate-50 border border-slate-200 rounded-lg p-4"
+                    >
+                      <div className="font-semibold text-sm text-[#6b2358] mb-1">
+                        {option.label}
+                      </div>
+                      
+                      <p className="text-xs text-slate-600 mb-3 italic">
+                        {option.rationale}
+                      </p>
+                      
+                      <div className="text-sm text-slate-800 mb-3 p-3 bg-white rounded border border-slate-100 whitespace-pre-wrap">
+                        {option.text}
+                      </div>
+                      
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handleJamieInsertAtCursor(option.text)}
+                          className="text-xs px-3 py-1.5 bg-[#6b2358] hover:bg-[#6b2358]/90 text-white rounded transition-colors"
+                        >
+                          Insert after cursor
+                        </button>
+                        <button
+                          onClick={() => handleJamieInsertAtBottom(option.text)}
+                          className="text-xs px-3 py-1.5 bg-slate-600 hover:bg-slate-700 text-white rounded transition-colors"
+                        >
+                          Insert at bottom
+                        </button>
+                        <button
+                          onClick={handleJamieRegenerateOption}
+                          className="text-xs px-3 py-1.5 text-slate-600 hover:text-slate-900 flex items-center gap-1"
+                          title="Try again"
+                        >
+                          <RefreshCw className="w-3 h-3" />
+                          Try again
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Main Editor Area - Google Doc Style */}
           <div className="bg-white pt-8">
             <textarea
@@ -1056,7 +1232,7 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
               }}
             />
 
-            {/* Jamie Polish: Floating Pill */}
+            {/* Jamie "Rewrite with Jamie" Floating Pill */}
             {showPolishPill && (
               <div
                 style={{
@@ -1074,79 +1250,6 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
                   <Sparkles className="w-4 h-4" />
                   Rewrite with Jamie
                 </button>
-              </div>
-            )}
-
-            {/* Jamie Polish: Rewrite Tray */}
-            {showPolishTray && (
-              <div className="mt-6 p-4 bg-slate-50 border border-slate-200 rounded-lg">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="font-semibold text-slate-800 flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-[#6b2358]" />
-                    Jamie's Rewrites
-                  </h3>
-                  <button
-                    onClick={handleClosePolishTray}
-                    className="text-sm text-slate-600 hover:text-slate-900"
-                  >
-                    Dismiss
-                  </button>
-                </div>
-
-                {polishLoading ? (
-                  <div className="flex items-center justify-center py-8">
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <RefreshCw className="w-4 h-4 animate-spin" />
-                      <span>Jamie is polishing your text...</span>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    {polishOptions.map((option) => (
-                      <div
-                        key={option.id}
-                        className="bg-white border border-slate-200 rounded-lg p-4"
-                      >
-                        <div className="flex items-center justify-between mb-2">
-                          <div className="font-semibold text-sm text-[#6b2358]">
-                            {option.label}
-                          </div>
-                          <button
-                            onClick={() => handleRegeneratePolishOption(option.id)}
-                            className="text-xs text-slate-600 hover:text-slate-900 flex items-center gap-1"
-                            title="Try again"
-                          >
-                            <RefreshCw className="w-3 h-3" />
-                            Try again
-                          </button>
-                        </div>
-                        
-                        <p className="text-xs text-slate-600 mb-3 italic">
-                          {option.rationale}
-                        </p>
-                        
-                        <div className="text-sm text-slate-800 mb-3 p-3 bg-slate-50 rounded border border-slate-100">
-                          {option.text}
-                        </div>
-                        
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={() => handleInsertAtCursor(option.text)}
-                            className="text-xs px-3 py-1.5 bg-[#6b2358] hover:bg-[#6b2358]/90 text-white rounded transition-colors"
-                          >
-                            Insert after cursor
-                          </button>
-                          <button
-                            onClick={() => handleInsertAtBottom(option.text)}
-                            className="text-xs px-3 py-1.5 bg-slate-600 hover:bg-slate-700 text-white rounded transition-colors"
-                          >
-                            Insert at bottom
-                          </button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
               </div>
             )}
           </div>

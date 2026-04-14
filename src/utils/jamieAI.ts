@@ -4011,3 +4011,176 @@ Generate the 2 rewrite options now.`;
     throw error;
   }
 }
+
+/**
+ * Generate exactly 2 writing options based on user's prompt
+ * Lightweight utility for the "Help me write" feature in Content Editor
+ */
+export async function generateJamieHelpMeWrite(params: {
+  userPrompt: string;
+  // Content context
+  title?: string;
+  platform?: string;
+  summary?: string;
+  notes?: string;
+  selectedPovAngles?: string[];
+  goals?: string[];
+  audiences?: string[];
+  mainPoints?: string[];
+  importantQuotes?: string[];
+  sourceContent?: string;
+  sourceUrl?: string;
+  sourceAuthor?: string;
+  // Current editor context
+  currentEditorContent?: string;
+}): Promise<Array<{
+  id: string;
+  label: string;
+  rationale: string;
+  text: string;
+}>> {
+  try {
+    const { projectId, publicAnonKey } = await import('./supabase/info');
+    
+    // Build context sections
+    let contextInfo = '';
+    
+    if (params.title) {
+      contextInfo += `\n**Content Title:** ${params.title}`;
+    }
+    
+    if (params.platform) {
+      contextInfo += `\n**Platform:** ${params.platform}`;
+    }
+    
+    if (params.summary) {
+      contextInfo += `\n\n**Summary:** ${params.summary}`;
+    }
+    
+    if (params.selectedPovAngles && params.selectedPovAngles.length > 0) {
+      contextInfo += `\n\n**Selected Angle:** ${params.selectedPovAngles[0]}`;
+    }
+    
+    if (params.goals && params.goals.length > 0) {
+      contextInfo += `\n\n**Goals:** ${params.goals.join(', ')}`;
+    }
+    
+    if (params.audiences && params.audiences.length > 0) {
+      contextInfo += `\n\n**Target Audiences:** ${params.audiences.join(', ')}`;
+    }
+    
+    if (params.mainPoints && params.mainPoints.length > 0) {
+      contextInfo += `\n\n**Key Points to Consider:**\n${params.mainPoints.slice(0, 3).map(p => `• ${p}`).join('\n')}`;
+    }
+    
+    if (params.importantQuotes && params.importantQuotes.length > 0) {
+      contextInfo += `\n\n**Important Quotes:**\n${params.importantQuotes.slice(0, 2).map(q => `• "${q}"`).join('\n')}`;
+    }
+    
+    if (params.notes) {
+      contextInfo += `\n\n**Notes:** ${params.notes}`;
+    }
+    
+    if (params.sourceAuthor || params.sourceUrl) {
+      contextInfo += `\n\n**Source:** ${params.sourceAuthor || 'Unknown author'}${params.sourceUrl ? ` (${params.sourceUrl})` : ''}`;
+    }
+
+    const prompt = `You are Jamie, Meredith's AI writing assistant. Meredith is working on a piece of content and has asked you to help her write something specific.
+
+YOUR TASK:
+Generate exactly 2 distinct writing options based on Meredith's request.
+
+MEREDITH'S REQUEST:
+"${params.userPrompt}"
+
+ACTIVE DRAFT CONTEXT:${contextInfo || '\n(No additional context provided)'}
+
+${params.currentEditorContent ? `\nCURRENT EDITOR CONTENT (for context):\n${params.currentEditorContent.substring(0, 1000)}${params.currentEditorContent.length > 1000 ? '...' : ''}` : ''}
+
+${getVoiceGuidanceText()}
+
+${getPlatformGuidanceText(params.platform)}
+
+${getWritingDNAGuidance()}
+
+WRITING RULES (Priority Order):
+1. **Address Meredith's immediate request** - give her what she asked for
+2. **Use the active draft's strategic context** - let the goals/angles/audience guide your approach
+3. **Use Meredith's voice**: Apply all voice rules, writing DNA, and platform guidance above
+4. **Make options meaningfully different**: Not just minor word swaps - offer distinct approaches (e.g., more concise vs more detailed, warmer vs more direct, story-driven vs insight-driven, etc.)
+5. **Keep it natural and human**: Avoid generic corporate speak or overly formulaic writing
+6. **Use strategic context as guidance, not mechanical insertion**: Don't force-fit every angle/goal/quote - use them when they naturally enhance the writing
+
+RESPONSE FORMAT (JSON):
+Return exactly 2 options as a JSON array. Each option must include:
+- **id**: "option1" or "option2"
+- **label**: Short descriptive label (e.g., "More Story-Driven," "More Direct," "More Tactical")
+- **rationale**: 1-2 sentences explaining what this version does well or the approach it takes
+- **text**: The written content
+
+Example structure:
+{
+  "options": [
+    {
+      "id": "option1",
+      "label": "More Personal",
+      "rationale": "Opens with a patient story and connects emotionally before diving into the tactical insight.",
+      "text": "..."
+    },
+    {
+      "id": "option2",
+      "label": "More Direct",
+      "rationale": "Gets straight to the core insight with a clear, actionable framework.",
+      "text": "..."
+    }
+  ]
+}
+
+Generate the 2 writing options now.`;
+
+    const messages = [
+      { role: 'user', content: prompt }
+    ];
+
+    const response = await fetch(`https://${projectId}.supabase.co/functions/v1/make-server-a89809a8/jamie/chat`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${publicAnonKey}`
+      },
+      body: JSON.stringify({ messages })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      console.error('Jamie API error:', errorData);
+      throw new Error(`Jamie API error: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    const content = data.choices[0].message.content.trim();
+    
+    // Strip markdown code fences and parse JSON response
+    const cleanedContent = stripMarkdownCodeFences(content);
+    try {
+      const parsed = JSON.parse(cleanedContent);
+      
+      if (!parsed.options || !Array.isArray(parsed.options) || parsed.options.length !== 2) {
+        throw new Error('Jamie did not return exactly 2 options');
+      }
+      
+      return parsed.options.map((opt: any) => ({
+        id: opt.id,
+        label: opt.label || 'Writing Option',
+        rationale: opt.rationale || '',
+        text: opt.text || ''
+      }));
+    } catch (parseError) {
+      console.error('Failed to parse Jamie Help Me Write response:', cleanedContent);
+      throw new Error('Jamie returned an invalid response format. Please try again.');
+    }
+  } catch (error) {
+    console.error('Error generating help me write options:', error);
+    throw error;
+  }
+}
