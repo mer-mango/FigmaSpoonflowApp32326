@@ -11,6 +11,52 @@ import {
 import * as rssFeeds from "./rss_feeds.tsx";
 import { handleJamieExtract, handleJamieExtractFromFathom } from "./jamie_extract.ts";
 
+/**
+ * Retry helper for API calls with exponential backoff
+ * Handles 503 (Service Unavailable) and other temporary failures
+ */
+async function fetchWithRetry(
+  url: string,
+  options: RequestInit,
+  maxRetries: number = 3
+): Promise<Response> {
+  let lastError: any;
+  
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      const response = await fetch(url, options);
+      
+      // If successful or non-retryable error, return immediately
+      if (response.ok || (response.status !== 503 && response.status !== 429 && response.status !== 500)) {
+        return response;
+      }
+      
+      // For 503/429/500 errors, retry with exponential backoff
+      if (attempt < maxRetries - 1) {
+        const delay = Math.min(1000 * Math.pow(2, attempt), 5000); // Max 5 seconds
+        console.log(`⏳ Gemini API returned ${response.status}, retrying in ${delay}ms... (attempt ${attempt + 1}/${maxRetries})`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        continue;
+      }
+      
+      return response;
+    } catch (error) {
+      lastError = error;
+      
+      // Network errors - retry with backoff
+      if (attempt < maxRetries - 1) {
+        const delay = Math.min(1000 * Math.pow(2, attempt), 5000);
+        console.log(`⏳ Network error calling Gemini API, retrying in ${delay}ms... (attempt ${attempt + 1}/${maxRetries})`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        continue;
+      }
+    }
+  }
+  
+  // If all retries failed, throw the last error
+  throw lastError || new Error('All retry attempts failed');
+}
+
 // Timezone helper functions for server-side (Eastern Time)
 const EASTERN_TZ = 'America/New_York';
 
@@ -570,8 +616,8 @@ app.post("/make-server-a89809a8/jamie/chat", async (c) => {
 
     console.log("📤 Sending request to Gemini API...");
     
-    // Call Gemini API
-    const response = await fetch(
+    // Call Gemini API with retry logic
+    const response = await fetchWithRetry(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiApiKey}`,
       {
         method: 'POST',
@@ -592,6 +638,15 @@ app.post("/make-server-a89809a8/jamie/chat", async (c) => {
     if (!response.ok) {
       const errorText = await response.text();
       console.error(`❌ Gemini API error: ${response.status} - ${errorText}`);
+      
+      // Return user-friendly error message for 503
+      if (response.status === 503) {
+        return c.json({ 
+          error: 'Jamie is experiencing high demand right now. Please try again in a moment.',
+          details: errorText 
+        }, 503);
+      }
+      
       return c.json({ 
         error: `Gemini API error: ${response.statusText}`,
         details: errorText 

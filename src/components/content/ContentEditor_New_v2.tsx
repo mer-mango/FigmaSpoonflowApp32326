@@ -430,9 +430,10 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
 
       setJamieDrawerOptions(options);
       toast.success('Jamie created 2 rewrite options!');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error generating rewrites:', error);
-      toast.error('Failed to generate rewrites. Please try again.');
+      const errorMessage = error?.message || 'Failed to generate rewrites. Please try again.';
+      toast.error(errorMessage);
       setJamieDrawerOpen(false);
     } finally {
       setJamieDrawerLoading(false);
@@ -492,9 +493,10 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
 
       setJamieDrawerOptions(options);
       toast.success('Jamie created 2 options!');
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error generating Jamie writing:', error);
-      toast.error('Failed to generate options. Please try again.');
+      const errorMessage = error?.message || 'Failed to generate options. Please try again.';
+      toast.error(errorMessage);
     } finally {
       setJamieDrawerLoading(false);
     }
