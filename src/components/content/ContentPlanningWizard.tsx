@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { 
   X, ChevronRight, ChevronLeft, FileText, Target, Users, 
-  Lightbulb, Check, Sparkles, ExternalLink, Plus, Trash2, Mic, MicOff, Pin, CheckCircle2
+  Lightbulb, Check, Sparkles, ExternalLink, Plus, Trash2, Mic, MicOff, Pin, CheckCircle2, Quote
 } from 'lucide-react';
 import type { ContentItem, Platform } from '../../types/content';
 import { generateContentSummary, generateMainPoints, generateImportantQuotes, generatePOVAngles } from '../../utils/jamieAI';
@@ -61,6 +61,8 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
   const [importantQuotes, setImportantQuotes] = useState<string[]>(item?.importantQuotes || []);
   const [povAngles, setPovAngles] = useState<string[]>(item?.povAngles || []);
   const [selectedPovAngles, setSelectedPovAngles] = useState<string[]>(item?.selectedPovAngles || []);
+  const [selectedMainPoints, setSelectedMainPoints] = useState<string[]>(item?.selectedMainPoints || []);
+  const [selectedImportantQuotes, setSelectedImportantQuotes] = useState<string[]>(item?.selectedImportantQuotes || []);
   
   const [selectedGoals, setSelectedGoals] = useState<string[]>(item?.goals || []);
   const [customGoal, setCustomGoal] = useState('');
@@ -99,6 +101,8 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
       setImportantQuotes(item?.importantQuotes || []);
       setPovAngles(item?.povAngles || []);
       setSelectedPovAngles(item?.selectedPovAngles || []);
+      setSelectedMainPoints(item?.selectedMainPoints || []);
+      setSelectedImportantQuotes(item?.selectedImportantQuotes || []);
       setSelectedGoals(item?.goals || []);
       setSelectedAudiences(item?.audiences || []);
       setLength(item?.length || '');
@@ -163,6 +167,8 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
         importantQuotes,
         povAngles,
         selectedPovAngles,
+        selectedMainPoints,
+        selectedImportantQuotes,
         goals: selectedGoals,
         audiences: selectedAudiences,
         length,
@@ -609,26 +615,64 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
                       ) : (mainPoints.length > 0) ? (
                         <>
                           <Sparkles className="w-3.5 h-3.5" />
-                          Regenerate main points
+                          Regenerate
                         </>
                       ) : (
                         <>
                           <Sparkles className="w-3.5 h-3.5" />
-                          Generate main points
+                          Generate with Jamie
                         </>
                       )}
                     </button>
                   </div>
-                  <textarea
-                    value={mainPoints.join('\n\n')}
-                    onChange={(e) => {
-                      const points = e.target.value.split('\n\n').map(p => p.trim()).filter(p => p);
-                      setMainPoints(points);
-                    }}
-                    placeholder="One main point per paragraph (separate with double line breaks)..."
-                    rows={6}
-                    className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#6b2358] focus:border-transparent resize-none"
-                  />
+                  {mainPoints.length > 0 ? (
+                    <div className="space-y-2">
+                      {mainPoints.map((point, idx) => {
+                        const isSelected = selectedMainPoints.includes(point);
+                        return (
+                          <div 
+                            key={idx} 
+                            className={`flex items-start gap-3 p-3 rounded-lg border-2 transition-all cursor-pointer ${
+                              isSelected 
+                                ? 'bg-[#f5e5eb] border-[#6b2358]' 
+                                : 'bg-white border-[#6b2358]/30 hover:border-[#6b2358]/50'
+                            }`}
+                            onClick={() => {
+                              if (isSelected) {
+                                setSelectedMainPoints(selectedMainPoints.filter(p => p !== point));
+                              } else {
+                                setSelectedMainPoints([...selectedMainPoints, point]);
+                              }
+                            }}
+                          >
+                            {/* Checkbox */}
+                            <div className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                              isSelected 
+                                ? 'bg-[#6b2358] border-[#6b2358]' 
+                                : 'bg-white border-slate-300'
+                            }`}>
+                              {isSelected && <Check className="w-3 h-3 text-white" />}
+                            </div>
+                            
+                            <Target className="w-5 h-5 text-[#6b2358] flex-shrink-0 mt-0.5" />
+                            <p className="text-sm text-slate-700 flex-1">{point}</p>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setMainPoints(mainPoints.filter((_, i) => i !== idx));
+                                setSelectedMainPoints(selectedMainPoints.filter(p => p !== point));
+                              }}
+                              className="text-slate-400 hover:text-red-500 transition-colors"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-slate-500 italic">Jamie can extract key points from your source material. Click "Generate with Jamie" above.</p>
+                  )}
                   {mainPointsError && (
                     <p className="text-sm text-red-600 mt-2">{mainPointsError}</p>
                   )}
@@ -653,26 +697,64 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
                       ) : (importantQuotes.length > 0) ? (
                         <>
                           <Sparkles className="w-3.5 h-3.5" />
-                          Regenerate quotes
+                          Regenerate
                         </>
                       ) : (
                         <>
                           <Sparkles className="w-3.5 h-3.5" />
-                          Generate quotes
+                          Generate with Jamie
                         </>
                       )}
                     </button>
                   </div>
-                  <textarea
-                    value={importantQuotes.join('\n\n')}
-                    onChange={(e) => {
-                      const quotes = e.target.value.split('\n\n').filter(q => q.trim());
-                      setImportantQuotes(quotes);
-                    }}
-                    placeholder="One quote per paragraph (separate with double line breaks)..."
-                    rows={6}
-                    className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#6b2358] focus:border-transparent resize-none"
-                  />
+                  {importantQuotes.length > 0 ? (
+                    <div className="space-y-2">
+                      {importantQuotes.map((quote, idx) => {
+                        const isSelected = selectedImportantQuotes.includes(quote);
+                        return (
+                          <div 
+                            key={idx} 
+                            className={`flex items-start gap-3 p-3 rounded-lg border-2 transition-all cursor-pointer ${
+                              isSelected 
+                                ? 'bg-[#f5e5eb] border-[#6b2358]' 
+                                : 'bg-white border-[#6b2358]/30 hover:border-[#6b2358]/50'
+                            }`}
+                            onClick={() => {
+                              if (isSelected) {
+                                setSelectedImportantQuotes(selectedImportantQuotes.filter(q => q !== quote));
+                              } else {
+                                setSelectedImportantQuotes([...selectedImportantQuotes, quote]);
+                              }
+                            }}
+                          >
+                            {/* Checkbox */}
+                            <div className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                              isSelected 
+                                ? 'bg-[#6b2358] border-[#6b2358]' 
+                                : 'bg-white border-slate-300'
+                            }`}>
+                              {isSelected && <Check className="w-3 h-3 text-white" />}
+                            </div>
+                            
+                            <Quote className="w-5 h-5 text-[#6b2358] flex-shrink-0 mt-0.5" />
+                            <p className="text-sm text-slate-700 flex-1 italic">"{quote}"</p>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setImportantQuotes(importantQuotes.filter((_, i) => i !== idx));
+                                setSelectedImportantQuotes(selectedImportantQuotes.filter(q => q !== quote));
+                              }}
+                              className="text-slate-400 hover:text-red-500 transition-colors"
+                            >
+                              <Trash2 className="w-4 h-4" />
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-slate-500 italic">Jamie can extract important quotes from your source material. Click "Generate with Jamie" above.</p>
+                  )}
                   {quotesError && (
                     <p className="text-sm text-red-600 mt-2">{quotesError}</p>
                   )}
@@ -1009,13 +1091,13 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
                     </div>
                   )}
 
-                  {mainPoints.length > 0 && (
+                  {selectedMainPoints.length > 0 && (
                     <div>
-                      <h4 className="text-sm font-medium text-slate-500 mb-2">Main Points (top {Math.min(8, mainPoints.length)} shown)</h4>
+                      <h4 className="text-sm font-medium text-slate-500 mb-2">Selected Main Points</h4>
                       <ul className="space-y-1.5">
-                        {mainPoints.slice(0, 8).map((point, idx) => (
+                        {selectedMainPoints.map((point, idx) => (
                           <li key={idx} className="text-sm text-slate-700 flex items-start gap-2">
-                            <span className="text-[#6b2358] font-semibold">•</span>
+                            <Target className="w-4 h-4 text-[#6b2358] flex-shrink-0 mt-0.5" />
                             <span>{point}</span>
                           </li>
                         ))}
@@ -1023,12 +1105,13 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
                     </div>
                   )}
 
-                  {importantQuotes.length > 0 && (
+                  {selectedImportantQuotes.length > 0 && (
                     <div>
-                      <h4 className="text-sm font-medium text-slate-500 mb-2">Important Quotes (top {Math.min(6, importantQuotes.length)} shown)</h4>
+                      <h4 className="text-sm font-medium text-slate-500 mb-2">Selected Important Quotes</h4>
                       <div className="space-y-2">
-                        {importantQuotes.slice(0, 6).map((quote, idx) => (
-                          <div key={idx} className="pl-4 border-l-2 border-[#6b2358]">
+                        {selectedImportantQuotes.map((quote, idx) => (
+                          <div key={idx} className="pl-4 border-l-2 border-[#6b2358] flex items-start gap-2">
+                            <Quote className="w-4 h-4 text-[#6b2358] flex-shrink-0 mt-0.5" />
                             <p className="text-sm text-slate-700 italic">"{quote}"</p>
                           </div>
                         ))}
@@ -1136,6 +1219,8 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
                     importantQuotes,
                     povAngles,
                     selectedPovAngles,
+                    selectedMainPoints,
+                    selectedImportantQuotes,
                     goals: selectedGoals.length > 0 ? selectedGoals : undefined,
                     audiences: selectedAudiences.length > 0 ? selectedAudiences : undefined,
                     length: length || undefined,
@@ -1164,6 +1249,8 @@ export function ContentPlanningWizard({ item, isOpen, onClose, onSave, onComplet
                     importantQuotes,
                     povAngles,
                     selectedPovAngles,
+                    selectedMainPoints,
+                    selectedImportantQuotes,
                     goals: selectedGoals.length > 0 ? selectedGoals : undefined,
                     audiences: selectedAudiences.length > 0 ? selectedAudiences : undefined,
                     length: length || undefined,

@@ -3412,6 +3412,8 @@ export async function generate2DraftOptions(params: {
   summary?: string;
   mainPoints?: string[];
   importantQuotes?: string[];
+  selectedMainPoints?: string[];
+  selectedImportantQuotes?: string[];
   
   // Platform context
   platform?: string;
@@ -3448,10 +3450,10 @@ ${params.sourceUrl ? `\nSource URL: ${params.sourceUrl}` : ''}
 ${params.sourceAuthor ? `\nSource Author: ${params.sourceAuthor}` : ''}
 
 MAIN POINTS FROM SOURCE:
-${params.mainPoints && params.mainPoints.length > 0 ? params.mainPoints.map(p => `• ${p}`).join('\n') : 'None provided'}
+${params.selectedMainPoints && params.selectedMainPoints.length > 0 ? params.selectedMainPoints.map(p => `• ${p}`).join('\n') : params.mainPoints && params.mainPoints.length > 0 ? params.mainPoints.map(p => `• ${p}`).join('\n') : 'None provided'}
 
 IMPORTANT QUOTES FROM SOURCE:
-${params.importantQuotes && params.importantQuotes.length > 0 ? params.importantQuotes.map(q => `"${q}"`).join('\n') : 'None provided'}
+${params.selectedImportantQuotes && params.selectedImportantQuotes.length > 0 ? params.selectedImportantQuotes.map(q => `"${q}"`).join('\n') : params.importantQuotes && params.importantQuotes.length > 0 ? params.importantQuotes.map(q => `"${q}"`).join('\n') : 'None provided'}
 
 MEREDITH'S NOTES:
 ${params.notes || 'None'}

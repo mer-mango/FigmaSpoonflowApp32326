@@ -25,6 +25,8 @@ export interface ContentItem {
   importantQuotes?: string[];
   povAngles?: string[];
   selectedPovAngles?: string[]; // User-selected POV angles to use in Draft Builder
+  selectedMainPoints?: string[]; // User-selected main points to use in Draft Builder
+  selectedImportantQuotes?: string[]; // User-selected important quotes to use in Draft Builder
   status: ContentStatus;
   tags?: string[];
   scheduledDate?: string;

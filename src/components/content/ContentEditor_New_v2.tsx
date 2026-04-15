@@ -279,6 +279,8 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
         summary: editedItem.summary,
         mainPoints: editedItem.mainPoints,
         importantQuotes: editedItem.importantQuotes,
+        selectedMainPoints: editedItem.selectedMainPoints,
+        selectedImportantQuotes: editedItem.selectedImportantQuotes,
         
         // Platform context
         platform: editedItem.platform,
