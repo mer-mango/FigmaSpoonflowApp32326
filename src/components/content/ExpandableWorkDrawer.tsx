@@ -23,16 +23,16 @@ export function ExpandableWorkDrawer({
       {/* Collapsed Header - Always Visible */}
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between px-6 py-4 hover:bg-slate-50/50 transition-colors"
+        className="w-full flex items-center justify-between px-6 py-2.5 hover:bg-slate-50/50 transition-colors"
       >
         <div className="flex items-center gap-3">
           {icon && (
-            <div className="w-8 h-8 bg-[#6b2358]/10 rounded-lg flex items-center justify-center flex-shrink-0">
+            <div className="w-7 h-7 bg-[#6b2358]/10 rounded-lg flex items-center justify-center flex-shrink-0">
               {icon}
             </div>
           )}
           <div className="text-left">
-            <h3 className="font-medium text-slate-800 text-[20px]">{title}</h3>
+            <h3 className="font-medium text-slate-800 text-[16px]">{title}</h3>
             {!isExpanded && (
               <p className="text-sm text-slate-500">{summary}</p>
             )}
@@ -49,7 +49,7 @@ export function ExpandableWorkDrawer({
       {isExpanded && (
         <div className="border-t border-slate-200 bg-white">
           {/* Expanded Header with Collapse Button */}
-          <div className="px-6 py-3 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+          <div className="px-6 py-2 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
             <p className="text-sm text-slate-600">{summary}</p>
             <button
               onClick={onToggle}

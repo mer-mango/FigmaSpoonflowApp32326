@@ -504,39 +504,43 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
     }
   };
 
-  // Jamie Writing Drawer: Insert at cursor
-  const handleJamieInsertAtCursor = (text: string) => {
-    if (!editorRef.current) return;
+// Jamie Writing Drawer: Insert at cursor
+const handleJamieInsertAtCursor = (text: string) => {
+  if (!editorRef.current) return;
 
-    const cursorPos = selectionRange?.end || editorRef.current.selectionStart;
-    const before = editorContent.substring(0, cursorPos);
-    const after = editorContent.substring(cursorPos);
-    const newContent = before + '\n\n' + text + after;
+  const cursorPos = selectionRange?.end || editorRef.current.selectionStart;
+  const before = editorContent.substring(0, cursorPos);
+  const after = editorContent.substring(cursorPos);
 
-    setEditorContent(newContent);
-    setHasUnsavedChanges(true);
-    toast.success('Inserted at cursor position');
-    
-    // Close drawer
-    setJamieDrawerOpen(false);
-    setJamieDrawerOptions([]);
-    setSelectedText('');
-    setSelectionRange(null);
-  };
+  const formattedText = `[JAMIE START] ${text} [JAMIE END]`;
+  const newContent = before + '\n\n' + formattedText + after;
 
-  // Jamie Writing Drawer: Insert at bottom
-  const handleJamieInsertAtBottom = (text: string) => {
-    const newContent = editorContent + '\n\n' + text;
-    setEditorContent(newContent);
-    setHasUnsavedChanges(true);
-    toast.success('Inserted at bottom');
-    
-    // Close drawer
-    setJamieDrawerOpen(false);
-    setJamieDrawerOptions([]);
-    setSelectedText('');
-    setSelectionRange(null);
-  };
+  setEditorContent(newContent);
+  setHasUnsavedChanges(true);
+  toast.success('Inserted at cursor position');
+  
+  // Close drawer
+  setJamieDrawerOpen(false);
+  setJamieDrawerOptions([]);
+  setSelectedText('');
+  setSelectionRange(null);
+};
+
+// Jamie Writing Drawer: Insert at bottom
+const handleJamieInsertAtBottom = (text: string) => {
+  const formattedText = `[JAMIE START] ${text} [JAMIE END]`;
+  const newContent = editorContent + '\n\n' + formattedText;
+
+  setEditorContent(newContent);
+  setHasUnsavedChanges(true);
+  toast.success('Inserted at bottom');
+  
+  // Close drawer
+  setJamieDrawerOpen(false);
+  setJamieDrawerOptions([]);
+  setSelectedText('');
+  setSelectionRange(null);
+};
 
   // Jamie Writing Drawer: Regenerate (tries again)
   const handleJamieRegenerateOption = async () => {
