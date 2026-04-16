@@ -1131,19 +1131,17 @@ const handleJamieInsertAtBottom = (text: string) => {
               {/* Mode A: Help me write - Prompt input */}
               {jamieDrawerMode === 'help-me-write' && jamieDrawerOptions.length === 0 && (
                 <div className="space-y-3">
-                  <input
-                    type="text"
-                    value={jamieDrawerPrompt}
-                    onChange={(e) => setJamieDrawerPrompt(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        handleGenerateJamieWriting();
-                      }
-                    }}
-                    placeholder="Tell Jamie what you want to write (e.g., 'Help me write 4 sentences about how a referral can make patients feel abandoned')"
-                    className="w-full px-4 py-3 text-sm border border-slate-200 rounded-lg outline-none focus:ring-2 focus:ring-[#6b2358] focus:border-transparent"
-                  />
+                  <textarea
+  value={jamieDrawerPrompt}
+  onChange={(e) => {
+    setJamieDrawerPrompt(e.target.value);
+    e.target.style.height = 'auto';
+    e.target.style.height = `${e.target.scrollHeight}px`;
+  }}
+  placeholder="Tell Jamie what you want to write (e.g., 'Help me write 4 sentences about how a referral can make patients feel abandoned')"
+  rows={2}
+  className="w-full px-4 py-3 text-sm border border-slate-200 rounded-lg resize-none overflow-hidden outline-none focus:ring-2 focus:ring-[#6b2358] focus:border-transparent"
+/>
                   <button
                     onClick={handleGenerateJamieWriting}
                     disabled={!jamieDrawerPrompt.trim() || jamieDrawerLoading}
