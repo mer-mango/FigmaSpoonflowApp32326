@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { X, Search, Minimize2, Sparkles, Send, Calendar, CheckSquare, User, FileText, ChevronRight, ExternalLink, Plus } from 'lucide-react';
+import { X, Search, Minimize2, Sparkles, Send, Calendar, CheckSquare, User, FileText, ExternalLink, Plus } from 'lucide-react';
 import { toast } from 'sonner@2.0.3';
 
 export interface ChatMessage {
@@ -294,30 +294,7 @@ export function MutedJamieChatPanel({
                       </div>
                     )}
 
-                    {msg.quickActions && msg.quickActions.length > 0 && (
-                      <div className="mt-3 space-y-2">
-                        {msg.quickActions.map((action, idx) => (
-                          <button
-                            key={idx}
-                            onClick={() => onExecuteAction(action.action, action.data)}
-                            className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-xs transition-all duration-200"
-                            style={{
-                              backgroundColor: 'rgba(94, 35, 80, 0.1)',
-                              color: '#5e2350',
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.backgroundColor = 'rgba(94, 35, 80, 0.2)';
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.backgroundColor = 'rgba(94, 35, 80, 0.1)';
-                            }}
-                          >
-                            <span>{action.label}</span>
-                            <ChevronRight className="w-3 h-3" />
-                          </button>
-                        ))}
-                      </div>
-                    )}
+      
                   </div>
 
                   <div className={`text-xs text-slate-400 mt-1 px-2 ${
