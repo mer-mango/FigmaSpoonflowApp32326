@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Download, Upload, Database, AlertCircle } from 'lucide-react';
-import { toast } from 'sonner';
+import { toast } from 'sonner@2.0.3';
 import { projectId, publicAnonKey } from '../utils/supabase/info';
 
 export function DataBackupSection() {

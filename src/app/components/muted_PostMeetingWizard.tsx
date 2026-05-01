@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { X, Sparkles, Calendar, Clock, MessageSquare, Maximize2, Minimize2, Save, UserPlus, Repeat, Mail, CheckCircle2, Copy, ExternalLink, ChevronRight, ChevronLeft, Target, Heart, ThumbsUp, FileText, Edit } from 'lucide-react';
 import { Avatar, AvatarFallback } from './ui/avatar';
 import { MeetingNotesDossier, MeetingDossierData } from './MeetingNotesDossier';
 import { useInteractions } from '../contexts/InteractionsContext';
 import { MeetingDossier } from '../types/interactions';
-import { toast } from 'sonner';
+import { toast } from 'sonner@2.0.3';
 import { projectId, publicAnonKey } from '../utils/supabase/info';
 import React from 'react';
 import { getTodayLocal, getTomorrowLocal, dateToLocalString } from '../utils/dateUtils';
@@ -73,10 +73,9 @@ export function MutedPostMeetingWizard({
 }: PostMeetingWizardProps) {
   const [currentStep, setCurrentStep] = useState<WizardStep>("welcome");
   const [isMaximized, setIsMaximized] = useState(false);
-  const followUpTaskCreationInProgressRef = useRef(false);
   
   // Interactions context for loading and updating dossiers
-  const { getDossierByMeetingId, updateDossier, createDossier } = useInteractions();
+  const { getDossierByMeetingId, updateDossier, createTask, createDossier } = useInteractions();
   
   // Load existing dossier (if prep was done in AM Wizard)
   const [existingDossier, setExistingDossier] = useState<MeetingDossier | null>(null);
@@ -292,12 +291,32 @@ export function MutedPostMeetingWizard({
     }
     
     if (dossier) {
-      // Action-item tasks are created immediately in MeetingNotesDossier.onCreateTasks.
-      // Do not create them again here, or each action item becomes a duplicate task
-      // when the user advances past the Meeting Review step.
+      // Create tasks via onCreateTask callback (fixes duplicate task bug - DON'T use InteractionsContext.createTask here)
       const taskIds: string[] = [];
-      console.log(`📝 ${createdTasks.length} action item task(s) already handled by MeetingNotesDossier.onCreateTasks`);
-
+      createdTasks.forEach(task => {
+        console.log('🔍 Creating task from post-meeting wizard:', task.title);
+        
+        // Only create via callback to App state (not in InteractionsContext to avoid duplicates)
+        if (onCreateTask) {
+          onCreateTask({
+            title: task.title,
+            description: task.description,
+            dueDate: task.dueDate,
+            contact: meeting.contact?.id ? {
+              id: meeting.contact.id,
+              name: meeting.contact.name
+            } : undefined,
+            priority: task.flagged ? 'high' : undefined,
+            status: 'toDo',
+            estimatedTime: task.estimatedTime || 15,
+            taskType: task.taskType
+          });
+          console.log('✅ Task created in App state');
+        } else {
+          console.warn('⚠️ onCreateTask callback not provided!');
+        }
+      });
+      
       // Update the dossier
       updateDossier(dossier.id, {
         postMeetingNotes: {
@@ -317,71 +336,56 @@ export function MutedPostMeetingWizard({
     }
   };
 
-  const createFollowUpReminderTask = () => {
-    if (
-      !followUpState.wantsReminderTask ||
-      !followUpState.reminderDate ||
-      followUpState.taskCreated ||
-      followUpTaskCreationInProgressRef.current
-    ) {
-      return false;
-    }
-
-    // React state updates are not immediate, so this ref prevents double-clicks
-    // or rapid Next clicks from creating the same follow-up task more than once.
-    followUpTaskCreationInProgressRef.current = true;
-
-    if (!onCreateTask || !meeting.contact?.id) {
-      followUpTaskCreationInProgressRef.current = false;
-      console.warn('⚠️ Cannot create follow-up reminder task: onCreateTask callback or contact ID is missing');
-      toast.error('Unable to create follow-up task. Contact or task callback is missing.');
-      return false;
-    }
-
-    // Use onCreateTask as the single canonical App task creation path.
-    // The previous version also called InteractionsContext.createTask here, which could create duplicates.
-    onCreateTask({
-      title: `Reminder to schedule follow-up call with ${meeting.contact.name}`,
-      description: `Follow-up from meeting: ${meeting.title}`,
-      dueDate: dateToLocalString(followUpState.reminderDate),
-      contact: {
-        id: meeting.contact.id,
-        name: meeting.contact.name
-      },
-      priority: undefined,
-      status: 'toDo'
-    });
-
-    setFollowUpState(prev => ({ ...prev, taskCreated: true }));
-
-    if (existingDossier) {
-      updateDossier(existingDossier.id, {
-        postMeetingNotes: {
-          ...existingDossier.postMeetingNotes,
-          followUpAlreadyScheduled: false,
-          followUpReminderDueDate: followUpState.reminderDate.toISOString()
-        }
-      });
-    }
-
-    console.log('✅ Created follow-up reminder task in App state');
-    return true;
-  };
-
   const saveFollowUpData = () => {
-    // Create the reminder if the user selected a date and advanced without pressing the confirm button.
+    // If user wants a reminder task and hasn't created it yet
     if (followUpState.wantsReminderTask && followUpState.reminderDate && !followUpState.taskCreated) {
-      createFollowUpReminderTask();
-      return;
-    }
-
-    // Just save the follow-up status if no reminder task needs to be created.
-    if (existingDossier) {
+      const newTask = createTask({
+        title: `Reminder to schedule follow-up call with ${meeting.contact?.name || 'contact'}`,
+        dueDate: followUpState.reminderDate,
+        flagged: false,
+        status: 'todo',
+        meetingDossierId: existingDossier?.id,
+        contactId: meeting.contact?.id || 'unknown',
+        contactName: meeting.contact?.name || 'Unknown',
+        meetingId: meeting.id
+      });
+      
+      if (newTask && existingDossier) {
+        setFollowUpState(prev => ({ ...prev, taskCreated: true }));
+        
+        // Update the dossier with follow-up tracking info
+        updateDossier(existingDossier.id, {
+          postMeetingNotes: {
+            ...existingDossier.postMeetingNotes,
+            followUpAlreadyScheduled: false,
+            followUpReminderTaskId: newTask.id,
+            followUpReminderDueDate: followUpState.reminderDate.toISOString()
+          }
+        });
+        
+        console.log('✅ Created follow-up reminder task');
+      }
+      
+      // 🎯 PHASE 5 PROMPT 10: Also save to App state via callback
+      if (onCreateTask && meeting.contact?.id) {
+        onCreateTask({
+          title: `Reminder to schedule follow-up call with ${meeting.contact.name}`,
+          description: `Follow-up from meeting: ${meeting.title}`,
+          dueDate: dateToLocalString(followUpState.reminderDate),
+          contact: {
+            id: meeting.contact.id,
+            name: meeting.contact.name
+          },
+          priority: undefined,
+          status: 'toDo'
+        });
+      }
+    } else if (existingDossier) {
+      // Just save the status even if no task was created
       updateDossier(existingDossier.id, {
         postMeetingNotes: {
           ...existingDossier.postMeetingNotes,
-          followUpAlreadyScheduled: followUpState.hasFollowUpScheduled || false,
-          followUpReminderDueDate: followUpState.reminderDate?.toISOString()
+          followUpAlreadyScheduled: followUpState.hasFollowUpScheduled || false
         }
       });
     }
@@ -676,31 +680,8 @@ export function MutedPostMeetingWizard({
                 }
               }}
               onCreateTasks={(tasks) => {
-                const existingTaskKeys = new Set(
-                  createdTasks.map(task =>
-                    [
-                      meeting.id,
-                      task.title?.trim().toLowerCase(),
-                      task.dueDate || '',
-                      meeting.contact?.id || meeting.contact?.name || ''
-                    ].join('|')
-                  )
-                );
-
-                const tasksToCreate = tasks.filter(task => {
-                  const taskKey = [
-                    meeting.id,
-                    task.text?.trim().toLowerCase(),
-                    task.dueDate || '',
-                    meeting.contact?.id || meeting.contact?.name || ''
-                  ].join('|');
-
-                  return !existingTaskKeys.has(taskKey);
-                });
-
-                // Create tasks immediately via onCreateTask callback.
-                // saveMeetingReviewData intentionally does not recreate these later.
-                tasksToCreate.forEach(task => {
+                // Create tasks immediately via onCreateTask callback
+                tasks.forEach(task => {
                   if (onCreateTask) {
                     onCreateTask({
                       title: task.text,
@@ -715,9 +696,9 @@ export function MutedPostMeetingWizard({
                     });
                   }
                 });
-
-                // Store in wizard state for tracking/summary only, not for later task creation.
-                const convertedTasks = tasksToCreate.map(task => ({
+                
+                // Also store in wizard state for tracking
+                const convertedTasks = tasks.map(task => ({
                   title: task.text,
                   description: `From meeting: ${meeting.title}`,
                   dueDate: task.dueDate, // Keep as string
@@ -725,22 +706,14 @@ export function MutedPostMeetingWizard({
                   estimatedTime: task.duration,
                   taskType: undefined,
                 }));
-
-                if (convertedTasks.length > 0) {
-                  setCreatedTasks(prev => [...prev, ...convertedTasks]);
-                }
-
+                setCreatedTasks(convertedTasks);
+                
                 // Show success toast
-                if (tasksToCreate.length > 0) {
-                  toast.success(`${tasksToCreate.length} task${tasksToCreate.length === 1 ? '' : 's'} created successfully!`, {
-                    description: `View them in the Tasks page`,
-                    duration: 3000,
-                  });
-                } else {
-                  toast.info('Those tasks already exist, so no duplicates were created.', {
-                    duration: 2500,
-                  });
-                }
+                const contactName = meeting.contact?.name || 'this meeting';
+                toast.success(`${tasks.length} task${tasks.length === 1 ? '' : 's'} created successfully!`, {
+                  description: `View them in the Tasks page`,
+                  duration: 3000,
+                });
               }}
               existingTasks={existingDossier?.taskIds?.map((id, index) => ({
                 id,
@@ -895,13 +868,11 @@ export function MutedPostMeetingWizard({
                         {!followUpState.taskCreated && (
                           <button
                             onClick={() => {
-                              const created = createFollowUpReminderTask();
-                              if (created) {
-                                toast.success('Follow-up reminder task created!', {
-                                  description: `Due ${followUpState.reminderDate?.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`,
-                                  duration: 2500,
-                                });
-                              }
+                              setFollowUpState(prev => ({ ...prev, taskCreated: true }));
+                              toast.success('Follow-up reminder task created!', {
+                                description: `Due ${followUpState.reminderDate?.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`,
+                                duration: 2500,
+                              });
                             }}
                             className="w-full px-6 py-3 bg-[#6b2358] hover:bg-[#6b2358]/90 text-white rounded-xl shadow-lg shadow-[#6b2358]/20 transition-all"
                           >

@@ -56,7 +56,7 @@ export interface MeetingDossier {
   meetingEndTime?: string;
   contactId: string;
   contactName: string;
-
+  
   // Lifecycle tracking
   prepCompleted: boolean;
   prepCompletedAt?: string;
@@ -64,22 +64,15 @@ export interface MeetingDossier {
   postMeetingCompletedAt?: string;
   windDownCompleted: boolean;
   windDownCompletedAt?: string;
-
+  
   // Notes from each phase
   prepNotes?: MeetingPrepNotes;
   postMeetingNotes?: PostMeetingNotes;
   windDownNotes?: WindDownNotes;
-
-  // CANONICAL notes fields - all entry points read/write to these fields
-  duringMeetingNotes?: string; // Notes taken during the meeting
-  fathomUrl?: string; // Link to Fathom recording
-  summary?: string; // Post-meeting summary
-  transcript?: string; // Full transcript from Fathom or manual entry
-  actionItems?: Array<{ text: string }>; // Action items extracted from meeting
-
+  
   // Tasks generated from this meeting
   taskIds: string[];
-
+  
   // Metadata
   createdAt: string;
   updatedAt: string;

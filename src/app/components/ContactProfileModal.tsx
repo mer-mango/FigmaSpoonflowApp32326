@@ -13,7 +13,7 @@ import { useNotifications } from "../contexts/NotificationContext";
 import { MeetingDossier } from "../types/interactions";
 import { MeetingNotesDossier, MeetingDossierData } from "./MeetingNotesDossier";
 import type { Service } from "../App";
-import { toast } from "sonner";
+import { toast } from "sonner@2.0.3";
 
 // Helper to parse date strings in local timezone
 const formatTaskDate = (dateStr: string) => {
@@ -1157,47 +1157,41 @@ export function ContactProfileModal({
                                 onClose(); // Close contact modal to show wizard
                               } else {
                                 // Upcoming meeting without dossier - create one for prep notes
-                                // CANONICAL WRITE: Initialize with empty canonical fields
                                 const newDossier = createDossier({
                                   meetingId: meeting.id,
                                   meetingTitle: meeting.title || `Meeting with ${contact.name}`,
-                                  meetingDate: meetingDate?.toLocaleDateString('en-US', {
-                                    month: 'long',
-                                    day: 'numeric',
-                                    year: 'numeric'
+                                  meetingDate: meetingDate?.toLocaleDateString('en-US', { 
+                                    month: 'long', 
+                                    day: 'numeric', 
+                                    year: 'numeric' 
                                   }) || '',
-                                  meetingTime: meetingDate?.toLocaleTimeString('en-US', {
-                                    hour: 'numeric',
-                                    minute: '2-digit',
-                                    hour12: true
+                                  meetingTime: meetingDate?.toLocaleTimeString('en-US', { 
+                                    hour: 'numeric', 
+                                    minute: '2-digit', 
+                                    hour12: true 
                                   }) || '',
-                                  meetingEndTime: meeting.endTime ? new Date(meeting.endTime).toLocaleTimeString('en-US', {
-                                    hour: 'numeric',
-                                    minute: '2-digit',
-                                    hour12: true
+                                  meetingEndTime: meeting.endTime ? new Date(meeting.endTime).toLocaleTimeString('en-US', { 
+                                    hour: 'numeric', 
+                                    minute: '2-digit', 
+                                    hour12: true 
                                   }) : undefined,
                                   contactId: contact.id,
                                   contactName: contact.name,
                                   prepNotes: {
+                                    agenda: [],
+                                    questions: [],
                                     thingsToKnow: '',
-                                    thingsToDiscuss: [],
-                                    questionsToAsk: [],
-                                    nextSteps: ''
+                                    nextStepsExpected: ''
                                   },
-                                  // Canonical notes fields
-                                  duringMeetingNotes: '',
-                                  fathomUrl: '',
-                                  summary: '',
-                                  transcript: '',
-                                  actionItems: [],
+                                  duringMeetingNotes: {
+                                    notes: ''
+                                  },
                                   postMeetingNotes: {
-                                    fathomUrl: '',
-                                    summary: '',
-                                    thingsDiscussed: [],
                                     outcomes: '',
-                                    remainingQuestions: '',
-                                    actionItems: []
+                                    summary: '',
+                                    transcript: '',
                                   },
+                                  actionItems: [],
                                   taskIds: []
                                 });
                                 
@@ -2043,7 +2037,6 @@ export function ContactProfileModal({
               }}
               hideHeader={true}
               initialData={{
-                // Canonical read path: all notes fields are at top level of dossier
                 agenda: selectedMeetingDossier.prepNotes?.thingsToDiscuss || [],
                 questions: selectedMeetingDossier.prepNotes?.questionsToAsk || [],
                 thingsToKnow: selectedMeetingDossier.prepNotes?.thingsToKnow || '',
@@ -2057,35 +2050,23 @@ export function ContactProfileModal({
                 tasksCreated: selectedMeetingDossier.taskIds && selectedMeetingDossier.taskIds.length > 0 || false,
               }}
               onDataChange={(data) => {
-                // CANONICAL WRITE PATH: Update persistent context with all notes fields
-                console.log('💾 [ContactProfileModal] Auto-saving dossier notes:', {
-                  dossierId: selectedMeetingDossier.id,
-                  hasPrep: !!(data.agenda?.length || data.questions?.length || data.thingsToKnow),
-                  hasDuring: !!data.duringNotes,
-                  hasPost: !!(data.summary || data.outcomes),
-                });
-
+                // Auto-save changes to dossier
                 updateDossier(selectedMeetingDossier.id, {
-                  // Prep notes
                   prepNotes: {
                     thingsToKnow: data.thingsToKnow,
                     thingsToDiscuss: data.agenda,
                     questionsToAsk: data.questions,
                     nextSteps: data.nextStepsExpected,
                   },
-                  // Canonical notes fields - persist at top level
                   duringMeetingNotes: data.duringNotes,
                   fathomUrl: data.fathomUrl,
                   summary: data.summary,
                   transcript: data.transcript,
-                  actionItems: data.actionItems,
-                  // Post-meeting notes
                   postMeetingNotes: {
                     ...selectedMeetingDossier.postMeetingNotes,
                     outcomes: data.outcomes,
-                    summary: data.summary, // Also store in postMeetingNotes for backwards compatibility
-                    actionItems: data.actionItems, // Also store in postMeetingNotes for backwards compatibility
                   },
+                  actionItems: data.actionItems,
                 });
               }}
               onCreateTasks={(tasks) => {
