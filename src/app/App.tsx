@@ -678,12 +678,14 @@ export function App() {
       }).then(async (res) => {
         if (res.ok) {
           console.log(`✅ [TASK PERSIST] Synced to backend /kv/tasks`);
-        } else {
-          const errorData = await res.json().catch(() => ({}));
-          console.error('❌ [TASK PERSIST] Failed to sync to backend:', errorData);
+        } else if (res.status !== 404) {
+          // Only log errors for non-404 responses (404 is expected when backend not configured)
+          const errorData = await res.json().catch(() => ({ status: res.status, statusText: res.statusText }));
+          console.warn('⚠️ [TASK PERSIST] Backend sync failed (localStorage is still safe):', errorData);
         }
       }).catch((error) => {
-        console.error('❌ [TASK PERSIST] Network error:', error);
+        // Silently handle network errors - localStorage is primary storage
+        console.debug('Network error during task backup (localStorage is safe):', error.message);
       });
       
       // Also backup to allTasks_backup
@@ -695,9 +697,10 @@ export function App() {
         },
         body: JSON.stringify({ value: allTasks })
       }).then(async (res) => {
-        if (!res.ok && res.status !== 503) {
-          const errorData = await res.json().catch(() => ({}));
-          console.error('Failed to backup tasks:', errorData);
+        if (!res.ok && res.status !== 503 && res.status !== 404) {
+          // Only log errors for non-404/503 responses (404 = not configured, 503 = service unavailable)
+          const errorData = await res.json().catch(() => ({ status: res.status, statusText: res.statusText }));
+          console.warn('⚠️ Tasks backup failed (localStorage is still safe):', errorData);
         }
       }).catch(() => {
         // Silently fail for network errors - localStorage is primary storage
@@ -824,9 +827,10 @@ export function App() {
         },
         body: JSON.stringify({ value: allGoals })
       }).then(async (res) => {
-        if (!res.ok && res.status !== 503) {
-          const errorData = await res.json().catch(() => ({}));
-          console.warn('Failed to backup goals:', errorData);
+        if (!res.ok && res.status !== 503 && res.status !== 404) {
+          // Only log errors for non-404/503 responses (404 = not configured, 503 = service unavailable)
+          const errorData = await res.json().catch(() => ({ status: res.status, statusText: res.statusText }));
+          console.warn('⚠️ Goals backup failed (localStorage is still safe):', errorData);
         }
       }).catch(() => {
         // Silently fail for network errors - localStorage is primary storage
@@ -978,13 +982,13 @@ export function App() {
         }).then(async (res) => {
           if (res.ok) {
             console.log('✅ Contacts backed up to cloud');
-          } else if (res.status !== 503) {
-            const errorData = await res.json().catch(() => ({}));
-            console.warn('Failed to backup contacts to cloud (localStorage is still safe):', errorData);
+          } else if (res.status !== 503 && res.status !== 404) {
+            // Only log errors for non-404/503 responses (404 = not configured, 503 = service unavailable)
+            const errorData = await res.json().catch(() => ({ status: res.status, statusText: res.statusText }));
+            console.warn('⚠️ Contacts backup failed (localStorage is still safe):', errorData);
           }
         }).catch(() => {
           // Silently fail for network errors - localStorage is primary storage
-          console.log('⚠️ Backend backup skipped (localStorage is primary storage)');
         });
       } else {
         console.log(`⚠️ Skipping backend backup (${Math.round(contactsSize/1024)}KB exceeds ${Math.round(MAX_BACKUP_SIZE/1024)}KB limit). localStorage is primary storage.`);
@@ -1338,9 +1342,10 @@ export function App() {
         },
         body: JSON.stringify({ value: allContentItems })
       }).then(async (res) => {
-        if (!res.ok && res.status !== 503) {
-          const errorData = await res.json().catch(() => ({}));
-          console.error('Failed to backup content:', errorData);
+        if (!res.ok && res.status !== 503 && res.status !== 404) {
+          // Only log errors for non-404/503 responses (404 = not configured, 503 = service unavailable)
+          const errorData = await res.json().catch(() => ({ status: res.status, statusText: res.statusText }));
+          console.warn('⚠️ Content backup failed (localStorage is still safe):', errorData);
         }
       }).catch(() => {
         // Silently fail for network errors - localStorage is primary storage

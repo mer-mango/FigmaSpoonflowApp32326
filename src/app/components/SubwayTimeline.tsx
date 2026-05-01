@@ -1225,16 +1225,19 @@ const SubwayTimelineComponent = ({ calendarEvents = [], onNavigateToContact, con
         });
         
         if (!response.ok) {
-          const errorData = await response.json().catch(() => ({}));
-          // Only log warning if it's not a WORKER_LIMIT error (which we now prevent with size check)
-          if (errorData.code !== 'WORKER_LIMIT') {
-            console.warn('⚠️ Backend save failed (localStorage still safe):', response.status, errorData);
+          // Only log warnings for non-404/503 responses (404 = not configured, 503 = service unavailable)
+          if (response.status !== 404 && response.status !== 503) {
+            const errorData = await response.json().catch(() => ({ status: response.status, statusText: response.statusText }));
+            // Only log warning if it's not a WORKER_LIMIT error (which we prevent with size check)
+            if (errorData.code !== 'WORKER_LIMIT') {
+              console.warn('⚠️ Timeline backup failed (localStorage still safe):', errorData);
+            }
           }
         } else {
           console.log('✅ Timeline activities also backed up to cloud');
         }
       } catch (error) {
-        console.warn('⚠️ Backend save error (localStorage still safe):', error);
+        // Silently handle network errors - localStorage is primary storage
       }
     };
 
