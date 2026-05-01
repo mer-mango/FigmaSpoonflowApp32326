@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 import { Checkbox } from './ui/checkbox';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog';
 import { PendingContact, loadQueueState, startProcessingQueue, dismissAllContacts } from '../utils/contactSuggestionQueue';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 interface ContactSuggestionModalProps {
   isOpen: boolean;
