@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Lightbulb, FileText, Mail, CheckCircle2, Copy, ArrowRight, Sparkles, ExternalLink, Calendar } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { generateStartMyTaskDraft } from '../utils/jamieAI';
 import type { TaskType } from '../utils/taskTypes';
 import { copyToClipboard } from '../utils/clipboard';
