@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CheckSquare, Pin, Sprout, Clock, Flag, Calendar, User, ChevronDown, Save, X, Archive, Star, Briefcase, RefreshCw, Plus } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { getPlaylistTasks } from '../../utils/playlistAdapter';
 import { getTaskTypeLabel, getTaskTypeColor } from '../../utils/taskTypes';
 import { DraggableTaskItem } from './DraggableTaskItem';

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { X, Search, Minimize2, Sparkles, Send, Calendar, CheckSquare, User, FileText, ExternalLink, Plus } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 
 export interface ChatMessage {
   id: string;

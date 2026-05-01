@@ -21,7 +21,7 @@ import {
   Wand2,
   Type
 } from 'lucide-react';
-import { toast } from 'sonner@2.0.3';
+import { toast } from 'sonner';
 import { ContentPlanningWizard } from './content/ContentPlanningWizard';
 import { RepurposingModal } from './content/RepurposingModal';
 import { PageHeader_Muted } from './PageHeader_Muted';

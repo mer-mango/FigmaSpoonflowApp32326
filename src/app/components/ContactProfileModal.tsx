@@ -13,7 +13,7 @@ import { useNotifications } from "../contexts/NotificationContext";
 import { MeetingDossier } from "../types/interactions";
 import { MeetingNotesDossier, MeetingDossierData } from "./MeetingNotesDossier";
 import type { Service } from "../App";
-import { toast } from "sonner@2.0.3";
+import { toast } from "sonner";
 
 // Helper to parse date strings in local timezone
 const formatTaskDate = (dateStr: string) => {

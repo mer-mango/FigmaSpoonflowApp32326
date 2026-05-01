@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Toaster, toast } from 'sonner@2.0.3';
+import { Toaster, toast } from 'sonner';
 import { ErrorBoundary } from './ErrorBoundary';
 import { projectId, publicAnonKey } from './utils/supabase/info';
 import { getTodayLocal, getTomorrowLocal, dateToLocalString, isoStringToLocalDate } from './utils/dateUtils';
