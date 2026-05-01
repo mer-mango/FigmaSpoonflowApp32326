@@ -16,8 +16,8 @@
 import { useEffect, useRef } from 'react';
 import { useNotifications } from '../contexts/NotificationContext';
 import { startNotificationScheduler } from '../utils/notificationScheduler';
-import type { Task } from '../components/TasksPage';
-import type { NurtureToDo } from '../components/muted_NurturesView';
+import type { Task } from './TasksPage';
+import type { NurtureToDo } from './muted_NurturesView';
 
 interface NotificationSchedulerBridgeProps {
   tasks: Task[];

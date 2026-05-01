@@ -1613,7 +1613,7 @@ const SubwayTimelineComponent = ({ calendarEvents = [], onNavigateToContact, con
         // Get the dossier for this meeting
         const dossier = getDossierByMeetingId(selectedMeetingForDossier.calendarEventId);
         
-        // Convert to unified format
+        // CANONICAL READ PATH: Read from persistent dossier fields
         const dossierData: MeetingDossierData = {
           agenda: dossier?.prepNotes?.thingsToDiscuss || [],
           questions: dossier?.prepNotes?.questionsToAsk || [],
@@ -1627,6 +1627,13 @@ const SubwayTimelineComponent = ({ calendarEvents = [], onNavigateToContact, con
           actionItems: dossier?.actionItems || [],
           tasksCreated: dossier?.taskIds && dossier.taskIds.length > 0 || false,
         };
+
+        console.log('📖 [SubwayTimeline] Reading dossier for modal:', {
+          meetingId: selectedMeetingForDossier.calendarEventId,
+          hasPrep: !!(dossierData.agenda?.length || dossierData.questions?.length || dossierData.thingsToKnow),
+          hasDuring: !!dossierData.duringNotes,
+          hasPost: !!(dossierData.summary || dossierData.outcomes),
+        });
         
         return (
           <div className="fixed inset-0 z-[100000] flex items-center justify-center bg-black/50 p-4">
@@ -1669,24 +1676,36 @@ const SubwayTimelineComponent = ({ calendarEvents = [], onNavigateToContact, con
                   hideHeader={true}
                   initialData={dossierData}
                   onDataChange={(data) => {
-                    // Auto-save changes to dossier
+                    // CANONICAL WRITE PATH: Update persistent context with all notes fields
                     if (dossier) {
+                      console.log('💾 [SubwayTimeline] Auto-saving dossier notes:', {
+                        dossierId: dossier.id,
+                        hasPrep: !!(data.agenda?.length || data.questions?.length || data.thingsToKnow),
+                        hasDuring: !!data.duringNotes,
+                        hasPost: !!(data.summary || data.outcomes),
+                      });
+
                       updateDossier(dossier.id, {
+                        // Prep notes
                         prepNotes: {
                           thingsToKnow: data.thingsToKnow,
                           thingsToDiscuss: data.agenda,
                           questionsToAsk: data.questions,
                           nextSteps: data.nextStepsExpected,
                         },
+                        // Canonical notes fields - persist at top level
                         duringMeetingNotes: data.duringNotes,
                         fathomUrl: data.fathomUrl,
                         summary: data.summary,
                         transcript: data.transcript,
+                        actionItems: data.actionItems,
+                        // Post-meeting notes
                         postMeetingNotes: {
                           ...dossier.postMeetingNotes,
                           outcomes: data.outcomes,
+                          summary: data.summary, // Also store in postMeetingNotes for backwards compatibility
+                          actionItems: data.actionItems, // Also store in postMeetingNotes for backwards compatibility
                         },
-                        actionItems: data.actionItems,
                       });
                     }
                   }}

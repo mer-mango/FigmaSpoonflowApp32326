@@ -15,7 +15,6 @@ import { Avatar, AvatarFallback } from '../ui/avatar';
 import { useInteractions } from '../../contexts/InteractionsContext';
 import { TodosReview } from './TodosReview';
 import { MeetingNotesDossier, MeetingDossierData } from '../MeetingNotesDossier';
-import { getPlaylistTasks } from '../../utils/playlistAdapter';
 import { ContactMentionInput } from '../ContactMentionInput';
 import { toast } from 'sonner';
 
@@ -31,8 +30,9 @@ interface Playlist {
 interface Meeting {
   id: string;
   title: string;
-  startTime: Date;
-  endTime: Date;
+  startTime: Date | string;
+  endTime: Date | string;
+  isDemoData?: boolean;
   contacts?: Array<{
     id: string;
     name: string;
@@ -41,6 +41,11 @@ interface Meeting {
     imageUrl?: string;
   }>;
 }
+
+type NormalizedMeeting = Omit<Meeting, 'startTime' | 'endTime'> & {
+  startTime: Date;
+  endTime: Date;
+};
 
 interface DayPlan {
   playlists: Playlist[];
@@ -75,7 +80,7 @@ interface AMWizardProps {
   meetings: Meeting[];
   contacts?: any[];
   tasks?: any[];
-  onUpdateMeeting?: (meetingId: string, updates: Partial<Meeting>) => void;
+  onUpdateMeeting?: (meetingId: string, updates: any) => void;
   onUpdateTask?: (taskId: string, updates: any) => void; // NEW: callback to update task in backend
   onComplete: (dayPlan: DayPlan) => void;
   onClose: () => void;
@@ -83,6 +88,32 @@ interface AMWizardProps {
   existingPlan?: Partial<DayPlan>;
   onContactClick?: (contact: any) => void; // NEW: callback to open contact profile
 }
+
+
+const getTodayRealMeetings = (meetingList: Meeting[]): NormalizedMeeting[] => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  return (meetingList || [])
+    .filter(meeting => {
+      if (!meeting || meeting.isDemoData) return false;
+      if (!meeting.startTime || !meeting.endTime) return false;
+
+      const start = new Date(meeting.startTime as any);
+      if (Number.isNaN(start.getTime())) return false;
+
+      return start >= today && start < tomorrow;
+    })
+    .map(meeting => ({
+      ...meeting,
+      startTime: new Date(meeting.startTime as any),
+      endTime: new Date(meeting.endTime as any),
+    }))
+    .sort((a, b) => a.startTime.getTime() - b.startTime.getTime());
+};
 
 type WizardStep = 'welcome' | 'todos' | 'meetings' | 'summary';
 
@@ -120,13 +151,10 @@ export function AMWizard({
     nextSteps: string;
   }>>({});
   
-  // Wizard data
-  const [updatedMeetings, setUpdatedMeetings] = useState<Meeting[]>(() => {
-    return [...meetings].sort((a, b) => {
-      if (!a.startTime || !b.startTime) return 0;
-      return a.startTime.getTime() - b.startTime.getTime();
-    });
-  });
+  // Wizard data: only today's real meetings should appear in Plan My Day.
+  const [updatedMeetings, setUpdatedMeetings] = useState<NormalizedMeeting[]>(() => {
+  return getTodayRealMeetings(meetings);
+});
   
   // Track playlists for TodosReview
   const [playlists, setPlaylists] = useState<Playlist[]>(
@@ -259,13 +287,10 @@ export function AMWizard({
     previousTaskIds.current = currentTaskIds;
   }, [tasks]);
 
-  // Sync updatedMeetings when meetings prop changes
+  // Sync updatedMeetings when meetings prop changes.
+  // AMWizard should only show today's real calendar meetings, never demo/sample meetings.
   useEffect(() => {
-    const sortedMeetings = [...meetings].sort((a, b) => {
-      if (!a.startTime || !b.startTime) return 0;
-      return a.startTime.getTime() - b.startTime.getTime();
-    });
-    setUpdatedMeetings(sortedMeetings);
+    setUpdatedMeetings(getTodayRealMeetings(meetings));
   }, [meetings]);
 
   // Exit confirmation modal state
@@ -769,6 +794,7 @@ export function AMWizard({
                 }));
                 
                 // ✅ IMMEDIATE SAVE: Create or update dossier as user types
+                // CANONICAL WRITE PATH: Persist all notes fields
                 const contact = currentMeeting.contacts?.[0];
                 if (existingDossier) {
                   // Update existing dossier immediately
@@ -779,7 +805,11 @@ export function AMWizard({
                       questionsToAsk: data.questions,
                       nextSteps: data.nextStepsExpected,
                     },
+                    // Canonical notes fields
                     duringMeetingNotes: data.duringNotes,
+                    fathomUrl: data.fathomUrl,
+                    summary: data.summary,
+                    transcript: data.transcript,
                     actionItems: data.actionItems,
                   });
                 } else {
@@ -800,7 +830,12 @@ export function AMWizard({
                       questionsToAsk: data.questions,
                       nextSteps: data.nextStepsExpected,
                     },
+                    // Canonical notes fields
                     duringMeetingNotes: data.duringNotes,
+                    fathomUrl: data.fathomUrl,
+                    summary: data.summary,
+                    transcript: data.transcript,
+                    actionItems: data.actionItems,
                     taskIds: [],
                     postMeetingCompleted: false,
                     windDownCompleted: false,

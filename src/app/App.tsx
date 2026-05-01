@@ -2112,48 +2112,6 @@ export function App() {
       });
     }
   };
-
-  // Fathom Sync Prompt Handlers
-  const handleFathomSyncAndStartWizard = (meeting: any) => {
-    // Mark as prompted so it doesn't show again
-    setPromptedMeetings(prev => [...prev, meeting.id]);
-    setFathomSyncPromptMeeting(null);
-    
-    // Open Post-Meeting Wizard with Fathom sync enabled
-    // TODO: Pass meeting data and fathomSyncEnabled flag to wizard
-    setPostMeetingWizardOpen(true);
-    toast.success('Opening Post-Meeting Wizard with Fathom sync');
-  };
-
-  const handleFathomSkipSyncAndStartWizard = (meeting: any) => {
-    // Mark as prompted so it doesn't show again
-    setPromptedMeetings(prev => [...prev, meeting.id]);
-    setFathomSyncPromptMeeting(null);
-    
-    // Open Post-Meeting Wizard without Fathom sync
-    setPostMeetingWizardOpen(true);
-    toast.success('Opening Post-Meeting Wizard');
-  };
-
-  const handleFathomDismissAndCreateMinimalInteraction = (meeting: any) => {
-    // Mark as prompted so it doesn't show again
-    setPromptedMeetings(prev => [...prev, meeting.id]);
-    setFathomSyncPromptMeeting(null);
-    
-    // Create a minimal interaction record via InteractionsContext
-    // TODO: Use InteractionsContext to create a basic meeting dossier
-    toast.success('Meeting logged in contact\'s interactions');
-  };
-
-  const handleFathomSnooze = (meeting: any, minutes: number) => {
-    const snoozeUntil = new Date().getTime() + (minutes * 60 * 1000);
-    setSnoozedMeetings(prev => ({
-      ...prev,
-      [meeting.id]: snoozeUntil
-    }));
-    setFathomSyncPromptMeeting(null);
-    toast.success(`Snoozed for ${minutes} minutes`);
-  };
   
   // Manual Post-Meeting Wizard trigger
   const handleManualPostMeetingWizard = (meeting: any) => {
@@ -3021,7 +2979,6 @@ export function App() {
         {/* The scheduler has module-level guards, but multiple bridges = wasted effects */}
         <NotificationSchedulerBridge
           tasks={allTasks}
-          contentItems={allContentItems}
           calendarEvents={calendarEvents}
           nurtureItems={allNurtures}
         />
@@ -3779,7 +3736,7 @@ export function App() {
               
               return allTodayItems;
             })()}
-            contentItems={allContentItems}
+  
             onUpdateTask={(taskId, updates) => {
               console.log(`🔄 Updating task ${taskId} from AM wizard:`, updates);
               // Update the task in allTasks
@@ -3876,117 +3833,43 @@ export function App() {
               toast.success('Progress saved! You can continue where you left off.');
             }}
             existingPlan={draftDayPlan}
-            meetings={(() => {
-              // Filter calendar events to today only and use them as source of truth
-              const today = new Date();
-              const todayStr = today.toDateString();
-              
-              console.log('🔍 AMWizard: Filtering calendar events for today:', todayStr);
-              console.log('🔍 Total calendar events:', calendarEvents.length);
-              console.log('🔍 All calendar events:', calendarEvents.map(e => ({
-                title: e.title,
-                startTime: e.startTime,
-                startTimeType: typeof e.startTime,
-                toDateString: e.startTime ? e.startTime.toDateString() : 'null'
-              })));
-              
-              // Filter out events from calendars that shouldn't show in wizards
-              // Exclude personal/medical/family calendars that don't need prep/post notes
-              const wizardExcludedCalendarNames = [
-                'Common Grounds',
-                'Medical Appts',
-                'Virtual Appts',
-                'CBC',
-                'Gildergold Family',
-                'holidays',
-                'birthdays',
-                // Add more calendar names here as needed
-              ];
-              
-              const todayEvents = calendarEvents
-                .filter(event => {
-                  // Exclude certain calendars from wizards
-                  if (event.calendarName && wizardExcludedCalendarNames.some(name => 
-                    event.calendarName.toLowerCase().includes(name.toLowerCase())
-                  )) {
-                    console.log(`  🚫 Excluding from wizard: "${event.title}" (Calendar: ${event.calendarName})`);
-                    return false;
-                  }
-                  
-                  if (!event.startTime) {
-                    console.log(`  ❌ Event "${event.title}": No startTime`);
-                    return false;
-                  }
-                  const eventDateStr = event.startTime.toDateString();
-                  const matches = eventDateStr === todayStr;
-                  console.log(`  Event "${event.title}": ${eventDateStr} ${matches ? '✅ MATCH' : '❌ no match'}`);
-                  return matches;
-                });
-              
-              console.log('🔍 Today events filtered count:', todayEvents.length);
-              console.log('🔍 Today events details:', todayEvents);
-              
-              const mappedMeetings = todayEvents.map(m => {
-                // Find matching contact from allContacts for full details (color, etc.)
-                const matchingContact = m.contact 
-                  ? findContactForEvent(m, allContacts)
-                  : null;
-                
-                // Use meeting title if available (and not empty), otherwise fall back to contact name
-                // Don't use email addresses as meeting titles
-                const hasValidTitle = m.title && m.title.trim() && !m.title.includes('@');
-                const meetingTitle = hasValidTitle 
-                  ? m.title 
-                  : matchingContact?.name || (m.contact?.name && !m.contact.name.includes('@') ? m.contact.name : 'Untitled Meeting');
-                
-                // For contact name, prefer matched contact, but don't use email addresses
-                const contactName = matchingContact?.name || (m.contact?.name && !m.contact?.name.includes('@') ? m.contact.name : undefined);
-                
-                return {
-                  id: m.id,
-                  title: meetingTitle,
-                  startTime: m.startTime,
-                  endTime: m.endTime,
-                  contacts: m.contact && contactName ? [{
-                    id: matchingContact?.id || m.contact.email || m.id,
-                    name: contactName,
-                    initials: matchingContact?.initials,
-                    relationshipStage: 'client' as const,
-                    color: matchingContact?.color || '#6b7b98',
-                    imageUrl: matchingContact?.imageUrl,
-                    company: matchingContact?.company,
-                    role: matchingContact?.role,
-                  }] : [],
-                  prepNotes: '',
-                  isEssential: true
-                };
-              });
-              
-              console.log('✅ Passing', mappedMeetings.length, 'meetings to AMWizard:', mappedMeetings);
-              
-              return mappedMeetings;
-            })()}
-            onUpdateMeeting={(meetingId, updates) => {
-              // Update calendar events with new meeting title
-              setCalendarEvents(prev => prev.map(event => 
-                event.id === meetingId ? { ...event, ...updates } : event
-              ));
-            }}
-            routines={[
-              // Work Routines (from Settings > Schedule)
-              { id: '1', name: 'Plan My Day', type: 'self-directed' as const, duration: 15, priority: 1, frequency: 'daily', daysOfWeek: [1, 2, 3, 4, 5], energyRequired: 'low' },
-              { id: '2', name: 'AM Admin', type: 'self-directed' as const, duration: 30, priority: 1, frequency: 'daily', daysOfWeek: [1, 2, 3, 4, 5], energyRequired: 'medium' },
-              { id: '3', name: 'Task Time', type: 'task-playlist' as const, duration: 90, priority: 1, frequency: 'daily', daysOfWeek: [1, 2, 3, 4, 5], energyRequired: 'high' },
-              { id: '4', name: 'Professional Development', type: 'self-directed' as const, duration: 30, priority: 2, frequency: 'specific-days', daysOfWeek: [2, 5], energyRequired: 'low' },
-              { id: '5', name: 'Content', type: 'content-playlist' as const, duration: 30, priority: 2, frequency: 'specific-days', daysOfWeek: [1, 4], energyRequired: 'high' },
-              { id: '6', name: 'PM Admin', type: 'self-directed' as const, duration: 30, priority: 1, frequency: 'daily', daysOfWeek: [1, 2, 3, 4, 5], energyRequired: 'medium' },
-              { id: '7', name: 'Wind Down', type: 'self-directed' as const, duration: 15, priority: 1, frequency: 'daily', daysOfWeek: [1, 2, 3, 4, 5], energyRequired: 'medium' },
-              { id: '8', name: 'Nurtures', type: 'nurture-list' as const, duration: 30, priority: 1, frequency: 'specific-days', daysOfWeek: [1], energyRequired: 'medium' },
-              // Personal Routines
-              { id: '9', name: 'Break', type: 'self-directed' as const, duration: 15, priority: 1, frequency: 'daily', daysOfWeek: [1, 2, 3, 4, 5], energyRequired: 'low' },
-              { id: '10', name: 'Lunch', type: 'self-directed' as const, duration: 45, priority: 1, frequency: 'daily', daysOfWeek: [1, 2, 3, 4, 5], energyRequired: 'low' },
-              { id: '11', name: 'PT', type: 'self-directed' as const, duration: 30, priority: 2, frequency: 'daily', daysOfWeek: [0, 1, 2, 3, 4, 5, 6], energyRequired: 'high' },
-            ]}
+            meetings={(todaysCalendarEvents || []).map((event: any) => {
+  const matchingContact = event.contact
+    ? findContactForEvent(event, allContacts)
+    : null;
+
+  const contactDetails = matchingContact || event.contactDetails || event.contact || null;
+
+  const hasValidTitle =
+    event.title &&
+    event.title.trim() &&
+    !event.title.includes('@');
+
+  const meetingTitle = hasValidTitle
+    ? event.title
+    : contactDetails?.name || 'Untitled Meeting';
+
+  return {
+    id: event.id,
+    title: meetingTitle,
+    startTime: event.startTime ? new Date(event.startTime) : new Date(),
+    endTime: event.endTime ? new Date(event.endTime) : new Date(),
+    isDemoData: event.isDemoData || false,
+    contacts: contactDetails?.name
+      ? [{
+          id: contactDetails.id || contactDetails.email || event.id,
+          name: contactDetails.name,
+          initials: contactDetails.initials,
+          color: contactDetails.color || '#6b7b98',
+          imageUrl: contactDetails.imageUrl,
+        }]
+      : [],
+  };
+})}
+         onUpdateMeeting={(meetingId, updates) => {
+  console.log('Meeting update requested from AMWizard:', meetingId, updates);
+}}
+          
             contacts={allContacts}
             onContactClick={(contact) => {
               setSelectedContactForProfile(contact);
@@ -4002,67 +3885,39 @@ export function App() {
             console.log('Wind Down completed');
             setWindDownWizardOpen(false);
           }}
-          meetings={(() => {
-            // Filter calendar events to today only
-            const today = new Date();
-            const todayStr = today.toDateString();
-            
-            // Filter out events from calendars that shouldn't show in wizards
-            const wizardExcludedCalendarNames = [
-              'Common Grounds',
-              'Medical Appts',
-              'Virtual Appts',
-              'CBC',
-              'Gildergold Family',
-              'holidays',
-              'birthdays',
-            ];
-            
-            return calendarEvents
-              .filter(event => {
-                // Exclude certain calendars from wizards
-                if (event.calendarName && wizardExcludedCalendarNames.some(name => 
-                  event.calendarName.toLowerCase().includes(name.toLowerCase())
-                )) {
-                  return false;
-                }
-                return event.startTime?.toDateString() === todayStr;
-              })
-              .sort((a, b) => {
-                if (!a.startTime || !b.startTime) return 0;
-                return a.startTime.getTime() - b.startTime.getTime();
-              })
-              .map(m => {
-                // Find matching contact for full details
-                const matchingContact = m.contact 
-                  ? findContactForEvent(m, allContacts)
-                  : null;
-                
-                // Use meeting title if available (and not empty), otherwise fall back to contact name
-                // Don't use email addresses as meeting titles
-                const hasValidTitle = m.title && m.title.trim() && !m.title.includes('@');
-                const meetingTitle = hasValidTitle 
-                  ? m.title 
-                  : matchingContact?.name || (m.contact?.name && !m.contact.name.includes('@') ? m.contact.name : 'Untitled Meeting');
-                
-                // For contact name, prefer matched contact, but don't use email addresses
-                const contactName = matchingContact?.name || (m.contact?.name && !m.contact?.name.includes('@') ? m.contact.name : undefined);
-                
-                return {
-                  id: m.id,
-                  title: meetingTitle,
-                  startTime: m.startTime || new Date(),
-                  endTime: m.endTime || new Date(),
-                  contacts: contactName ? [{
-                    id: matchingContact?.id || m.contact?.email || 'unknown',
-                    name: contactName,
-                    initials: matchingContact?.initials,
-                    color: matchingContact?.color || '#6b7b98',
-                    imageUrl: matchingContact?.imageUrl,
-                  }] : [],
-                };
-              });
-          })()}
+          meetings={(todaysCalendarEvents || []).map((event: any) => {
+  const matchingContact = event.contact
+    ? findContactForEvent(event, allContacts)
+    : null;
+
+  const contactDetails = matchingContact || event.contactDetails || event.contact || null;
+
+  const hasValidTitle =
+    event.title &&
+    event.title.trim() &&
+    !event.title.includes('@');
+
+  const meetingTitle = hasValidTitle
+    ? event.title
+    : contactDetails?.name || 'Untitled Meeting';
+
+  return {
+    id: event.id,
+    title: meetingTitle,
+    startTime: event.startTime ? new Date(event.startTime) : new Date(),
+    endTime: event.endTime ? new Date(event.endTime) : new Date(),
+    isDemoData: event.isDemoData || false,
+    contacts: contactDetails?.name
+      ? [{
+          id: contactDetails.id || contactDetails.email || event.id,
+          name: contactDetails.name,
+          initials: contactDetails.initials,
+          color: contactDetails.color || '#6b7b98',
+          imageUrl: contactDetails.imageUrl,
+        }]
+      : [],
+  };
+})}
           tasks={(() => {
             // Get all tasks due today for review
             const today = getTodayLocal();
