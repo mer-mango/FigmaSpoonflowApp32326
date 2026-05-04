@@ -469,7 +469,7 @@ app.post("/make-server-a89809a8/documents", async (c) => {
 // ========================================
 
 // Get a value by key
-app.get("/make-server-a89809a8/kv/:key", async (c) => {
+app.get("/kv/:key", async (c) => {
   try {
     const key = c.req.param("key");
     console.log(`📖 Getting KV key: ${key}`);
@@ -489,7 +489,7 @@ app.get("/make-server-a89809a8/kv/:key", async (c) => {
 });
 
 // Set a value by key
-app.put("/make-server-a89809a8/kv/:key", async (c) => {
+app.put("/kv/:key", async (c) => {
   try {
     const key = c.req.param("key");
     
@@ -537,7 +537,7 @@ app.put("/make-server-a89809a8/kv/:key", async (c) => {
 });
 
 // Delete a value by key
-app.delete("/make-server-a89809a8/kv/:key", async (c) => {
+app.delete("/kv/:key", async (c) => {
   try {
     const key = c.req.param("key");
     await kv.del(key);
@@ -786,7 +786,7 @@ app.delete("/make-server-a89809a8/contacts/:id", async (c) => {
 // ========================================
 
 // Get all tasks
-app.get("/make-server-a89809a8/tasks", async (c) => {
+app.get("/tasks", async (c) => {
   try {
     console.log("📥 GET /tasks - Fetching all tasks");
     const tasks = await kv.get("tasks") || [];
@@ -799,7 +799,7 @@ app.get("/make-server-a89809a8/tasks", async (c) => {
 });
 
 // Create task
-app.post("/make-server-a89809a8/tasks", async (c) => {
+app.post("/tasks", async (c) => {
   try {
     const taskData = await c.req.json();
     console.log("📝 POST /tasks - Creating task:", taskData);
@@ -838,7 +838,7 @@ app.post("/make-server-a89809a8/tasks", async (c) => {
 });
 
 // Update task
-app.put("/make-server-a89809a8/tasks/:id", async (c) => {
+app.put("/tasks/:id", async (c) => {
   try {
     const id = c.req.param("id");
     const updates = await c.req.json();
@@ -879,7 +879,7 @@ app.put("/make-server-a89809a8/tasks/:id", async (c) => {
 });
 
 // Delete task
-app.delete("/make-server-a89809a8/tasks/:id", async (c) => {
+app.delete("/tasks/:id", async (c) => {
   try {
     const id = c.req.param("id");
     console.log(`🗑️ DELETE /tasks/${id}`);
@@ -906,7 +906,7 @@ app.delete("/make-server-a89809a8/tasks/:id", async (c) => {
 // ========================================
 
 // Store integration tokens and settings
-app.post("/make-server-a89809a8/integrations/:id/connect", async (c) => {
+app.post("/integrations/:id/connect", async (c) => {
   try {
     const integrationId = c.req.param("id");
     const { accessToken, refreshToken, settings } = await c.req.json();
@@ -932,7 +932,7 @@ app.post("/make-server-a89809a8/integrations/:id/connect", async (c) => {
 });
 
 // Get connection status for all integrations (MUST come before /:id route!)
-app.get("/make-server-a89809a8/integrations/status", async (c) => {
+app.get("/integrations/status", async (c) => {
   try {
     console.log("🔍 [STATUS] Fetching integrations from KV store...");
     const integrations = await kv.get("integrations") || {};
@@ -2871,7 +2871,7 @@ app.post("/calendar/authorize", async (c) => {
 
 // Calendar OAuth: Exchange code for tokens (called by frontend with auth)
 // Google redirects directly to frontend now, so no backend callback needed
-app.post("/make-server-a89809a8/calendar/exchange", async (c) => {
+app.post("/calendar/exchange", async (c) => {
   try {
     console.log("📅 Exchanging Calendar OAuth code for tokens...");
     
@@ -2958,7 +2958,7 @@ app.post("/make-server-a89809a8/calendar/exchange", async (c) => {
 });
 
 // Disconnect Google Calendar
-app.post("/make-server-a89809a8/calendar/disconnect", async (c) => {
+app.post("/calendar/disconnect", async (c) => {
   try {
     console.log("🔌 Disconnecting Google Calendar...");
     
@@ -2994,7 +2994,7 @@ app.get("/make-server-a89809a8/debug/kv-integrations", async (c) => {
 });
 
 // Get list of user's Google Calendars
-app.get("/make-server-a89809a8/calendar/list", async (c) => {
+app.get("/calendar/list", async (c) => {
   try {
     console.log("📋 Fetching user's calendar list...");
     
@@ -3098,7 +3098,7 @@ app.get("/make-server-a89809a8/calendar/list", async (c) => {
 });
 
 // Fetch events from Google Calendar
-app.get("/make-server-a89809a8/calendar/events", async (c) => {
+app.get("/calendar/events", async (c) => {
   try {
     console.log("📅 Fetching calendar events...");
     
@@ -3291,7 +3291,7 @@ app.get("/make-server-a89809a8/calendar/events", async (c) => {
 });
 
 // Update selected calendars
-app.post("/make-server-a89809a8/calendar/select", async (c) => {
+app.post("/calendar/select", async (c) => {
   try {
     console.log("💾 Updating calendar selection...");
     
@@ -3329,7 +3329,7 @@ app.post("/make-server-a89809a8/calendar/select", async (c) => {
 });
 
 // Clean up calendar preferences (remove invalid IDs)
-app.post("/make-server-a89809a8/calendar/cleanup", async (c) => {
+app.post("/calendar/cleanup", async (c) => {
   try {
     console.log("🧹 Cleaning up calendar preferences...");
     
@@ -3362,7 +3362,7 @@ app.post("/make-server-a89809a8/calendar/cleanup", async (c) => {
 });
 
 // Get selected calendars
-app.get("/make-server-a89809a8/calendar/selected", async (c) => {
+app.get("/calendar/selected", async (c) => {
   try {
     const prefs = await kv.get("calendar_preferences") || {};
     const selectedCalendars = prefs.selectedCalendars || [];
@@ -3376,7 +3376,7 @@ app.get("/make-server-a89809a8/calendar/selected", async (c) => {
 });
 
 // Update per-calendar interaction creation settings
-app.post("/make-server-a89809a8/calendar/interaction-setting", async (c) => {
+app.post("/calendar/interaction-setting", async (c) => {
   try {
     console.log("💾 Updating calendar interaction setting...");
     
@@ -3405,7 +3405,7 @@ app.post("/make-server-a89809a8/calendar/interaction-setting", async (c) => {
 });
 
 // Get calendar interaction settings
-app.get("/make-server-a89809a8/calendar/interaction-settings", async (c) => {
+app.get("/calendar/interaction-settings", async (c) => {
   try {
     const settings = await kv.get("calendar_interaction_settings") || {};
     console.log("📖 Retrieved calendar interaction settings:", settings);
@@ -3417,7 +3417,7 @@ app.get("/make-server-a89809a8/calendar/interaction-settings", async (c) => {
 });
 
 // Create a new event in Google Calendar (for time blocks)
-app.post("/make-server-a89809a8/calendar/create-event", async (c) => {
+app.post("/calendar/create-event", async (c) => {
   try {
     console.log("📅 Creating calendar event...");
     
@@ -3500,7 +3500,7 @@ app.post("/make-server-a89809a8/calendar/create-event", async (c) => {
 });
 
 // Update an existing event in Google Calendar
-app.patch("/make-server-a89809a8/calendar/update-event/:eventId", async (c) => {
+app.patch("/calendar/update-event/:eventId", async (c) => {
   try {
     const eventId = c.req.param('eventId');
     console.log(`📅 Updating calendar event: ${eventId}`);
@@ -3547,7 +3547,7 @@ app.patch("/make-server-a89809a8/calendar/update-event/:eventId", async (c) => {
 });
 
 // Delete an event from Google Calendar
-app.delete("/make-server-a89809a8/calendar/delete-event/:eventId", async (c) => {
+app.delete("/calendar/delete-event/:eventId", async (c) => {
   try {
     const eventId = c.req.param('eventId');
     console.log(`📅 Deleting calendar event: ${eventId}`);
@@ -4286,7 +4286,7 @@ app.post("/make-server-a89809a8/schedule-settings", async (c) => {
 // ========================================
 
 // Test Fathom API connection
-app.get("/make-server-a89809a8/fathom/test", async (c) => {
+app.get("/fathom/test", async (c) => {
   try {
     const fathomApiKey = Deno.env.get('CURRENT_FATHOM_API_KEY');
     
@@ -4310,7 +4310,7 @@ app.get("/make-server-a89809a8/fathom/test", async (c) => {
 });
 
 // Fetch and parse Fathom transcript from URL
-app.post("/make-server-a89809a8/fathom/fetch", async (c) => {
+app.post("/fathom/fetch", async (c) => {
   try {
     const { fathomUrl } = await c.req.json();
     
@@ -4389,7 +4389,7 @@ app.post("/make-server-a89809a8/fathom/fetch", async (c) => {
 });
 
 // Test Fathom API connectivity
-app.get("/make-server-a89809a8/fathom/test", async (c) => {
+app.get("/fathom/test", async (c) => {
   const fathomApiKey = Deno.env.get('CURRENT_FATHOM_API_KEY');
   
   if (!fathomApiKey) {
@@ -5041,7 +5041,7 @@ app.post("/make-server-a89809a8/import-data", async (c) => {
 });
 
 // Get manual contact assignment for a calendar event
-app.get("/make-server-a89809a8/calendar/event/:eventId/contact", async (c) => {
+app.get("/calendar/event/:eventId/contact", async (c) => {
   try {
     const eventId = c.req.param('eventId');
     console.log(`📖 Getting manual contact for event: ${eventId}`);
@@ -5063,7 +5063,7 @@ app.get("/make-server-a89809a8/calendar/event/:eventId/contact", async (c) => {
 });
 
 // Set manual contact assignment for a calendar event
-app.post("/make-server-a89809a8/calendar/event/:eventId/contact", async (c) => {
+app.post("/calendar/event/:eventId/contact", async (c) => {
   try {
     const eventId = c.req.param('eventId');
     const { contactId } = await c.req.json();
