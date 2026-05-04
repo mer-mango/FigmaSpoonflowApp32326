@@ -105,25 +105,25 @@ app.use(
 // ========================================
 
 // GET endpoint for testing - confirm the function is reachable
-app.get("/make-server-a89809a8", (c) => {
+app.get("/integrations/status", async (c) => {
   console.log("✅ GET REQUEST RECEIVED AT BASE ENDPOINT");
   return c.json({ 
     success: true, 
     message: "SpoonFlow webhook endpoint is live!",
-    endpoint: "/make-server-a89809a8",
+    endpoint: "/",
     methods: ["GET", "POST"],
     timestamp: new Date().toISOString()
   });
 });
 
 // TEST: Simple documents test endpoint
-app.get("/make-server-a89809a8/documents-test", (c) => {
+app.get("/documents-test", (c) => {
   console.log("🧪 DOCUMENTS TEST ENDPOINT HIT!");
   return c.json({ success: true, message: "Documents test endpoint works!", timestamp: new Date().toISOString() });
 });
 
 // Simplified public webhook for testing - accepts any POST data from Fathom
-app.post("/make-server-a89809a8", async (c) => {
+app.post("/", async (c) => {
   console.log("==========================================");
   console.log("🚨 FATHOM WEBHOOK HIT - POST REQUEST RECEIVED");
   console.log("==========================================");
