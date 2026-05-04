@@ -8,7 +8,7 @@ import { FileText, Link as LinkIcon, Sparkles, Loader2, CheckCircle2, Plus, Tras
 import type { CalendarEvent } from '../types/calendar';
 import type { Contact } from '../types/contact';
 import { projectId, publicAnonKey } from '../utils/supabase/info';
-import { toast } from 'sonner';
+import { toast } from 'sonner@2.0.3';
 
 interface MutedMeetingDossierProps {
   // Support both old and new prop patterns

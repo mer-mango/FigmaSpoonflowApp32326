@@ -23,30 +23,44 @@ export function ExpandableWorkDrawer({
       {/* Collapsed Header - Always Visible */}
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between px-4 py-1.5 hover:bg-slate-50/50 transition-colors"
+        className="w-full flex items-center justify-between px-6 py-4 hover:bg-slate-50/50 transition-colors"
       >
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {icon && (
-            <div className="w-5 h-5 bg-[#6b2358]/10 rounded-md flex items-center justify-center flex-shrink-0">
+            <div className="w-8 h-8 bg-[#6b2358]/10 rounded-lg flex items-center justify-center flex-shrink-0">
               {icon}
             </div>
           )}
           <div className="text-left">
-            <h3 className="font-medium text-slate-800 text-[14px] leading-tight">{title}</h3>
+            <h3 className="font-medium text-slate-800 text-[20px]">{title}</h3>
+            {!isExpanded && (
+              <p className="text-sm text-slate-500">{summary}</p>
+            )}
           </div>
         </div>
         {isExpanded ? (
-          <ChevronUp className="w-4 h-4 text-slate-400 flex-shrink-0" />
+          <ChevronUp className="w-5 h-5 text-slate-400 flex-shrink-0" />
         ) : (
-          <ChevronDown className="w-4 h-4 text-slate-400 flex-shrink-0" />
+          <ChevronDown className="w-5 h-5 text-slate-400 flex-shrink-0" />
         )}
       </button>
 
       {/* Expanded Content */}
       {isExpanded && (
         <div className="border-t border-slate-200 bg-white">
+          {/* Expanded Header with Collapse Button */}
+          <div className="px-6 py-3 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+            <p className="text-sm text-slate-600">{summary}</p>
+            <button
+              onClick={onToggle}
+              className="text-xs text-[#6b2358] hover:text-[#6b2358]/80 font-medium transition-colors"
+            >
+              Collapse
+            </button>
+          </div>
+          
           {/* Drawer Content */}
-          <div className="p-4 bg-[#f7f7f980]">
+          <div className="p-6 bg-[#f7f7f980]">
             {children}
           </div>
         </div>

@@ -504,43 +504,39 @@ export function ContentEditorNew({ item, onClose, onSave, onQuickAddSelect, onJa
     }
   };
 
-// Jamie Writing Drawer: Insert at cursor
-const handleJamieInsertAtCursor = (text: string) => {
-  if (!editorRef.current) return;
+  // Jamie Writing Drawer: Insert at cursor
+  const handleJamieInsertAtCursor = (text: string) => {
+    if (!editorRef.current) return;
 
-  const cursorPos = selectionRange?.end || editorRef.current.selectionStart;
-  const before = editorContent.substring(0, cursorPos);
-  const after = editorContent.substring(cursorPos);
+    const cursorPos = selectionRange?.end || editorRef.current.selectionStart;
+    const before = editorContent.substring(0, cursorPos);
+    const after = editorContent.substring(cursorPos);
+    const newContent = before + '\n\n' + text + after;
 
-  const formattedText = `[JAMIE START] ${text} [JAMIE END]`;
-  const newContent = before + '\n\n' + formattedText + after;
+    setEditorContent(newContent);
+    setHasUnsavedChanges(true);
+    toast.success('Inserted at cursor position');
+    
+    // Close drawer
+    setJamieDrawerOpen(false);
+    setJamieDrawerOptions([]);
+    setSelectedText('');
+    setSelectionRange(null);
+  };
 
-  setEditorContent(newContent);
-  setHasUnsavedChanges(true);
-  toast.success('Inserted at cursor position');
-  
-  // Close drawer
-  setJamieDrawerOpen(false);
-  setJamieDrawerOptions([]);
-  setSelectedText('');
-  setSelectionRange(null);
-};
-
-// Jamie Writing Drawer: Insert at bottom
-const handleJamieInsertAtBottom = (text: string) => {
-  const formattedText = `[JAMIE START] ${text} [JAMIE END]`;
-  const newContent = editorContent + '\n\n' + formattedText;
-
-  setEditorContent(newContent);
-  setHasUnsavedChanges(true);
-  toast.success('Inserted at bottom');
-  
-  // Close drawer
-  setJamieDrawerOpen(false);
-  setJamieDrawerOptions([]);
-  setSelectedText('');
-  setSelectionRange(null);
-};
+  // Jamie Writing Drawer: Insert at bottom
+  const handleJamieInsertAtBottom = (text: string) => {
+    const newContent = editorContent + '\n\n' + text;
+    setEditorContent(newContent);
+    setHasUnsavedChanges(true);
+    toast.success('Inserted at bottom');
+    
+    // Close drawer
+    setJamieDrawerOpen(false);
+    setJamieDrawerOptions([]);
+    setSelectedText('');
+    setSelectionRange(null);
+  };
 
   // Jamie Writing Drawer: Regenerate (tries again)
   const handleJamieRegenerateOption = async () => {
@@ -1131,17 +1127,19 @@ const handleJamieInsertAtBottom = (text: string) => {
               {/* Mode A: Help me write - Prompt input */}
               {jamieDrawerMode === 'help-me-write' && jamieDrawerOptions.length === 0 && (
                 <div className="space-y-3">
-                  <textarea
-  value={jamieDrawerPrompt}
-  onChange={(e) => {
-    setJamieDrawerPrompt(e.target.value);
-    e.target.style.height = 'auto';
-    e.target.style.height = `${e.target.scrollHeight}px`;
-  }}
-  placeholder="Tell Jamie what you want to write (e.g., 'Help me write 4 sentences about how a referral can make patients feel abandoned')"
-  rows={2}
-  className="w-full px-4 py-3 text-sm border border-slate-200 rounded-lg resize-none overflow-hidden outline-none focus:ring-2 focus:ring-[#6b2358] focus:border-transparent"
-/>
+                  <input
+                    type="text"
+                    value={jamieDrawerPrompt}
+                    onChange={(e) => setJamieDrawerPrompt(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        handleGenerateJamieWriting();
+                      }
+                    }}
+                    placeholder="Tell Jamie what you want to write (e.g., 'Help me write 4 sentences about how a referral can make patients feel abandoned')"
+                    className="w-full px-4 py-3 text-sm border border-slate-200 rounded-lg outline-none focus:ring-2 focus:ring-[#6b2358] focus:border-transparent"
+                  />
                   <button
                     onClick={handleGenerateJamieWriting}
                     disabled={!jamieDrawerPrompt.trim() || jamieDrawerLoading}

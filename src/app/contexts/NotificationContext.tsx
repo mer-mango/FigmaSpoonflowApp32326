@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
-import { toast } from 'sonner';
+import { toast } from 'sonner@2.0.3';
 import type { Notification } from '../types/notification';
 import type { NotificationPreferences } from '../types/notificationPreferences';
 import { defaultNotificationPreferences } from '../types/notificationPreferences';

@@ -419,7 +419,7 @@ export function JamiePanel({
                                 tempDiv.innerHTML = dump.jamieDraft || '';
                                 const success = await copyToClipboard(tempDiv.innerText);
                                 // Show toast notification
-                                const { toast } = await import('sonner');
+                                const { toast } = await import('sonner@2.0.3');
                                 if (success) {
                                   toast.success('Draft copied to clipboard');
                                 } else {

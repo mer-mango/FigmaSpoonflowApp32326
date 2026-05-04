@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback } from './ui/avatar';
 import { MeetingNotesDossier, MeetingDossierData } from './MeetingNotesDossier';
 import { useInteractions } from '../contexts/InteractionsContext';
 import { MeetingDossier } from '../types/interactions';
-import { toast } from 'sonner';
+import { toast } from 'sonner@2.0.3';
 import { projectId, publicAnonKey } from '../utils/supabase/info';
 import React from 'react';
 import { getTodayLocal, getTomorrowLocal, dateToLocalString } from '../utils/dateUtils';

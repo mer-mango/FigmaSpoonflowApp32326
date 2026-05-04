@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { Toaster, toast } from 'sonner';
+import { Toaster, toast } from 'sonner@2.0.3';
 import { ErrorBoundary } from './ErrorBoundary';
 import { projectId, publicAnonKey } from './utils/supabase/info';
 import { getTodayLocal, getTomorrowLocal, dateToLocalString, isoStringToLocalDate } from './utils/dateUtils';
@@ -680,10 +680,10 @@ export function App() {
           console.log(`✅ [TASK PERSIST] Synced to backend /kv/tasks`);
         } else if (res.status !== 404) {
           const errorData = await res.json().catch(() => ({}));
-          console.warn('⚠️ [TASK PERSIST] Backend sync failed (localStorage is still safe):', errorData);
+          console.warn('⚠️ [TASK PERSIST] Backend sync skipped (localStorage is primary storage):', errorData);
         }
-      }).catch(() => {
-        // Silently handle network errors - localStorage is primary storage
+      }).catch((error) => {
+        console.error('❌ [TASK PERSIST] Network error:', error);
       });
       
       // Also backup to allTasks_backup
@@ -697,7 +697,7 @@ export function App() {
       }).then(async (res) => {
         if (!res.ok && res.status !== 503 && res.status !== 404) {
           const errorData = await res.json().catch(() => ({}));
-          console.warn('⚠️ Tasks backup failed (localStorage is still safe):', errorData);
+          console.warn('⚠️ Failed to backup tasks (localStorage is primary storage):', errorData);
         }
       }).catch(() => {
         // Silently fail for network errors - localStorage is primary storage
@@ -826,7 +826,7 @@ export function App() {
       }).then(async (res) => {
         if (!res.ok && res.status !== 503 && res.status !== 404) {
           const errorData = await res.json().catch(() => ({}));
-          console.warn('⚠️ Goals backup failed (localStorage is still safe):', errorData);
+          console.warn('⚠️ Failed to backup goals (localStorage is primary storage):', errorData);
         }
       }).catch(() => {
         // Silently fail for network errors - localStorage is primary storage
@@ -980,7 +980,7 @@ export function App() {
             console.log('✅ Contacts backed up to cloud');
           } else if (res.status !== 503 && res.status !== 404) {
             const errorData = await res.json().catch(() => ({}));
-            console.warn('⚠️ Contacts backup failed (localStorage is still safe):', errorData);
+            console.warn('⚠️ Failed to backup contacts to cloud (localStorage is still safe):', errorData);
           }
         }).catch(() => {
           // Silently fail for network errors - localStorage is primary storage
@@ -1340,7 +1340,7 @@ export function App() {
       }).then(async (res) => {
         if (!res.ok && res.status !== 503 && res.status !== 404) {
           const errorData = await res.json().catch(() => ({}));
-          console.warn('⚠️ Content backup failed (localStorage is still safe):', errorData);
+          console.warn('⚠️ Failed to backup content (localStorage is primary storage):', errorData);
         }
       }).catch(() => {
         // Silently fail for network errors - localStorage is primary storage
