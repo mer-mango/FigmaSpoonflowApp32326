@@ -2832,7 +2832,7 @@ async function refreshGmailToken(refreshToken: string): Promise<string> {
 // ========================================
 
 // Calendar OAuth: Initiate authorization flow (POST to allow auth header)
-app.post("/make-server-a89809a8/calendar/authorize", async (c) => {
+app.post("/calendar/authorize", async (c) => {
   try {
     console.log("📅 Initiating Google Calendar OAuth flow (POST)...");
     
